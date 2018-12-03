@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1554259727989338}
+  m_IsPrefabAsset: 1
+--- !u!1 &1554259727989338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4770640360608364}
+  - component: {fileID: 114428755368220734}
+  m_Layer: 0
+  m_Name: LeaderboardDataFeeder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4770640360608364
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1554259727989338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114428755368220734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1554259727989338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 346d51973b655da48b58b8e84ed5388b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BarPrefab: {fileID: 114897891289105616, guid: fb1767a2e543d7242936f6b97ef7ccec,
+    type: 2}
+  CategoryPrefab: {fileID: 114897891289105616, guid: fb1767a2e543d7242936f6b97ef7ccec,
+    type: 2}
+  Format: 1
+  ParentObject: 
+  Categories:
+  - Enabled: 1
+    Name: Player 1
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 1
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 2
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 2
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 3
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 3
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 4
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 4
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 5
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 5
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 6
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 6
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 7
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 7
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 8
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 8
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 9
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 9
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
+  - Enabled: 1
+    Name: Player 10
+    DataType: 2
+    DataFormat: 0
+    Skip: 0
+    ParentObjectName: Player 10
+    DataObjectName: 
+    XDataObjectName: Score
+    YDataObjectName: 
+    SizeDataObjectName: 
+    XDateFormat: 
+    YDateFormat: 
