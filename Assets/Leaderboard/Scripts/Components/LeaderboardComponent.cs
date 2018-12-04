@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LeaderboardComponent : MonoBehaviour
 {
-    public BarGraphComponent BarGraphPrefab;
-    private BarGraphComponent BarGraphInstance;
+    public LeadboardTopDownComponent LeadboardTopDownPrefab;
+    private LeadboardTopDownComponent LeadboardTopDownInstance;
     private LeaderboardData Data;
     private bool Loading = true;
 
@@ -36,13 +36,10 @@ public class LeaderboardComponent : MonoBehaviour
 
     public void CreateObjects()
     {
-        BarGraphInstance = Instantiate(BarGraphPrefab).GetComponent<BarGraphComponent>();
-        BarGraphInstance.transform.SetParent(transform);
-
-        foreach(var playerData in Data.PlayerData)
-        {
-            BarGraphInstance.SetValue(playerData.PlayerDisplayName, playerData.PlayerScore);
-        }
+        LeadboardTopDownInstance = Instantiate(LeadboardTopDownPrefab).GetComponent<LeadboardTopDownComponent>();
+        LeadboardTopDownInstance.transform.SetParent(transform);
+        LeadboardTopDownInstance.SetPlayerData(Data.PlayerData);
+        LeadboardTopDownInstance.CreateObjects();
     }
 
     public void ShowObjects()
@@ -55,11 +52,6 @@ public class LeaderboardComponent : MonoBehaviour
     {
         Hidden = true;
         gameObject.SetActive(false);
-    }
-
-    public void Play()
-    {
-        LeaderboardManager.Instance.OnPlay();
     }
 
     public void Update()
@@ -80,21 +72,7 @@ public class LeaderboardComponent : MonoBehaviour
             }
             if (touchClickPosition != Vector2.zero)
             {
-                RaycastHit hitInfo;
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(touchClickPosition), out hitInfo))
-                {
-                    if (hitInfo.collider != null)
-                    {
-                        if (hitInfo.transform)
-                        {
-                            var buttonComponent = hitInfo.transform.GetComponent<PollButtonComponent>();
-                            if (buttonComponent)
-                            {
-                                buttonComponent.OnClick();
-                            }
-                        }
-                    }
-                }
+                LeaderboardManager.Instance.OnPlay();
             }
         }
     }

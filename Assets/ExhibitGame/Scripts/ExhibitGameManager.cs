@@ -8,15 +8,35 @@ public class ExhibitGameManager : MonoBehaviour {
     public string CurrentGameState;
     private string PreviousGameState;
 
+    public PollImageSequenceComponent ExhibitBackgroundPrefab;
+    private PollImageSequenceComponent ExhibitBackgroundInstance;
+    
     public void Awake()
     {
         Instance = this;
+        ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageSequenceComponent>();
+        ExhibitBackgroundInstance.transform.SetParent(transform);
+        ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
+        ExhibitBackgroundInstance.CreateObjects(Application.dataPath + "/background_image_sequence");
     }
 
     IEnumerator Start()
     {
         yield return new WaitForSeconds(2);
-        GoToState("StartingLeaderboard");
+        yield return StartCoroutine(CheckIsDoneLoading());
+    }
+
+    IEnumerator CheckIsDoneLoading()
+    {
+        if (!ExhibitBackgroundInstance.Loading)
+        {
+            GoToState("StartingLeaderboard");
+        }
+        else
+        {
+            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(CheckIsDoneLoading());
+        }
     }
 
     public void Update()

@@ -6,4 +6,5 @@ public class LeaderboardPlayerData {
     public string PlayerBaseName { get; set; }
     public string PlayerDisplayName { get; set; }
     public int PlayerScore { get; set; }
+    public string TotalTime { get; set; }
 }

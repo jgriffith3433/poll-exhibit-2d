@@ -37,12 +37,6 @@ public class PollButtonComponent : MonoBehaviour {
             loginComponent.Submit();
         }
 
-        var leaderboardComponent = transform.parent.GetComponent<LeaderboardComponent>();
-        if (leaderboardComponent != null)
-        {
-            leaderboardComponent.Play();
-        }
-
         var databaseComponent = transform.parent.GetComponent<DatabaseManager>();
         if (databaseComponent != null)
         {

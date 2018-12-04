@@ -689,6 +689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentGameState: 
+  ExhibitBackgroundPrefab: {fileID: 114584228834900726, guid: c89fbe0c85c766e4c86824305ca2fcd4,
+    type: 2}
 --- !u!114 &1995646087
 MonoBehaviour:
   m_ObjectHideFlags: 0

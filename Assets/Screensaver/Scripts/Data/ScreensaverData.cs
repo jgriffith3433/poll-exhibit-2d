@@ -9,12 +9,12 @@ using System.IO;
 public class ScreensaverData
 {
     private string DirectoryUrl;
-    public List<Sprite> ScreensaverImages { get; set; }
+    public List<Texture2D> ScreensaverImages { get; set; }
     public bool Loading = true;
 
     public ScreensaverData(string directoryUrl)
     {
-        ScreensaverImages = new List<Sprite>();
+        ScreensaverImages = new List<Texture2D>();
         DirectoryUrl = directoryUrl;
     }
 
@@ -31,7 +31,7 @@ public class ScreensaverData
             yield return request;
             if (string.IsNullOrEmpty(request.error))
             {
-                ScreensaverImages.Add(Sprite.Create(request.texture, new Rect(0, 0, request.texture.width, request.texture.height), new Vector2(0, 0)));
+                ScreensaverImages.Add(request.texture);
             }
             else
             {

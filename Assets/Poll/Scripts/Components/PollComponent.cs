@@ -21,6 +21,11 @@ public class PollComponent : MonoBehaviour
 
     private PollButtonComponent BtnStartOver;
 
+    public PollTextComponent TopScoreTextInstance;
+    public PollTextComponent TopScoreTextLabelInstance;
+    public PollTextComponent YourScoreTextInstance;
+    public PollTextComponent YourScoreTextLabelInstance;
+
     private PollData Data;
 
     private bool Loading = true;
@@ -181,11 +186,20 @@ public class PollComponent : MonoBehaviour
             pollQuestionInstance.CreateObjects();
             QuestionInstances.Add(pollQuestionInstance);
         }
+
+        TopScoreTextInstance.ShowObjects();
+        TopScoreTextLabelInstance.ShowObjects();
+        YourScoreTextInstance.ShowObjects();
+        YourScoreTextLabelInstance.ShowObjects();
     }
 
     public void HideObjects()
     {
         Hidden = true;
+        TopScoreTextInstance.HideObjects();
+        TopScoreTextLabelInstance.HideObjects();
+        YourScoreTextInstance.HideObjects();
+        YourScoreTextLabelInstance.HideObjects();
         CurrentQuestion.HideObjects();
         TitleTextInstance.gameObject.SetActive(false);
         BtnStartOver.gameObject.SetActive(false);

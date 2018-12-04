@@ -23,10 +23,8 @@ public class ScreensaverComponent : MonoBehaviour {
         {
             var screensaverImageComponent = Instantiate(ScreensaverImagePrefab).GetComponent<PollImageComponent>();
             screensaverImageComponent.transform.SetParent(transform);
-            screensaverImageComponent.CreateObjects();
-            screensaverImageComponent.SetSprite(Data.ScreensaverImages[i]);
+            screensaverImageComponent.CreateObjects(Data.ScreensaverImages[i]);
             screensaverImageComponent.HideObjects();
-
             ScreensaverImages.Add(screensaverImageComponent);
         }
         CountdownComponent.CreateObjects();

@@ -5,25 +5,25 @@ using TMPro;
 using UnityEngine.UI;
 
 public class PollImageComponent : MonoBehaviour {
-    private Image m_image;
-    private string m_image_path;
-    
-    public void CreateObjects()
+    protected Image m_image;
+
+    public virtual void CreateObjects(Texture2D texture)
     {
         m_image = gameObject.GetComponentInChildren<Image>();
+        SetSprite(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0)));
     }
 
-    public void HideObjects()
+    public virtual void HideObjects()
     {
         gameObject.SetActive(false);
     }
 
-    public void ShowObjects()
+    public virtual void ShowObjects()
     {
         gameObject.SetActive(true);
     }
 
-    public void SetSprite(Sprite newSprite)
+    protected void SetSprite(Sprite newSprite)
     {
         m_image.sprite = newSprite;
     }
