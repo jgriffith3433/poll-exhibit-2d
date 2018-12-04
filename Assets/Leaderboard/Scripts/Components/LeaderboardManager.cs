@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ChartAndGraph;
 
 public class LeaderboardManager : MonoBehaviour {
     public static LeaderboardManager Instance { get; private set; }
@@ -11,27 +10,54 @@ public class LeaderboardManager : MonoBehaviour {
     void Awake ()
     {
         Instance = this;
+    }
+
+    public void FillLeaderboard()
+    {
+        DestroyLeaderboard();
         LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-    }
-
-    public void StartingLeaderboard()
-    {
-        LeaderboardInstance.RestartLeaderboard();
-    }
-
-    public void RestartLeaderboard()
-    {
         LeaderboardInstance.FillLeaderboard();
+        LeaderboardInstance.ShowObjects();
     }
 
     public void OnInactive()
     {
-        LeaderboardInstance.HideObjects();
+        if (LeaderboardInstance != null)
+        {
+            LeaderboardInstance.HideObjects();
+        }
+    }
+
+    public void ShowLeaderboardScreensaver()
+    {
+        if (LeaderboardInstance == null)
+        {
+            LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
+            LeaderboardInstance.FillLeaderboard();
+            LeaderboardInstance.ShowObjects();
+        }
+        LeaderboardInstance.ShowObjects();
+    }
+
+    public void HideLeaderboardScreensaver()
+    {
+        if (LeaderboardInstance != null)
+        {
+            LeaderboardInstance.HideObjects();
+        }
+    }
+
+    public void DestroyLeaderboard()
+    {
+        if (LeaderboardInstance != null)
+        {
+            Destroy(LeaderboardInstance.gameObject);
+        }
     }
 
     public void OnPlay()
     {
-        LeaderboardInstance.HideObjects();
+        DestroyLeaderboard();
         ExhibitGameManager.Instance.OnFinishLeaderboard();
     }
 }

@@ -8,15 +8,6 @@ public class ExhibitGameManager : MonoBehaviour {
     public string CurrentGameState;
     private string PreviousGameState;
 
-    public Transform PollCameraPosition;
-    public Transform LeaderboardCameraPosition;
-    public Transform ScreenSaverCameraPosition;
-    public Transform AdminCameraPosition;
-
-    public float MinDistanceToStartState = 10.0f;
-    public float CameraTransitionSpeed = 2.0f;
-    public float CameraScreensaverTransitionSpeed = 18.0f;
-
     public void Awake()
     {
         Instance = this;
@@ -37,56 +28,24 @@ public class ExhibitGameManager : MonoBehaviour {
             case "Start":
                 break;
             case "StartingPoll":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, PollCameraPosition.position, Time.deltaTime * CameraTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, PollCameraPosition.rotation, Time.deltaTime * CameraTransitionSpeed);
-                if ((Camera.main.transform.position - PollCameraPosition.transform.position).magnitude < MinDistanceToStartState &&
-                    Quaternion.Angle(Camera.main.transform.rotation, PollCameraPosition.transform.rotation) < MinDistanceToStartState)
-                {
-                    GoToState("Poll");
-                }
+                GoToState("Poll");
                 break;
             case "Poll":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, PollCameraPosition.position, Time.deltaTime * CameraTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, PollCameraPosition.rotation, Time.deltaTime * CameraTransitionSpeed);
-                break;
+               break;
             case "StartingLeaderboard":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, LeaderboardCameraPosition.position, Time.deltaTime * CameraTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, LeaderboardCameraPosition.rotation, Time.deltaTime * CameraTransitionSpeed);
-                if ((Camera.main.transform.position - LeaderboardCameraPosition.transform.position).magnitude < MinDistanceToStartState &&
-                    Quaternion.Angle(Camera.main.transform.rotation, LeaderboardCameraPosition.transform.rotation) < MinDistanceToStartState)
-                {
-                    GoToState("Leaderboard");
-                }
+                GoToState("Leaderboard");
                 break;
             case "Leaderboard":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, LeaderboardCameraPosition.position, Time.deltaTime * CameraTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, LeaderboardCameraPosition.rotation, Time.deltaTime * CameraTransitionSpeed);
                 break;
             case "StartingScreensaver":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, ScreenSaverCameraPosition.position, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, ScreenSaverCameraPosition.rotation, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                if ((Camera.main.transform.position - ScreenSaverCameraPosition.transform.position).magnitude < MinDistanceToStartState &&
-                    Quaternion.Angle(Camera.main.transform.rotation, ScreenSaverCameraPosition.transform.rotation) < MinDistanceToStartState)
-                {
-                    GoToState("Screensaver");
-                }
+                GoToState("Screensaver");
                 break;
             case "Screensaver":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, ScreenSaverCameraPosition.position, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, ScreenSaverCameraPosition.rotation, Time.deltaTime * CameraScreensaverTransitionSpeed);
                 break;
             case "StartingAdmin":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, AdminCameraPosition.position, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, AdminCameraPosition.rotation, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                if ((Camera.main.transform.position - AdminCameraPosition.transform.position).magnitude < MinDistanceToStartState &&
-                    Quaternion.Angle(Camera.main.transform.rotation, AdminCameraPosition.transform.rotation) < MinDistanceToStartState)
-                {
-                    GoToState("Admin");
-                }
+                GoToState("Admin");
                 break;
             case "Admin":
-                Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, AdminCameraPosition.position, Time.deltaTime * CameraScreensaverTransitionSpeed);
-                Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, AdminCameraPosition.rotation, Time.deltaTime * CameraScreensaverTransitionSpeed);
                 break;
             default:
                 break;
@@ -96,6 +55,7 @@ public class ExhibitGameManager : MonoBehaviour {
     public void ResetGame()
     {
         PollManager.Instance.DestroyPoll();
+        LeaderboardManager.Instance.DestroyLeaderboard();
     }
 
     public void OnFinishPoll()
@@ -166,8 +126,7 @@ public class ExhibitGameManager : MonoBehaviour {
         else if (newState == "StartingLeaderboard")
         {
             PreviousGameState = previousState;
-            LeaderboardManager.Instance.StartingLeaderboard();
-            LeaderboardManager.Instance.RestartLeaderboard();
+            LeaderboardManager.Instance.FillLeaderboard();
         }
         else if (newState == "Leaderboard")
         {

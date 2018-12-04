@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using ChartAndGraph;
 
 public class ScreensaverManager : MonoBehaviour {
     public static ScreensaverManager Instance { get; private set; }

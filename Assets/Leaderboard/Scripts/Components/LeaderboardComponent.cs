@@ -2,42 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaderboardComponent : MonoBehaviour {
+public class LeaderboardComponent : MonoBehaviour
+{
+    public BarGraphComponent BarGraphPrefab;
+    private BarGraphComponent BarGraphInstance;
+    private LeaderboardData Data;
+    private bool Loading = true;
 
-    public BarDataFiller BarDataFillerPrefab;
-    private BarDataFiller BarDataFillerInstance;
     public bool Hidden;
 
-    public void Awake()
+    public void FillLeaderboard()
     {
+        Loading = true;
+        ShowObjects();
+        Data = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
+        StartCoroutine(Data.GetData());
+        StartCoroutine(CheckIsDoneParsing());
     }
 
-	public void FillLeaderboard()
+    IEnumerator CheckIsDoneParsing()
     {
-        BarDataFillerInstance.Fill();
-    }
-
-	public void RestartLeaderboard()
-    {
-        CreateObjects();
-        BarDataFillerInstance.Zero();
+        if (Data != null && Data.IsDoneParsing)
+        {
+            CreateObjects();
+            Loading = false;
+        }
+        else
+        {
+            yield return new WaitForSeconds(1);
+            yield return CheckIsDoneParsing();
+        }
     }
 
     public void CreateObjects()
     {
-        Hidden = false;
-        BarDataFillerInstance = Instantiate(BarDataFillerPrefab).GetComponent<BarDataFiller>();
-        BarDataFillerInstance.transform.SetParent(transform);
+        BarGraphInstance = Instantiate(BarGraphPrefab).GetComponent<BarGraphComponent>();
+        BarGraphInstance.transform.SetParent(transform);
+
+        foreach(var playerData in Data.PlayerData)
+        {
+            BarGraphInstance.SetValue(playerData.PlayerDisplayName, playerData.PlayerScore);
+        }
+    }
+
+    public void ShowObjects()
+    {
         gameObject.SetActive(true);
+        Hidden = false;
     }
 
     public void HideObjects()
     {
         Hidden = true;
-        if (BarDataFillerInstance)
-        {
-            Destroy(BarDataFillerInstance.gameObject);
-        }
         gameObject.SetActive(false);
     }
 
@@ -48,7 +64,7 @@ public class LeaderboardComponent : MonoBehaviour {
 
     public void Update()
     {
-        if (!Hidden && ExhibitGameManager.Instance.CurrentGameState != "Screensaver")
+        if (!Hidden && !Loading && ExhibitGameManager.Instance.CurrentGameState != "Screensaver")
         {
             Vector2 touchClickPosition = Vector2.zero;
             if (Input.GetMouseButtonDown(0))

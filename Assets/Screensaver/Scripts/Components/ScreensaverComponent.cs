@@ -73,12 +73,15 @@ public class ScreensaverComponent : MonoBehaviour {
 
         if (CurrentScreensaverImage > ScreensaverImages.Count - 1)
         {
-            //when at the end, show no image and instead show the leaderboard
+            LeaderboardManager.Instance.ShowLeaderboardScreensaver();
+            BtnStartOver.gameObject.SetActive(false);
             CurrentScreensaverImage = -1;
         }
         else
         {
             ScreensaverImages[CurrentScreensaverImage].ShowObjects();
+            LeaderboardManager.Instance.HideLeaderboardScreensaver();
+            BtnStartOver.gameObject.SetActive(true);
         }
         yield return new WaitForSeconds(3);
         yield return ShowNextScreensaverImage();

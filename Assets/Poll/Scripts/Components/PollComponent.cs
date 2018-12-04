@@ -34,8 +34,8 @@ public class PollComponent : MonoBehaviour
         AskedQuestions = new List<int>();
         UserAnswers = new List<PollUserAnswer>();
         Loading = true;
-        Data = new PollData(Application.dataPath + "/poll-questions-test.json");
-        m_LeaderboardData = new LeaderboardData(Application.dataPath + "/poll-leaderboard-test.json");
+        Data = new PollData(Application.dataPath + "/poll-questions.json");
+        m_LeaderboardData = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
 
         StartCoroutine(Data.GetData());
         StartCoroutine(m_LeaderboardData.GetData());
