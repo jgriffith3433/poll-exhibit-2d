@@ -11,6 +11,13 @@ public class PollAnswerComponent : MonoBehaviour
     public PollButtonComponent AnswerButtonTextPrefab;
     private PollButtonComponent AnswerButtonTextInstance;
 
+    public PollImageComponent AnswerCorrectBackgroundPrefab;
+    public PollImageComponent AnswerIncorrectBackgroundPrefab;
+    private PollImageComponent CorrectOrIncorrectBackgroundInstance;
+
+    public PollImageSequenceComponent SelectedImageSequencePrefab;
+    private PollImageSequenceComponent SelectedImageSequenceInstance;
+
     private PollQuestionComponent QuestionParent;
     private PollAnswerData Data;
 
@@ -40,36 +47,49 @@ public class PollAnswerComponent : MonoBehaviour
         AnswerButtonTextInstance.transform.position = Data.AnswerButtonTextPosition;
         AnswerButtonTextInstance.SetButtonTextData(Data.AnswerButtonText);
         AnswerButtonTextInstance.CreateAllObjects();
+
+        if (Data.Correct)
+        {
+            CorrectOrIncorrectBackgroundInstance = Instantiate(AnswerCorrectBackgroundPrefab).GetComponent<PollImageComponent>();
+        }
+        else
+        {
+            CorrectOrIncorrectBackgroundInstance = Instantiate(AnswerIncorrectBackgroundPrefab).GetComponent<PollImageComponent>();
+        }
+        CorrectOrIncorrectBackgroundInstance.transform.SetParent(transform);
+        CorrectOrIncorrectBackgroundInstance.transform.position = Data.AnswerButtonTextPosition;
+
+        SelectedImageSequenceInstance = Instantiate(SelectedImageSequencePrefab).GetComponent<PollImageSequenceComponent>();
+        SelectedImageSequenceInstance.transform.SetParent(transform);
+        SelectedImageSequenceInstance.transform.position = Data.AnswerButtonTextPosition;
+        SelectedImageSequenceInstance.SetImageSequenceFolder("Poll/Images/CorrectAnswer");
+        SelectedImageSequenceInstance.CreateObjects(false);
+        SelectedImageSequenceInstance.SetLoop(false);
+        HideObjects();
+    }
+
+    public void HideObjects()
+    {
+        AnswerTextInstance.gameObject.SetActive(false);
+        AnswerButtonTextInstance.gameObject.SetActive(false);
+        CorrectOrIncorrectBackgroundInstance.HideObjects();
+    }
+
+    public void ShowObjects()
+    {
+        AnswerTextInstance.gameObject.SetActive(true);
+        AnswerButtonTextInstance.gameObject.SetActive(true);
     }
 
     public void OnChoose()
     {
         IsSelected = true;
-        if (Data.Correct)
-        {
-            QuestionParent.OnCorrect();
-        }
-        else
-        {
-            QuestionParent.OnIncorrect();
-        }
+        QuestionParent.OnSelectedAnswer(this, Data.AnswerId, Data.Correct);
+        SelectedImageSequenceInstance.Play();
     }
 
     public void ShowAsCorrectOrIncorrect()
     {
-        if (IsSelected)
-        {
-            //change font size or translate
-        }
-        if (Data.Correct)
-        {
-            AnswerButtonTextInstance.ChangeText("#05FF05");
-            AnswerTextInstance.ChangeText("#05FF05");
-        }
-        else
-        {
-            AnswerButtonTextInstance.ChangeText("#FF0505");
-            AnswerTextInstance.ChangeText("#FF0505");
-        }
+        CorrectOrIncorrectBackgroundInstance.gameObject.SetActive(true);
     }
 }

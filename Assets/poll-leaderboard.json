@@ -1,1 +1,72 @@
-{"Player 1":[{"DisplayName":"A. B.","Score":"1"}],"Player 2":[{"DisplayName":"Johnson","Score":"2"}],"Player 3":[{"DisplayName":"J. D.","Score":"6"}],"Player 4":[{"DisplayName":"S. M.","Score":"12"}],"Player 5":[{"DisplayName":"N. D.","Score":"5"}],"Player 6":[{"DisplayName":"S. G.","Score":"30"}],"Player 7":[{"DisplayName":"S. R.","Score":"10"}],"Player 8":[{"DisplayName":"A. W.","Score":"9"}],"Player 9":[{"DisplayName":"Griffith","Score":"15"}],"Player 10":[{"DisplayName":"J. G.","Score":"0"}]}
+{
+  "Player 1": [
+    {
+      "DisplayName": "N. D.",
+      "Score": "0",
+      "TotalTime": "00:10:54"
+    }
+  ],
+  "Player 2": [
+    {
+      "DisplayName": "S. G.",
+      "Score": "0",
+      "TotalTime": "01:03:49"
+    }
+  ],
+  "Player 3": [
+    {
+      "DisplayName": "S. R.",
+      "Score": "0",
+      "TotalTime": "00:59:59"
+    }
+  ],
+  "Player 4": [
+    {
+      "DisplayName": "A. W.",
+      "Score": "0",
+      "TotalTime": "00:10:54"
+    }
+  ],
+  "Player 5": [
+    {
+      "DisplayName": "Griffith",
+      "Score": "0",
+      "TotalTime": "00:10:54"
+    }
+  ],
+  "Player 6": [
+    {
+      "DisplayName": "J. G.",
+      "Score": "0",
+      "TotalTime": "00:2:40"
+    }
+  ],
+  "Player 7": [
+    {
+      "DisplayName": "jaycee",
+      "Score": "0",
+      "TotalTime": "00:00:20"
+    }
+  ],
+  "Player 8": [
+    {
+      "DisplayName": "jaycee",
+      "Score": "0",
+      "TotalTime": "00:00:15"
+    }
+  ],
+  "Player 9": [
+    {
+      "DisplayName": "J. G.",
+      "Score": "0",
+      "TotalTime": "00:00:38"
+    }
+  ],
+  "Player 10": [
+    {
+      "DisplayName": "S. G.",
+      "Score": "0",
+      "TotalTime": "00:02:48"
+    }
+  ]
+}

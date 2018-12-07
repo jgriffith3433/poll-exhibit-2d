@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class PollQuestionComponent : MonoBehaviour
@@ -10,12 +11,28 @@ public class PollQuestionComponent : MonoBehaviour
     public PollAnswerComponent AnswerPrefab;
     public PollTextComponent QuestionTextPrefab;
     private PollTextComponent QuestionTextInstance;
-    
+
+    public BarGraphComponent AnswerBarGraphPrefab;
+    private BarGraphComponent AnswerBarGraphInstance;
+
+    public PollImageComponent AnswerBackgroundPrefab;
+    private PollImageComponent AnswerBackgroundInstance;
+
+    private bool TransitioningAnswersIn = false;
+    private bool TransitioningAnswersOut = false;
+    private bool TransitioningBarGraphIn = false;
+    private bool TransitioningBarGraphOut = false;
+    private Vector3 OriginalAnswerBarGraphInstancePosition;
+
+    private PollAnswerComponent SelectedAnswer;
+
+    private GameObject AnswersObject;
+
     public void SetPollQuestionData(PollQuestionData data)
     {
         Data = data;
     }
-
+    
     public void CreateObjects()
     {
         QuestionTextInstance = Instantiate(QuestionTextPrefab).GetComponent<PollTextComponent>();
@@ -25,47 +42,145 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
 
-        var answersObject = new GameObject("Answers");
-        answersObject.transform.SetParent(transform);
+        AnswersObject = new GameObject("Answers");
+        AnswersObject.transform.SetParent(transform);
         PollAnswerInstances = new List<PollAnswerComponent>();
         for(var i = 0; i < Data.PollAnswersData.Count; i++)
         {
             var pollAnswerInstance = Instantiate(AnswerPrefab).GetComponent<PollAnswerComponent>();
             pollAnswerInstance.name = "Answer";
-            pollAnswerInstance.transform.SetParent(answersObject.transform);
+            pollAnswerInstance.transform.SetParent(AnswersObject.transform);
             pollAnswerInstance.SetQuestionParent(this);
             pollAnswerInstance.SetPollAnswerData(Data.PollAnswersData[i]);
             pollAnswerInstance.CreateObjects();
             PollAnswerInstances.Add(pollAnswerInstance);
         }
-        gameObject.SetActive(false);
+        AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab, AnswersObject.transform).GetComponent<PollImageComponent>();
+        AnswersObject.transform.position += new Vector3(100, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
+
+        HideObjects();
     }
 
-    public void OnCorrect()
+    public void OnSelectedAnswer(PollAnswerComponent selectedAnswer, int answerId, bool correct)
     {
-        PollManager.Instance.OnCorrect();
-    }
-
-    public void OnIncorrect()
-    {
-        PollManager.Instance.OnIncorrect();
-    }
-
-    public void ShowCorrectAnswer()
-    {
-        for (var i = 0; i < PollAnswerInstances.Count; i++)
+        SelectedAnswer = selectedAnswer;
+        if (correct)
         {
-            PollAnswerInstances[i].ShowAsCorrectOrIncorrect();
+            PollManager.Instance.OnCorrect(Data.QuestionId, answerId);
         }
+        else
+        {
+            PollManager.Instance.OnIncorrect(Data.QuestionId, answerId);
+
+        }
+    }
+
+    public void ShowAsCorrectOrIncorrect()
+    {
+        SelectedAnswer.ShowAsCorrectOrIncorrect();
+        StartCoroutine(HideCorrectAnswerAndShowBarGraph());
+    }
+
+    public void Update()
+    {
+        if (TransitioningAnswersIn)
+        {
+            if (AnswersObject.transform.position.x > 0)
+            {
+                AnswersObject.transform.position -= new Vector3(1, 0, 0);
+            }
+            else if (AnswersObject.transform.position.x <= 0)
+            {
+                AnswersObject.transform.position = new Vector3(0, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
+                TransitioningAnswersIn = false;
+            }
+        }
+        if (TransitioningAnswersOut)
+        {
+            if (AnswersObject.transform.position.x < 100)
+            {
+                AnswersObject.transform.position += new Vector3(1, 0, 0);
+            }
+            else if (AnswersObject.transform.position.x >= 100)
+            {
+                AnswersObject.transform.position = new Vector3(100, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
+                TransitioningAnswersOut = false;
+            }
+        }
+        if (TransitioningBarGraphIn)
+        {
+            if (AnswerBarGraphInstance.transform.position.x > OriginalAnswerBarGraphInstancePosition.x)
+            {
+                AnswerBarGraphInstance.transform.position -= new Vector3(1, 0, 0);
+            }
+            else if (AnswerBarGraphInstance.transform.position.x <= OriginalAnswerBarGraphInstancePosition.x)
+            {
+                AnswerBarGraphInstance.transform.position = new Vector3(OriginalAnswerBarGraphInstancePosition.x, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
+                TransitioningBarGraphIn = false;
+            }
+        }
+        if (TransitioningBarGraphOut)
+        {
+            if (AnswerBarGraphInstance.transform.position.x < 100)
+            {
+                AnswerBarGraphInstance.transform.position += new Vector3(1, 0, 0);
+            }
+            else if (AnswerBarGraphInstance.transform.position.x >= 100)
+            {
+                AnswerBarGraphInstance.transform.position = new Vector3(100, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
+                TransitioningBarGraphOut = false;
+            }
+        }
+    }
+
+    public IEnumerator HideCorrectAnswerAndShowBarGraph()
+    {
+        yield return new WaitForSeconds(1);
+        TransitioningAnswersOut = true;
+        yield return new WaitForSeconds(0.2f);
+        AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
+        OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
+
+        var questionAnswers = DatabaseManager.Instance.GetPlayerAnswersForQuestionId(Data.QuestionId);
+        var answerTimes = new Dictionary<string, List<int>>();
+        var answerCorrectIncorrect = new Dictionary<string, bool>();
+        foreach (var pollAnswerData in Data.PollAnswersData)
+        {
+            answerTimes.Add(pollAnswerData.AnswerText, questionAnswers.FindAll(qa => qa == pollAnswerData.AnswerId));
+            answerCorrectIncorrect.Add(pollAnswerData.AnswerText, pollAnswerData.Correct);
+        }
+        var mostAnswers = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
+        AnswerBarGraphInstance.MaxBarValue = mostAnswers;
+
+        foreach (var answer in answerTimes)
+        {
+            AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
+        }
+        AnswerBarGraphInstance.transform.position += new Vector3(100, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
+        TransitioningBarGraphIn = true;
+        yield return new WaitForSeconds(3);
+        TransitioningBarGraphOut = true;
+        yield return new WaitForSeconds(1);
     }
 
     public void ShowObjects()
     {
-        gameObject.SetActive(true);
+        TransitioningAnswersIn = true;
+        foreach (var pollAnswerInstance in PollAnswerInstances)
+        {
+            pollAnswerInstance.ShowObjects();
+        }
+        AnswerBackgroundInstance.ShowObjects();
+        QuestionTextInstance.gameObject.SetActive(true);
     }
 
     public void HideObjects()
     {
-        gameObject.SetActive(false);
+        foreach (var pollAnswerInstance in PollAnswerInstances)
+        {
+            pollAnswerInstance.HideObjects();
+        }
+        AnswerBackgroundInstance.HideObjects();
+        QuestionTextInstance.gameObject.SetActive(false);
     }
 }

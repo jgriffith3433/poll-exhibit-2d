@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SimpleJSON;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class PollComponent : MonoBehaviour
 {
@@ -28,9 +29,14 @@ public class PollComponent : MonoBehaviour
 
     private PollData Data;
 
+    private int TopScore;
+    private int YourScore;
+
     private bool Loading = true;
     private bool Hidden = false;
     private bool LoginHidden = false;
+
+    private TimeSpan StartedTime;
 
     private LeaderboardData m_LeaderboardData;
 
@@ -45,6 +51,18 @@ public class PollComponent : MonoBehaviour
         StartCoroutine(Data.GetData());
         StartCoroutine(m_LeaderboardData.GetData());
         StartCoroutine(CheckIsDoneParsing());
+    }
+
+    public void SetTopScore(int score)
+    {
+        TopScoreTextInstance.SetTextData(score.ToString());
+        TopScoreTextInstance.CreateAllObjects();
+    }
+
+    public void SetYourScore(int score)
+    {
+        YourScoreTextInstance.SetTextData(score.ToString());
+        YourScoreTextInstance.CreateAllObjects();
     }
 
     public void GoToNextQuestion()
@@ -81,6 +99,7 @@ public class PollComponent : MonoBehaviour
     {
         if (Data != null && m_LeaderboardData != null && Data.IsDoneParsing && m_LeaderboardData.IsDoneParsing)
         {
+            StartedTime = TimeSpan.FromSeconds(Time.time);
             CreateObjects();
             GoToNextQuestion();
             Loading = false;
@@ -92,19 +111,21 @@ public class PollComponent : MonoBehaviour
         }
     }
 
-    public void OnCorrect()
+    public void OnCorrect(int questionId, int answerId)
     {
         UserAnswers.Add(new PollUserAnswer
         {
-            Correct = true
+            Correct = true,
+            AnswerId = answerId,
+            QuestionId = questionId
         });
         StartCoroutine(ShowCorrectAnswerGoToNextQuestion());
     }
 
     public IEnumerator ShowCorrectAnswerGoToNextQuestion()
     {
-        CurrentQuestion.ShowCorrectAnswer();
-        yield return new WaitForSeconds(2);
+        CurrentQuestion.ShowAsCorrectOrIncorrect();
+        yield return new WaitForSeconds(5);
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
@@ -113,29 +134,39 @@ public class PollComponent : MonoBehaviour
         else
         {
             GoToNextQuestion();
+            var topScore = m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault().PlayerScore;
+            var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
+            SetYourScore(yourScore);
+            if (yourScore > topScore)
+            {
+                SetTopScore(yourScore);
+            }
         }
     }
 
-    public void OnIncorrect()
+    public void OnIncorrect(int questionId, int answerId)
     {
         UserAnswers.Add(new PollUserAnswer
         {
-            Correct = false
+            Correct = false,
+            AnswerId = answerId,
+            QuestionId = questionId
         });
         StartCoroutine(ShowCorrectAnswerThenLogin());
     }
 
     public IEnumerator ShowCorrectAnswerThenLogin()
     {
-        CurrentQuestion.ShowCorrectAnswer();
-        yield return new WaitForSeconds(2);
+        CurrentQuestion.ShowAsCorrectOrIncorrect();
+        yield return new WaitForSeconds(5);
         HideObjects();
         ShowLogin();
     }
 
     public void OnLogin(string displayName, string fullName)
     {
-        SaveLeaderboard(displayName, fullName);
+        var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
+        SaveLeaderboard(displayName, fullName, string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds));
         HideLogin();
     }
 
@@ -145,14 +176,23 @@ public class PollComponent : MonoBehaviour
         PollManager.Instance.RestartPoll();
     }
 
-    public void SaveLeaderboard(string displayName, string fullName)
+    public void SaveLeaderboard(string displayName, string fullName, string totalTime)
     {
         var correctAnswers = UserAnswers.Where(ua => ua.Correct == true).ToList();
         //var percentScore = (int)(((float)correctAnswers.Count / (float)Data.NumberOfQuestionsAsked) * 100);
         //m_LeaderboardData.AddPlayerScore(displayName, percentScore);
-        m_LeaderboardData.AddPlayerScore(displayName, correctAnswers.Count);
+        m_LeaderboardData.AddPlayerScore(displayName, correctAnswers.Count, totalTime);
         m_LeaderboardData.SaveLeaderboard();
-        DatabaseManager.Instance.SavePlayerScore(fullName, correctAnswers.Count);
+        var playerAnswerData = new List<PlayerAnswerData>();
+        foreach (var userAnswer in UserAnswers)
+        {
+            playerAnswerData.Add(new PlayerAnswerData
+            {
+                AnswerId = userAnswer.AnswerId,
+                QuestionId = userAnswer.QuestionId
+            });
+        }
+        DatabaseManager.Instance.SavePlayerScore(fullName, correctAnswers.Count, playerAnswerData);
         PollManager.Instance.OnSaveLeaderboard();
     }
 
@@ -191,6 +231,10 @@ public class PollComponent : MonoBehaviour
         TopScoreTextLabelInstance.ShowObjects();
         YourScoreTextInstance.ShowObjects();
         YourScoreTextLabelInstance.ShowObjects();
+        SetYourScore(0);
+        SetTopScore(m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault().PlayerScore);
+
+
     }
 
     public void HideObjects()

@@ -4,7 +4,8 @@ using System.IO;
 using System.Collections.Generic;
 using System;
 
-public class DatabaseManager : MonoBehaviour {
+public class DatabaseManager : MonoBehaviour
+{
     public static DatabaseManager Instance { get; private set; }
     private PollButtonComponent BtnCombineDbs;
     private PollTextComponent TxtTitle;
@@ -12,7 +13,7 @@ public class DatabaseManager : MonoBehaviour {
     private ExhibitData Data;
     private bool Loading = true;
 
-    void Awake ()
+    void Awake()
     {
         Instance = this;
         DatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-database.json";
@@ -43,10 +44,24 @@ public class DatabaseManager : MonoBehaviour {
         }
     }
 
-    public void SavePlayerScore(string displayName, int score)
+    public void SavePlayerScore(string displayName, int score, List<PlayerAnswerData> playerAnswerData)
     {
-        Data.AddPlayerScore(displayName, score);
+        Data.AddPlayerScore(displayName, score, playerAnswerData);
         Data.SaveExhibitData();
+    }
+
+    public List<int> GetPlayerAnswersForQuestionId(int questionId)
+    {
+        var playerAnswers = new List<int>();
+        foreach (var playerData in Data.PlayerData)
+        {
+            var playerAnswerData = playerData.PlayerAnswerData.Find(pd => pd.QuestionId == questionId);
+            if (playerAnswerData != null)
+            {
+                playerAnswers.Add(playerAnswerData.AnswerId);
+            }
+        }
+        return playerAnswers;
     }
 
     public void ShowAdminScreen()
@@ -84,7 +99,7 @@ public class DatabaseManager : MonoBehaviour {
                 yield return databaseData.GetData();
                 foreach (var playerScore in databaseData.PlayerData)
                 {
-                    masterData.AddPlayerScore(playerScore.PlayerDisplayName, playerScore.PlayerScore);
+                    masterData.AddPlayerScore(playerScore.PlayerDisplayName, playerScore.PlayerScore, playerScore.PlayerAnswerData);
                 }
             }
             else

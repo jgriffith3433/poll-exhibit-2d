@@ -53,7 +53,8 @@ public class LeaderboardData
                     {
                         PlayerBaseName = playerXObj.Key,
                         PlayerDisplayName = playerXObj.Value[i]["DisplayName"].Value,
-                        PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value)
+                        PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value),
+                        TotalTime = playerXObj.Value[i]["TotalTime"].Value
                     });
                 }
             }
@@ -64,7 +65,7 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score)
+    public void AddPlayerScore(string displayName, int score, string totalTime)
     {
         if (PlayerData.Count == 10)
         {
@@ -78,7 +79,8 @@ public class LeaderboardData
         {
             PlayerBaseName = "Player " + (PlayerData.Count + 1).ToString(),
             PlayerDisplayName = displayName,
-            PlayerScore = score
+            PlayerScore = score,
+            TotalTime = totalTime
         });
     }
 
@@ -94,6 +96,7 @@ public class LeaderboardData
                 var playerDataChildObject = new JSONObject();
                 playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
                 playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
+                playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
                 playerDataChild.Add(playerDataChildObject);
                 rootXObj[playerData.PlayerBaseName] = playerDataChild;
             }

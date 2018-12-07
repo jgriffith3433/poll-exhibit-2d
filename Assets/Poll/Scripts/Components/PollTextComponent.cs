@@ -10,6 +10,10 @@ public class PollTextComponent : MonoBehaviour {
     public void Awake()
     {
         m_textMeshPro = gameObject.GetComponent<TextMeshPro>();
+        if (m_textMeshPro == null)
+        {
+            m_textMeshPro = gameObject.GetComponentInChildren<TextMeshPro>();
+        }
     }
 
     public void SetTextData(string text)
@@ -19,7 +23,7 @@ public class PollTextComponent : MonoBehaviour {
 
     public void CreateAllObjects()
     {
-        ChangeText("#FFFFFF");
+        m_textMeshPro.SetText(Text);
     }
 
     public void HideObjects()
@@ -30,10 +34,5 @@ public class PollTextComponent : MonoBehaviour {
     public void ShowObjects()
     {
         gameObject.SetActive(true);
-    }
-
-    public void ChangeText(string color)
-    {
-        m_textMeshPro.SetText("<" + color  + ">" + Text + "</color>");
     }
 }

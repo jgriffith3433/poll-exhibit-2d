@@ -55,3 +55,10 @@ MonoBehaviour:
     type: 2}
   AnswerButtonTextPrefab: {fileID: 114585871855852988, guid: 4c2005bcedabfe247870222df154c3f0,
     type: 2}
+  AnswerCorrectBackgroundPrefab: {fileID: 114110842614179550, guid: 42b255f2b572fb54b9d4dd6d2c463821,
+    type: 2}
+  AnswerIncorrectBackgroundPrefab: {fileID: 114110842614179550, guid: 35380a482e4464d4180493be51e8f7d6,
+    type: 2}
+  SelectedImageSequencePrefab: {fileID: 114584228834900726, guid: ea11241eea2528448b2ab6ba78a51f3f,
+    type: 2}
+  IsSelected: 0

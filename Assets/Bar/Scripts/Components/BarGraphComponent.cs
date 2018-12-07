@@ -7,7 +7,6 @@ public class BarGraphComponent : MonoBehaviour
     public float MaxBarValue = 30;
     public float BarSpacing = 4;
     public BarComponent BarPrefab;
-
     private Dictionary<string, BarComponent> BarInstances;
 
     public void Awake()
@@ -15,7 +14,7 @@ public class BarGraphComponent : MonoBehaviour
         BarInstances = new Dictionary<string, BarComponent>();
     }
 
-    public void SetValue(string category, float value)
+    public void SetValue(string category, float value, BarComponent.BarColor barColor)
     {
         if (BarInstances.ContainsKey(category) == false)
         {
@@ -25,6 +24,7 @@ public class BarGraphComponent : MonoBehaviour
             bar.SetMaxValue(MaxBarValue);
             bar.SetCategory(category);
             bar.CreateObjects();
+            bar.SetBarColor(barColor);
             BarInstances.Add(category, bar);
         }
         BarInstances[category].SetValue(value);

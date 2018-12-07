@@ -213,12 +213,12 @@ Prefab:
     - target: {fileID: 114555560138494410, guid: 4c2005bcedabfe247870222df154c3f0,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114555560138494410, guid: 4c2005bcedabfe247870222df154c3f0,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 33367165427788664, guid: 4c2005bcedabfe247870222df154c3f0,
         type: 2}
@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 1995646087}
   - component: {fileID: 1995646086}
   - component: {fileID: 1995646088}
+  - component: {fileID: 1995646089}
   m_Layer: 0
   m_Name: ExhibitGame
   m_TagString: Untagged
@@ -704,7 +705,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreensaverPrefab: {fileID: 114929425997362752, guid: 346a9872d1efe9a488710d8c5c7bd359,
     type: 2}
-  InactivityUntilScreensaver: 20
 --- !u!114 &1995646088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +714,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 534bf986d31254d4b8a8b90331cc3432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1995646089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995646082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b407f34a7019ceb46b5ae96d8466d915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2013333183

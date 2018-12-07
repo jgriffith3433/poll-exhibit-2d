@@ -38,14 +38,14 @@ public class PollManager : MonoBehaviour {
         }
     }
 
-    public void OnCorrect()
+    public void OnCorrect(int questionId, int answerId)
     {
-        PollInstance.OnCorrect();
+        PollInstance.OnCorrect(questionId, answerId);
     }
 
-    public void OnIncorrect()
+    public void OnIncorrect(int questionId, int answerId)
     {
-        PollInstance.OnIncorrect();
+        PollInstance.OnIncorrect(questionId, answerId);
     }
 
     public void OnLogin(string displayName, string fullName)

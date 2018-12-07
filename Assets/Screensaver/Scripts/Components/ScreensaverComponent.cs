@@ -15,7 +15,7 @@ public class ScreensaverComponent : MonoBehaviour {
 
     public IEnumerator CreateObjects()
     {
-        BtnStartOver = GetComponentInChildren<PollButtonComponent>();
+        //BtnStartOver = GetComponentInChildren<PollButtonComponent>();
         Data = new ScreensaverData(Application.dataPath + "/screensaver_images");
         yield return StartCoroutine(Data.GetData());
         ScreensaverImages = new List<PollImageComponent>();
@@ -72,14 +72,14 @@ public class ScreensaverComponent : MonoBehaviour {
         if (CurrentScreensaverImage > ScreensaverImages.Count - 1)
         {
             LeaderboardManager.Instance.ShowLeaderboardScreensaver();
-            BtnStartOver.gameObject.SetActive(false);
+            //BtnStartOver.gameObject.SetActive(false);
             CurrentScreensaverImage = -1;
         }
         else
         {
             ScreensaverImages[CurrentScreensaverImage].ShowObjects();
             LeaderboardManager.Instance.HideLeaderboardScreensaver();
-            BtnStartOver.gameObject.SetActive(true);
+            //BtnStartOver.gameObject.SetActive(true);
         }
         yield return new WaitForSeconds(3);
         yield return ShowNextScreensaverImage();

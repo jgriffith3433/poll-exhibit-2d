@@ -17,11 +17,13 @@ public class ExhibitGameManager : MonoBehaviour {
         ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageSequenceComponent>();
         ExhibitBackgroundInstance.transform.SetParent(transform);
         ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
-        ExhibitBackgroundInstance.CreateObjects(Application.dataPath + "/background_image_sequence");
+        ExhibitBackgroundInstance.SetImageSequenceFolder("background_image_sequence");
+        ExhibitBackgroundInstance.SetLoop(true);
     }
 
     IEnumerator Start()
     {
+        ExhibitBackgroundInstance.CreateObjects(true);
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsDoneLoading());
     }

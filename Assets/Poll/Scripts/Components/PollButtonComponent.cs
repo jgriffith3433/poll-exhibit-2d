@@ -7,6 +7,11 @@ public class PollButtonComponent : MonoBehaviour {
     private TextMeshPro m_textMeshPro;
     private string Text = "Submit";
 
+    public void Awake()
+    {
+        m_textMeshPro = gameObject.GetComponent<TextMeshPro>();
+    }
+
     public void SetButtonTextData(string text)
     {
         Text = text;
@@ -14,13 +19,7 @@ public class PollButtonComponent : MonoBehaviour {
 
     public void CreateAllObjects()
     {
-        m_textMeshPro = gameObject.GetComponent<TextMeshPro>();
-        ChangeText("#FFFFFF");
-    }
-
-    public void ChangeText(string color)
-    {
-        m_textMeshPro.SetText("<" + color + ">" + Text + "</color>");
+        m_textMeshPro.SetText(Text);
     }
 
     public void OnClick()

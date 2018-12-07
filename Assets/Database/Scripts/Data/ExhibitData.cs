@@ -62,10 +62,20 @@ public class ExhibitData
         {
             foreach(var playerXObj in xObj.Linq)
             {
+                var playerAnswerData = new List<PlayerAnswerData>();
+                foreach(var playerAnswerXObj in playerXObj.Value["PlayerAnswerData"].Linq)
+                {
+                    playerAnswerData.Add(new PlayerAnswerData
+                    {
+                        QuestionId = int.Parse(playerAnswerXObj.Value["QuestionId"].Value),
+                        AnswerId = int.Parse(playerAnswerXObj.Value["AnswerId"].Value)
+                    });
+                }
                 PlayerData.Add(new ExhibitPlayerData
                 {
                     PlayerDisplayName = playerXObj.Value["DisplayName"].Value,
-                    PlayerScore = int.Parse(playerXObj.Value["Score"].Value)
+                    PlayerScore = int.Parse(playerXObj.Value["Score"].Value),
+                    PlayerAnswerData = playerAnswerData
                 });
             }
         }
@@ -75,12 +85,13 @@ public class ExhibitData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score)
+    public void AddPlayerScore(string displayName, int score, List<PlayerAnswerData> playerAnswerData)
     {
         PlayerData.Add(new ExhibitPlayerData
         {
             PlayerDisplayName = displayName,
-            PlayerScore = score
+            PlayerScore = score,
+            PlayerAnswerData = playerAnswerData
         });
     }
 
@@ -94,6 +105,17 @@ public class ExhibitData
                 var playerDataChildObject = new JSONObject();
                 playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
                 playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
+
+                var playerAnswers = new JSONArray();
+                foreach(var playerAnswer in playerData.PlayerAnswerData)
+                {
+                    var playerAnswerDataChildObject = new JSONObject();
+                    playerAnswerDataChildObject["QuestionId"] = new JSONString(playerAnswer.QuestionId.ToString());
+                    playerAnswerDataChildObject["AnswerId"] = new JSONString(playerAnswer.AnswerId.ToString());
+                    playerAnswers.Add(playerAnswerDataChildObject);
+                }
+                playerDataChildObject["PlayerAnswerData"] = playerAnswers;
+
                 rootXObj.Add(playerDataChildObject);
             }
             File.WriteAllText(RemoteUrl, rootXObj.ToString());

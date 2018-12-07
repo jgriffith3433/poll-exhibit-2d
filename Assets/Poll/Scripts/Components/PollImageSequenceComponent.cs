@@ -10,63 +10,97 @@ public class PollImageSequenceComponent : PollImageComponent
     private List<Sprite> Sprites;
     private int currentSprite = 0;
     public bool Loading = true;
-    private bool IsPaused = false;
+    public bool Playing = false;
+    public bool Loop = false;
+    public bool PlayOnAwake = false;
     public float SpeedDelay = 0.04f;
+    public string ImageSequenceFolder;
 
-    public void CreateObjects(string imageBasePath)
+    public void Awake()
     {
-        m_image = gameObject.GetComponentInChildren<Image>();
-        Loading = true;
-        Sprites = new List<Sprite>();
-        StartCoroutine(GetData(imageBasePath));
+        if (PlayOnAwake)
+        {
+            CreateObjects(true);
+        }
     }
 
-    public IEnumerator GetData(string imageBasePath)
+    public void SetImageSequenceFolder(string imageSequenceFolder)
     {
-        var di = new DirectoryInfo(imageBasePath);
-        var imageFileInfo = new List<FileInfo>();
-        imageFileInfo.AddRange(di.GetFiles("*.jpg"));
-        imageFileInfo.AddRange(di.GetFiles("*.jpeg"));
-        imageFileInfo.AddRange(di.GetFiles("*.png"));
+        ImageSequenceFolder = Application.dataPath + "/" + imageSequenceFolder;
+    }
 
-        foreach (var fi in imageFileInfo)
+    public void SetLoop(bool loop)
+    {
+        Loop = loop;
+    }
+
+    public void CreateObjects(bool autoPlay)
+    {
+        m_image = gameObject.GetComponentInChildren<Image>();
+        m_image.gameObject.SetActive(false);
+        Loading = true;
+        Sprites = new List<Sprite>();
+        StartCoroutine(GetData(autoPlay));
+    }
+
+    public IEnumerator GetData(bool autoPlay)
+    {
+        yield return PollImageSequenceLoader.Instance.LoadImageSeqence(ImageSequenceFolder, (spriteList) =>
         {
-            var request = new WWW(fi.FullName);
-            yield return request;
-            if (string.IsNullOrEmpty(request.error))
+            Sprites = spriteList;
+            Loading = false;
+            if (autoPlay)
             {
-                Sprites.Add(Sprite.Create(request.texture, new Rect(0, 0, request.texture.width, request.texture.height), new Vector2(0, 0)));
+                Play();
             }
-            else
-            {
-                Debug.Log("URL request failed:" + request.error);
-            }
-        }
-        Loading = false;
-        Play();
+        });
     }
 
     public void Play()
     {
+        StartCoroutine(PlayAfterLoaded());
+    }
+
+    private IEnumerator PlayAfterLoaded()
+    {
         if (!Loading)
         {
-            StartCoroutine(PlayImageSequence());
+            m_image.gameObject.SetActive(true);
+            Playing = true;
+            yield return StartCoroutine(PlayImageSequence());
+        }
+        else
+        {
+            yield return new WaitForSeconds(.1f);
+            StartCoroutine(PlayAfterLoaded());
         }
     }
 
     public void Pause()
     {
-        IsPaused = true;
+        Playing = false;
+    }
+
+    public void UnPause()
+    {
+        Playing = true;
     }
 
     private IEnumerator PlayImageSequence()
     {
-        if (!IsPaused)
+        if (Playing)
         {
-            currentSprite = (++currentSprite) % Sprites.Count;
-            SetSprite(Sprites[currentSprite]);
-            yield return new WaitForSeconds(SpeedDelay);
-            yield return PlayImageSequence();
+            if (currentSprite + 1 >= Sprites.Count && !Loop)
+            {
+                yield return null;
+            }
+            else
+            {
+                currentSprite = (++currentSprite) % Sprites.Count;
+                SetSprite(Sprites[currentSprite]);
+                yield return new WaitForSeconds(SpeedDelay);
+                yield return PlayImageSequence();
+            }
         }
     }
 }
