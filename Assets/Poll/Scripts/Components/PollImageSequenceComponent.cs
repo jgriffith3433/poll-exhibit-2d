@@ -9,7 +9,6 @@ public class PollImageSequenceComponent : PollImageComponent
 {
     private List<Sprite> Sprites;
     private int currentSprite = 0;
-    public bool Loading = true;
     public bool Playing = false;
     public bool Loop = false;
     public bool PlayOnAwake = false;

@@ -7,37 +7,62 @@ public class ExhibitGameManager : MonoBehaviour {
     
     public string CurrentGameState;
     private string PreviousGameState;
+    private bool UseSequenceForBackground = false;
+    public PollImageSequenceComponent ExhibitBackgroundSequencePrefab;
+    private PollImageSequenceComponent ExhibitBackgroundSequenceInstance;
 
-    public PollImageSequenceComponent ExhibitBackgroundPrefab;
-    private PollImageSequenceComponent ExhibitBackgroundInstance;
-    
+    public PollImageComponent ExhibitBackgroundPrefab;
+    private PollImageComponent ExhibitBackgroundInstance;
+
     public void Awake()
     {
         Instance = this;
-        ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageSequenceComponent>();
-        ExhibitBackgroundInstance.transform.SetParent(transform);
-        ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
-        ExhibitBackgroundInstance.SetImageSequenceFolder("background_image_sequence");
-        ExhibitBackgroundInstance.SetLoop(true);
+        if (UseSequenceForBackground)
+        {
+            ExhibitBackgroundSequenceInstance = Instantiate(ExhibitBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
+            ExhibitBackgroundSequenceInstance.transform.SetParent(transform);
+            ExhibitBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
+            ExhibitBackgroundSequenceInstance.SetImageSequenceFolder("background_image_sequence");
+            ExhibitBackgroundSequenceInstance.SetLoop(true);
+        }
+        else
+        {
+            ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageComponent>();
+            ExhibitBackgroundInstance.transform.SetParent(transform);
+            ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
+            ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.jpg");
+        }
     }
 
     IEnumerator Start()
     {
-        ExhibitBackgroundInstance.CreateObjects(true);
+        if (UseSequenceForBackground)
+        {
+            ExhibitBackgroundSequenceInstance.CreateObjects(true);
+        }
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsDoneLoading());
     }
 
     IEnumerator CheckIsDoneLoading()
     {
-        if (!ExhibitBackgroundInstance.Loading)
+        var stillLoading = false;
+        if (UseSequenceForBackground)
         {
-            GoToState("StartingLeaderboard");
+            stillLoading = ExhibitBackgroundSequenceInstance.Loading;
         }
         else
         {
+            stillLoading = ExhibitBackgroundInstance.Loading;
+        }
+        if (stillLoading)
+        {
             yield return new WaitForSeconds(1);
             yield return StartCoroutine(CheckIsDoneLoading());
+        }
+        else
+        {
+            GoToState("StartingLeaderboard");
         }
     }
 
