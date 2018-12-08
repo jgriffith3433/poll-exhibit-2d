@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4905377500668614}
   - component: {fileID: 114584228834900726}
   m_Layer: 0
-  m_Name: PollCorrectAnswerImageSequence
+  m_Name: PollSelectAnswerImageSequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

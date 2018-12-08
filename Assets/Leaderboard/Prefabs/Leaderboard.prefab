@@ -116,6 +116,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeadboardTopDownPrefab: {fileID: 114328105396999118, guid: 00511cddc08515b4da63ef9ef4b55140,
     type: 2}
+  LoginPrefab: {fileID: 114269727429866448, guid: d0471a618aedbe1419ff12cb4b046dc0,
+    type: 2}
+  PollFinishedPrefab: {fileID: 114606904332190170, guid: 0cc8c34412ef84d4e81d9762b913725c,
+    type: 2}
   Hidden: 0
 --- !u!114 &114735065197823436
 MonoBehaviour:

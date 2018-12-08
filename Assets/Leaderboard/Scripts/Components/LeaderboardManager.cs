@@ -12,11 +12,11 @@ public class LeaderboardManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void FillLeaderboard()
+    public void ShowLeaderboard(int score, float totalTime)
     {
         DestroyLeaderboard();
         LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-        LeaderboardInstance.FillLeaderboard();
+        LeaderboardInstance.ShowLeaderboard(score, totalTime);
         LeaderboardInstance.ShowObjects();
     }
 
@@ -33,7 +33,7 @@ public class LeaderboardManager : MonoBehaviour {
         if (LeaderboardInstance == null)
         {
             LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-            LeaderboardInstance.FillLeaderboard();
+            LeaderboardInstance.ShowLeaderboard(0, 0.0f);
             LeaderboardInstance.ShowObjects();
         }
         LeaderboardInstance.ShowObjects();

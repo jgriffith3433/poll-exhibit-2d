@@ -57,12 +57,19 @@ public class PollAnswerComponent : MonoBehaviour
             CorrectOrIncorrectBackgroundInstance = Instantiate(AnswerIncorrectBackgroundPrefab).GetComponent<PollImageComponent>();
         }
         CorrectOrIncorrectBackgroundInstance.transform.SetParent(transform);
-        CorrectOrIncorrectBackgroundInstance.transform.position = Data.AnswerButtonTextPosition;
+        CorrectOrIncorrectBackgroundInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, 0.5f);
 
         SelectedImageSequenceInstance = Instantiate(SelectedImageSequencePrefab).GetComponent<PollImageSequenceComponent>();
         SelectedImageSequenceInstance.transform.SetParent(transform);
-        SelectedImageSequenceInstance.transform.position = Data.AnswerButtonTextPosition;
-        SelectedImageSequenceInstance.SetImageSequenceFolder("Poll/Images/CorrectAnswer");
+        SelectedImageSequenceInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, 0.5f);
+        if (Data.Correct)
+        {
+            SelectedImageSequenceInstance.SetImageSequenceFolder("Poll/Images/CorrectAnswer");
+        }
+        else
+        {
+            SelectedImageSequenceInstance.SetImageSequenceFolder("Poll/Images/IncorrectAnswer");
+        }
         SelectedImageSequenceInstance.CreateObjects(false);
         SelectedImageSequenceInstance.SetLoop(false);
         HideObjects();

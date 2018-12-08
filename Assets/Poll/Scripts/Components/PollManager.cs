@@ -25,11 +25,6 @@ public class PollManager : MonoBehaviour {
         PollInstance.RestartPoll();
     }
 
-    public void HideLogin()
-    {
-        PollInstance.HideLogin();
-    }
-
     public void DestroyPoll()
     {
         if (PollInstance)
@@ -53,7 +48,7 @@ public class PollManager : MonoBehaviour {
         PollInstance.OnLogin(displayName, fullName);
     }
 
-    public void OnSaveLeaderboard()
+    public void FinishPoll()
     {
         ExhibitGameManager.Instance.OnFinishPoll();
     }

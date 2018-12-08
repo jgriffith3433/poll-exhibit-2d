@@ -16,10 +16,7 @@ public class PollComponent : MonoBehaviour
 
     public PollTextComponent TitleTextPrefab;
     private PollTextComponent TitleTextInstance;
-
-    public LoginComponent LoginPrefab;
-    private LoginComponent LoginInstance;
-
+    
     private PollButtonComponent BtnStartOver;
 
     public PollTextComponent TopScoreTextInstance;
@@ -34,7 +31,6 @@ public class PollComponent : MonoBehaviour
 
     private bool Loading = true;
     private bool Hidden = false;
-    private bool LoginHidden = false;
 
     private TimeSpan StartedTime;
 
@@ -129,7 +125,7 @@ public class PollComponent : MonoBehaviour
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
-            ShowLogin();
+            PollManager.Instance.FinishPoll();
         }
         else
         {
@@ -152,22 +148,21 @@ public class PollComponent : MonoBehaviour
             AnswerId = answerId,
             QuestionId = questionId
         });
-        StartCoroutine(ShowCorrectAnswerThenLogin());
+        StartCoroutine(ShowCorrectAnswerThenFinishPoll());
     }
 
-    public IEnumerator ShowCorrectAnswerThenLogin()
+    public IEnumerator ShowCorrectAnswerThenFinishPoll()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
         yield return new WaitForSeconds(5);
         HideObjects();
-        ShowLogin();
+        PollManager.Instance.FinishPoll();
     }
 
     public void OnLogin(string displayName, string fullName)
     {
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         SaveLeaderboard(displayName, fullName, string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds));
-        HideLogin();
     }
 
     public void StartOver()
@@ -193,7 +188,6 @@ public class PollComponent : MonoBehaviour
             });
         }
         DatabaseManager.Instance.SavePlayerScore(fullName, correctAnswers.Count, playerAnswerData);
-        PollManager.Instance.OnSaveLeaderboard();
     }
 
     private void CreateObjects()
@@ -202,11 +196,7 @@ public class PollComponent : MonoBehaviour
 
         BtnStartOver = GetComponentInChildren<PollButtonComponent>();
 
-        LoginInstance = Instantiate(LoginPrefab).GetComponent<LoginComponent>();
-        LoginInstance.transform.SetParent(transform);
-        LoginInstance.CreateAllObjects();
-        HideLogin();
-
+        
         TitleTextInstance = Instantiate(TitleTextPrefab).GetComponent<PollTextComponent>();
         TitleTextInstance.name = "Poll Title";
         TitleTextInstance.transform.SetParent(transform);
@@ -249,21 +239,9 @@ public class PollComponent : MonoBehaviour
         BtnStartOver.gameObject.SetActive(false);
     }
 
-    public void ShowLogin()
-    {
-        LoginInstance.gameObject.SetActive(true);
-        LoginHidden = false;
-    }
-
-    public void HideLogin()
-    {
-        LoginInstance.gameObject.SetActive(false);
-        LoginHidden = true;
-    }
-
     public void Update()
     {
-        if (!Hidden || !LoginHidden && !Loading)
+        if (!Hidden && !Loading)
         {
             Vector2 touchClickPosition = Vector2.zero;
             if (Input.GetMouseButtonDown(0))

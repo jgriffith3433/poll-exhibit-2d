@@ -173,7 +173,7 @@ public class ExhibitGameManager : MonoBehaviour {
         else if (newState == "StartingLeaderboard")
         {
             PreviousGameState = previousState;
-            LeaderboardManager.Instance.FillLeaderboard();
+            LeaderboardManager.Instance.ShowLeaderboard(0, 0.0f);
         }
         else if (newState == "Leaderboard")
         {

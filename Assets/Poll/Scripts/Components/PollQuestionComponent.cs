@@ -12,6 +12,9 @@ public class PollQuestionComponent : MonoBehaviour
     public PollTextComponent QuestionTextPrefab;
     private PollTextComponent QuestionTextInstance;
 
+    public PollTextComponent TF_ConfirmationTextPrefab;
+    private PollTextComponent TF_ConfirmationTextInstance;
+
     public BarGraphComponent AnswerBarGraphPrefab;
     private BarGraphComponent AnswerBarGraphInstance;
 
@@ -42,6 +45,10 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
 
+        TF_ConfirmationTextInstance = Instantiate(TF_ConfirmationTextPrefab).GetComponent<PollTextComponent>();
+        TF_ConfirmationTextInstance.name = "TF_ConfirmationText";
+        TF_ConfirmationTextInstance.transform.SetParent(transform);
+
         AnswersObject = new GameObject("Answers");
         AnswersObject.transform.SetParent(transform);
         PollAnswerInstances = new List<PollAnswerComponent>();
@@ -54,7 +61,13 @@ public class PollQuestionComponent : MonoBehaviour
             pollAnswerInstance.SetPollAnswerData(Data.PollAnswersData[i]);
             pollAnswerInstance.CreateObjects();
             PollAnswerInstances.Add(pollAnswerInstance);
+            if (Data.PollAnswersData[i].Correct)
+            {
+                TF_ConfirmationTextInstance.SetTextData(Data.PollAnswersData[i].AnswerText);
+                TF_ConfirmationTextInstance.CreateAllObjects();
+            }
         }
+        TF_ConfirmationTextInstance.HideObjects();
         AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab, AnswersObject.transform).GetComponent<PollImageComponent>();
         AnswersObject.transform.position += new Vector3(100, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
 
@@ -78,7 +91,7 @@ public class PollQuestionComponent : MonoBehaviour
     public void ShowAsCorrectOrIncorrect()
     {
         SelectedAnswer.ShowAsCorrectOrIncorrect();
-        StartCoroutine(HideCorrectAnswerAndShowBarGraph());
+        StartCoroutine(HideCorrectAnswerAndShowConfirmation());
     }
 
     public void Update()
@@ -109,31 +122,32 @@ public class PollQuestionComponent : MonoBehaviour
         }
         if (TransitioningBarGraphIn)
         {
-            if (AnswerBarGraphInstance.transform.position.x > OriginalAnswerBarGraphInstancePosition.x)
+            if (AnswerBarGraphInstance.transform.position.y < OriginalAnswerBarGraphInstancePosition.y)
             {
-                AnswerBarGraphInstance.transform.position -= new Vector3(1, 0, 0);
+                AnswerBarGraphInstance.transform.position += new Vector3(0, 1, 0);
             }
-            else if (AnswerBarGraphInstance.transform.position.x <= OriginalAnswerBarGraphInstancePosition.x)
+            else if (AnswerBarGraphInstance.transform.position.y >= OriginalAnswerBarGraphInstancePosition.y)
             {
-                AnswerBarGraphInstance.transform.position = new Vector3(OriginalAnswerBarGraphInstancePosition.x, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
+                AnswerBarGraphInstance.transform.position = new Vector3(AnswerBarGraphInstance.transform.position.x, OriginalAnswerBarGraphInstancePosition.y, AnswerBarGraphInstance.transform.position.z);
                 TransitioningBarGraphIn = false;
             }
         }
         if (TransitioningBarGraphOut)
         {
-            if (AnswerBarGraphInstance.transform.position.x < 100)
+            if (AnswerBarGraphInstance.transform.position.y > -100)
             {
-                AnswerBarGraphInstance.transform.position += new Vector3(1, 0, 0);
+                AnswerBarGraphInstance.transform.position -= new Vector3(0, 1, 0);
             }
-            else if (AnswerBarGraphInstance.transform.position.x >= 100)
+            else if (AnswerBarGraphInstance.transform.position.y <= -100)
             {
-                AnswerBarGraphInstance.transform.position = new Vector3(100, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
+                AnswerBarGraphInstance.transform.position = new Vector3(AnswerBarGraphInstance.transform.position.x, -100, AnswerBarGraphInstance.transform.position.z);
                 TransitioningBarGraphOut = false;
+                Destroy(AnswerBarGraphInstance.gameObject);
             }
         }
     }
 
-    public IEnumerator HideCorrectAnswerAndShowBarGraph()
+    public IEnumerator HideCorrectAnswerAndShowConfirmation()
     {
         yield return new WaitForSeconds(1);
         TransitioningAnswersOut = true;
@@ -156,11 +170,20 @@ public class PollQuestionComponent : MonoBehaviour
         {
             AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
         }
-        AnswerBarGraphInstance.transform.position += new Vector3(100, AnswerBarGraphInstance.transform.position.y, AnswerBarGraphInstance.transform.position.z);
-        TransitioningBarGraphIn = true;
-        yield return new WaitForSeconds(3);
-        TransitioningBarGraphOut = true;
-        yield return new WaitForSeconds(1);
+        AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
+        if (Data.QuestionType == "TF")
+        {
+            TF_ConfirmationTextInstance.ShowObjects();
+            yield return new WaitForSeconds(3);
+            TF_ConfirmationTextInstance.HideObjects();
+        }
+        else
+        {
+            TransitioningBarGraphIn = true;
+            yield return new WaitForSeconds(3);
+            TransitioningBarGraphOut = true;
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void ShowObjects()
