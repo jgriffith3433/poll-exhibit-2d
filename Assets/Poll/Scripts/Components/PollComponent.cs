@@ -24,6 +24,9 @@ public class PollComponent : MonoBehaviour
     public PollTextComponent YourScoreTextInstance;
     public PollTextComponent YourScoreTextLabelInstance;
 
+    public GameObject SurfaceProPrefab;
+    private GameObject SurfaceProInstance;
+
     private PollData Data;
 
     private int TopScore;
@@ -43,9 +46,20 @@ public class PollComponent : MonoBehaviour
         Loading = true;
         Data = new PollData(Application.dataPath + "/poll-questions.json");
         m_LeaderboardData = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
+        TopScoreTextInstance.HideObjects();
+        TopScoreTextLabelInstance.HideObjects();
+        YourScoreTextInstance.HideObjects();
+        YourScoreTextLabelInstance.HideObjects();
 
+        StartCoroutine(ShowSurfacePro());
         StartCoroutine(Data.GetData());
         StartCoroutine(m_LeaderboardData.GetData());
+    }
+
+    public IEnumerator ShowSurfacePro()
+    {
+        SurfaceProInstance = Instantiate(SurfaceProPrefab);
+        yield return new WaitForSeconds(4);
         StartCoroutine(CheckIsDoneParsing());
     }
 
@@ -193,9 +207,9 @@ public class PollComponent : MonoBehaviour
     private void CreateObjects()
     {
         Hidden = false;
+        Destroy(SurfaceProInstance);
 
         BtnStartOver = GetComponentInChildren<PollButtonComponent>();
-
         
         TitleTextInstance = Instantiate(TitleTextPrefab).GetComponent<PollTextComponent>();
         TitleTextInstance.name = "Poll Title";
@@ -223,7 +237,6 @@ public class PollComponent : MonoBehaviour
         YourScoreTextLabelInstance.ShowObjects();
         SetYourScore(0);
         SetTopScore(m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault().PlayerScore);
-
 
     }
 

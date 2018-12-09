@@ -44,6 +44,7 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.transform.position = Data.QuestionTextPosition;
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
+        QuestionTextInstance.AnimateFromTop();
 
         TF_ConfirmationTextInstance = Instantiate(TF_ConfirmationTextPrefab).GetComponent<PollTextComponent>();
         TF_ConfirmationTextInstance.name = "TF_ConfirmationText";

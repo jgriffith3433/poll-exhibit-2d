@@ -4,15 +4,20 @@ using UnityEngine;
 using TMPro;
 
 public class PollTextComponent : MonoBehaviour {
-    private TextMeshPro m_textMeshPro;
+    public TextMeshProUGUI ChildTextMeshPro;
+    public RectTransform ChildRectTransform;
     private string Text;
+    private float HeightToAnimateTo;
+    private float AnimateSpeed = 5.0f;
+    private bool DoAnimateFromTop = false;
 
     public void Awake()
     {
-        m_textMeshPro = gameObject.GetComponent<TextMeshPro>();
-        if (m_textMeshPro == null)
+        ChildTextMeshPro = gameObject.GetComponent<TextMeshProUGUI>();
+
+        if (ChildTextMeshPro == null)
         {
-            m_textMeshPro = gameObject.GetComponentInChildren<TextMeshPro>();
+            ChildTextMeshPro = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
     }
 
@@ -23,7 +28,7 @@ public class PollTextComponent : MonoBehaviour {
 
     public void CreateAllObjects()
     {
-        m_textMeshPro.SetText(Text);
+        ChildTextMeshPro.SetText(Text);
     }
 
     public void HideObjects()
@@ -34,5 +39,30 @@ public class PollTextComponent : MonoBehaviour {
     public void ShowObjects()
     {
         gameObject.SetActive(true);
+    }
+
+    public void AnimateFromTop()
+    {
+        HeightToAnimateTo = ChildRectTransform.sizeDelta.y;
+        ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, 0.1f);
+        DoAnimateFromTop = true;
+    }
+
+    public void Update()
+    {
+        if (DoAnimateFromTop)
+        {
+            if (ChildRectTransform.sizeDelta.y < HeightToAnimateTo)
+            {
+                ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, ChildRectTransform.sizeDelta.y + AnimateSpeed);
+
+                if (ChildRectTransform.sizeDelta.y >= HeightToAnimateTo)
+                {
+                    ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, HeightToAnimateTo);
+                    DoAnimateFromTop = false;
+                }
+                ChildTextMeshPro.SetText(Text);
+            }
+        }
     }
 }

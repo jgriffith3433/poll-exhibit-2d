@@ -51,8 +51,6 @@ public class LoginComponent : MonoBehaviour {
     public void CreateAllObjects()
     {
         submitted = false;
-        LoginTitle.SetTextData("SUBMIT TO LEADERBOARD");
-        LoginTitle.CreateAllObjects();
         DisplayNameField.CreateAllObjects();
         SubmitButton.CreateAllObjects();
     }

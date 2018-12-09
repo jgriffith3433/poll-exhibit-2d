@@ -466,49 +466,51 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 33367894578423130, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_text
       value: Admin
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_textInfo.characterCount
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_textInfo.spaceCount
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114106481040374118, guid: 381edca20c6094748be0a8822202dcdb,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: m_margin.w
       value: 7.293651
       objectReference: {fileID: 0}
     - target: {fileID: 1016933379540730, guid: 381edca20c6094748be0a8822202dcdb, type: 2}
       propertyPath: m_Name
       value: AdminTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381edca20c6094748be0a8822202dcdb, type: 2}
@@ -587,7 +589,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 26
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

@@ -16,7 +16,7 @@ public class LeadboardTopDownComponent : MonoBehaviour
     private Dictionary<string, List<PollTextComponent>> LeaderboardEntries;
 
     public float VerticalSpacing = 3.0f;
-    private float VerticalOffset = 10.5f;
+    private float VerticalOffset = 7;
 
     private List<LeaderboardPlayerData> PlayerData;
     public void SetPlayerData(List<LeaderboardPlayerData> playerData)

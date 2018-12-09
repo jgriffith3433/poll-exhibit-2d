@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnswerPrefab: {fileID: 114469997771742708, guid: 77457fee6b40c694c86deb6a6777b643,
     type: 2}
-  QuestionTextPrefab: {fileID: 114268802782179692, guid: 381edca20c6094748be0a8822202dcdb,
+  QuestionTextPrefab: {fileID: 114551771733323042, guid: 381edca20c6094748be0a8822202dcdb,
     type: 2}
   TF_ConfirmationTextPrefab: {fileID: 114869469422517568, guid: 11ab119fcb1a8ef488709c34d8b608b1,
     type: 2}
