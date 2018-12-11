@@ -696,6 +696,8 @@ MonoBehaviour:
     type: 2}
   ExhibitBackgroundPrefab: {fileID: 114074507564754322, guid: 2d6315a097a47d5478a3d29039a0a022,
     type: 2}
+  LoadTimerPrefab: {fileID: 114320355675464998, guid: c1ce911295950cd44afa4f56d7f64f76,
+    type: 2}
 --- !u!114 &1995646087
 MonoBehaviour:
   m_ObjectHideFlags: 0

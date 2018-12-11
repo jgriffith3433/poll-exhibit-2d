@@ -139,7 +139,9 @@ public class PollComponent : MonoBehaviour
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
-            PollManager.Instance.FinishPoll();
+            var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
+            var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
+            PollManager.Instance.FinishPoll(yourScore, elapsedTime);
         }
         else
         {
@@ -170,13 +172,15 @@ public class PollComponent : MonoBehaviour
         CurrentQuestion.ShowAsCorrectOrIncorrect();
         yield return new WaitForSeconds(5);
         HideObjects();
-        PollManager.Instance.FinishPoll();
+        var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
+        var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
+        PollManager.Instance.FinishPoll(yourScore, elapsedTime);
     }
 
     public void OnLogin(string displayName, string fullName)
     {
-        var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
-        SaveLeaderboard(displayName, fullName, string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds));
+        //var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
+        //SaveLeaderboard(displayName, fullName, string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds));
     }
 
     public void StartOver()
@@ -185,7 +189,7 @@ public class PollComponent : MonoBehaviour
         PollManager.Instance.RestartPoll();
     }
 
-    public void SaveLeaderboard(string displayName, string fullName, string totalTime)
+    public void SaveLeaderboard(string displayName, string fullName, TimeSpan totalTime)
     {
         var correctAnswers = UserAnswers.Where(ua => ua.Correct == true).ToList();
         //var percentScore = (int)(((float)correctAnswers.Count / (float)Data.NumberOfQuestionsAsked) * 100);

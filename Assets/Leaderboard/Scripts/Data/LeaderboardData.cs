@@ -54,7 +54,7 @@ public class LeaderboardData
                         PlayerBaseName = playerXObj.Key,
                         PlayerDisplayName = playerXObj.Value[i]["DisplayName"].Value,
                         PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value),
-                        TotalTime = playerXObj.Value[i]["TotalTime"].Value
+                        TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value)
                     });
                 }
             }
@@ -65,7 +65,7 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, string totalTime)
+    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime)
     {
         if (PlayerData.Count == 10)
         {

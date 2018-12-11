@@ -20,6 +20,7 @@ public class PollQuestionComponent : MonoBehaviour
 
     public PollImageComponent AnswerBackgroundPrefab;
     private PollImageComponent AnswerBackgroundInstance;
+    private PollTimerComponent AnswerTimerInstance;
 
     private bool TransitioningAnswersIn = false;
     private bool TransitioningAnswersOut = false;
@@ -70,6 +71,8 @@ public class PollQuestionComponent : MonoBehaviour
         }
         TF_ConfirmationTextInstance.HideObjects();
         AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab, AnswersObject.transform).GetComponent<PollImageComponent>();
+        AnswerTimerInstance = AnswerBackgroundInstance.GetComponentInChildren<PollTimerComponent>();
+        AnswerTimerInstance.CreateObjects(false);
         AnswersObject.transform.position += new Vector3(100, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
 
         HideObjects();
@@ -195,6 +198,8 @@ public class PollQuestionComponent : MonoBehaviour
             pollAnswerInstance.ShowObjects();
         }
         AnswerBackgroundInstance.ShowObjects();
+        AnswerTimerInstance.ShowObjects();
+        AnswerTimerInstance.Play();
         QuestionTextInstance.gameObject.SetActive(true);
     }
 
@@ -205,6 +210,7 @@ public class PollQuestionComponent : MonoBehaviour
             pollAnswerInstance.HideObjects();
         }
         AnswerBackgroundInstance.HideObjects();
+        AnswerTimerInstance.HideObjects();
         QuestionTextInstance.gameObject.SetActive(false);
     }
 }

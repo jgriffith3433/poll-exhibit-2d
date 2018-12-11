@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class LeaderboardManager : MonoBehaviour {
     public static LeaderboardManager Instance { get; private set; }
@@ -12,11 +13,11 @@ public class LeaderboardManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void ShowLeaderboard(int score, float totalTime)
+    public void ShowLeaderboard(int score, TimeSpan? totalTime, bool fromPoll)
     {
         DestroyLeaderboard();
         LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-        LeaderboardInstance.ShowLeaderboard(score, totalTime);
+        LeaderboardInstance.ShowLeaderboard(score, totalTime, fromPoll);
         LeaderboardInstance.ShowObjects();
     }
 
@@ -33,7 +34,7 @@ public class LeaderboardManager : MonoBehaviour {
         if (LeaderboardInstance == null)
         {
             LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-            LeaderboardInstance.ShowLeaderboard(0, 0.0f);
+            LeaderboardInstance.ShowLeaderboard(0, null, false);
             LeaderboardInstance.ShowObjects();
         }
         LeaderboardInstance.ShowObjects();

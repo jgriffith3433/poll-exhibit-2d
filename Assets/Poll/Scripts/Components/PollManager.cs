@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,8 +49,8 @@ public class PollManager : MonoBehaviour {
         PollInstance.OnLogin(displayName, fullName);
     }
 
-    public void FinishPoll()
+    public void FinishPoll(int score, TimeSpan totalTime)
     {
-        ExhibitGameManager.Instance.OnFinishPoll();
+        ExhibitGameManager.Instance.OnFinishPoll(score, totalTime);
     }
 }

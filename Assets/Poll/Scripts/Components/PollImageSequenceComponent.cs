@@ -15,8 +15,9 @@ public class PollImageSequenceComponent : PollImageComponent
     public float SpeedDelay = 0.04f;
     public string ImageSequenceFolder;
 
-    public void Awake()
+    protected virtual void Awake()
     {
+        m_image = gameObject.GetComponentInChildren<Image>();
         if (PlayOnAwake)
         {
             CreateObjects(true);
@@ -35,7 +36,6 @@ public class PollImageSequenceComponent : PollImageComponent
 
     public void CreateObjects(bool autoPlay)
     {
-        m_image = gameObject.GetComponentInChildren<Image>();
         m_image.gameObject.SetActive(false);
         Loading = true;
         Sprites = new List<Sprite>();

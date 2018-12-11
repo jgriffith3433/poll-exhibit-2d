@@ -46,7 +46,7 @@ public class LeadboardTopDownComponent : MonoBehaviour
                 var totalTimeTextInstance = Instantiate(TopScoreTextPrefab).GetComponent<PollTextComponent>();
                 totalTimeTextInstance.transform.SetParent(transform);
                 totalTimeTextInstance.transform.position = TotalTimeText.transform.position - new Vector3(0, -5 + ((i + 1) * VerticalSpacing) + VerticalOffset, 0);
-                totalTimeTextInstance.SetTextData(PlayerData[i].TotalTime);
+                totalTimeTextInstance.SetTextData(PlayerData[i].TotalTime.ToString());
                 totalTimeTextInstance.CreateAllObjects();
 
                 LeaderboardEntries.Add(PlayerData[i].PlayerBaseName, new List<PollTextComponent>
@@ -73,7 +73,7 @@ public class LeadboardTopDownComponent : MonoBehaviour
                 var totalTimeTextInstance = Instantiate(TotalTimeTextPrefab).GetComponent<PollTextComponent>();
                 totalTimeTextInstance.transform.SetParent(transform);
                 totalTimeTextInstance.transform.position = TotalTimeText.transform.position - new Vector3(0, ((i + 1) * VerticalSpacing) + VerticalOffset, 0);
-                totalTimeTextInstance.SetTextData(PlayerData[i].TotalTime);
+                totalTimeTextInstance.SetTextData(PlayerData[i].TotalTime.ToString());
                 totalTimeTextInstance.CreateAllObjects();
 
                 LeaderboardEntries.Add(PlayerData[i].PlayerBaseName, new List<PollTextComponent>

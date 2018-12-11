@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +15,19 @@ public class ExhibitGameManager : MonoBehaviour {
     public PollImageComponent ExhibitBackgroundPrefab;
     private PollImageComponent ExhibitBackgroundInstance;
 
+    public PollTimerComponent LoadTimerPrefab;
+    private PollTimerComponent LoadTimerInstance;
+
+    private int PollScore;
+    private TimeSpan? PollTotalTime;
+
     public void Awake()
     {
         Instance = this;
+    }
+
+    IEnumerator Start()
+    {
         if (UseSequenceForBackground)
         {
             ExhibitBackgroundSequenceInstance = Instantiate(ExhibitBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
@@ -24,6 +35,7 @@ public class ExhibitGameManager : MonoBehaviour {
             ExhibitBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
             ExhibitBackgroundSequenceInstance.SetImageSequenceFolder("background_image_sequence");
             ExhibitBackgroundSequenceInstance.SetLoop(true);
+            ExhibitBackgroundSequenceInstance.CreateObjects(true);
         }
         else
         {
@@ -32,14 +44,9 @@ public class ExhibitGameManager : MonoBehaviour {
             ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
             ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.jpg");
         }
-    }
-
-    IEnumerator Start()
-    {
-        if (UseSequenceForBackground)
-        {
-            ExhibitBackgroundSequenceInstance.CreateObjects(true);
-        }
+        LoadTimerInstance = Instantiate(LoadTimerPrefab).GetComponent<PollTimerComponent>();
+        LoadTimerInstance.transform.SetParent(transform);
+        LoadTimerInstance.CreateObjects(false);
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsDoneLoading());
     }
@@ -49,11 +56,11 @@ public class ExhibitGameManager : MonoBehaviour {
         var stillLoading = false;
         if (UseSequenceForBackground)
         {
-            stillLoading = ExhibitBackgroundSequenceInstance.Loading;
+            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading;
         }
         else
         {
-            stillLoading = ExhibitBackgroundInstance.Loading;
+            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading;
         }
         if (stillLoading)
         {
@@ -62,6 +69,7 @@ public class ExhibitGameManager : MonoBehaviour {
         }
         else
         {
+            LoadTimerInstance.HideObjects();
             GoToState("StartingLeaderboard");
         }
     }
@@ -105,8 +113,10 @@ public class ExhibitGameManager : MonoBehaviour {
         LeaderboardManager.Instance.DestroyLeaderboard();
     }
 
-    public void OnFinishPoll()
+    public void OnFinishPoll(int score, TimeSpan totalTime)
     {
+        PollScore = score;
+        PollTotalTime = totalTime;
         GoToState("StartingLeaderboard");
     }
 
@@ -173,7 +183,9 @@ public class ExhibitGameManager : MonoBehaviour {
         else if (newState == "StartingLeaderboard")
         {
             PreviousGameState = previousState;
-            LeaderboardManager.Instance.ShowLeaderboard(0, 0.0f);
+            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PreviousGameState == "Poll");
+            PollScore = 0;
+            PollTotalTime = null;
         }
         else if (newState == "Leaderboard")
         {

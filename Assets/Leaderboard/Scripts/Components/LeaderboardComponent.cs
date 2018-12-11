@@ -1,12 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LeaderboardComponent : MonoBehaviour
 {
+    private LeaderboardData Data;
+
     public LeadboardTopDownComponent LeadboardTopDownPrefab;
     private LeadboardTopDownComponent LeadboardTopDownInstance;
-    private LeaderboardData Data;
+
+    public PollTextComponent TxtTitle;
+    public PollTextComponent TxtSubTitle;
+    public PollTextComponent TxtPlayNow;
 
     public LoginComponent LoginPrefab;
     private LoginComponent LoginInstance;
@@ -15,7 +22,8 @@ public class LeaderboardComponent : MonoBehaviour
     private PollFinishedComponent PollFinishedInstance;
 
     private int Score;
-    private float TotalTime;
+    private TimeSpan? TotalTime;
+    private bool FromPoll;
 
     private bool Loading = true;
     private bool LoginHidden = false;
@@ -23,8 +31,9 @@ public class LeaderboardComponent : MonoBehaviour
 
     public bool Hidden;
 
-    public void ShowLeaderboard(int score, float totalTime)
+    public void ShowLeaderboard(int score, TimeSpan? totalTime, bool fromPoll)
     {
+        FromPoll = fromPoll;
         Score = score;
         TotalTime = totalTime;
         Loading = true;
@@ -56,11 +65,54 @@ public class LeaderboardComponent : MonoBehaviour
         LeadboardTopDownInstance.CreateObjects();
         LoginInstance = Instantiate(LoginPrefab).GetComponent<LoginComponent>();
         LoginInstance.transform.SetParent(transform);
-        LoginInstance.CreateAllObjects();
+        LoginInstance.CreateAllObjects(Score, TotalTime);
         PollFinishedInstance = Instantiate(PollFinishedPrefab).GetComponent<PollFinishedComponent>();
         PollFinishedInstance.transform.SetParent(transform);
-        HideFinishPoll();
-        HideLogin();
+        if (FromPoll)
+        {
+            var lowestScore = Data.PlayerData.LastOrDefault();
+            if (lowestScore != null)
+            {
+                if (Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)
+                {
+                    ShowLogin();
+                    HideLeadboardTopDown();
+                    HideFinishPoll();
+                }
+                else
+                {
+                    PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                    HideLogin();
+                }
+            }
+            else
+            {
+                ShowLogin();
+                HideLeadboardTopDown();
+                HideFinishPoll();
+            }
+        }
+        else
+        {
+            HideFinishPoll();
+            HideLogin();
+        }
+    }
+
+    public void ShowLeadboardTopDown()
+    {
+        LeadboardTopDownInstance.gameObject.SetActive(true);
+        TxtTitle.ShowObjects();
+        TxtSubTitle.ShowObjects();
+        TxtPlayNow.ShowObjects();
+    }
+
+    public void HideLeadboardTopDown()
+    {
+        LeadboardTopDownInstance.gameObject.SetActive(false);
+        TxtTitle.HideObjects();
+        TxtSubTitle.HideObjects();
+        TxtPlayNow.HideObjects();
     }
 
     public void ShowLogin()

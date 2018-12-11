@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 114531693855526716}
   - component: {fileID: 114504626950366248}
   m_Layer: 0
-  m_Name: TotalTimeLabelText
+  m_Name: TotalTimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -890,8 +890,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1222,6 +1222,8 @@ MonoBehaviour:
   LoginTitle: {fileID: 114206910606742044}
   SubmitButton: {fileID: 114207913401663882}
   DisplayNameField: {fileID: 114064801256211860}
+  TxtScore: {fileID: 114897157967718016}
+  TxtTotalTime: {fileID: 114504626950366248}
   submitted: 0
 --- !u!114 &114269807809014652
 MonoBehaviour:
@@ -1412,8 +1414,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3115,7 +3117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -18.73, y: -9.5}
+  m_AnchoredPosition: {x: -4.2, y: -3.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224064654300963152
@@ -3171,7 +3173,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 146.2, y: 4.7}
-  m_SizeDelta: {x: 434.19, y: 60}
+  m_SizeDelta: {x: 434.19, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224332603029151186
 RectTransform:
@@ -3210,7 +3212,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 146.2, y: 4.7}
-  m_SizeDelta: {x: 434.19, y: 60}
+  m_SizeDelta: {x: 434.19, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224403029613738218
 RectTransform:
@@ -3540,7 +3542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -18.73, y: -9.5}
+  m_AnchoredPosition: {x: 19.06, y: -3.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224989596556387482
