@@ -141,15 +141,22 @@ public class PollComponent : MonoBehaviour
             HideObjects();
             var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
             var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
-            PollManager.Instance.FinishPoll(yourScore, elapsedTime);
+            PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers);
         }
         else
         {
             GoToNextQuestion();
-            var topScore = m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault().PlayerScore;
+            var topScore = m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault();
             var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
             SetYourScore(yourScore);
-            if (yourScore > topScore)
+            if (topScore != null)
+            {
+                if (yourScore > topScore.PlayerScore)
+                {
+                    SetTopScore(yourScore);
+                }
+            }
+            else
             {
                 SetTopScore(yourScore);
             }
@@ -174,38 +181,13 @@ public class PollComponent : MonoBehaviour
         HideObjects();
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
-        PollManager.Instance.FinishPoll(yourScore, elapsedTime);
-    }
-
-    public void OnLogin(string displayName, string fullName)
-    {
-        //var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
-        //SaveLeaderboard(displayName, fullName, string.Format("{0:D2}:{1:D2}:{2:D2}", elapsedTime.Hours, elapsedTime.Minutes, elapsedTime.Seconds));
+        PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers);
     }
 
     public void StartOver()
     {
         ExhibitGameManager.Instance.ResetGame();
         PollManager.Instance.RestartPoll();
-    }
-
-    public void SaveLeaderboard(string displayName, string fullName, TimeSpan totalTime)
-    {
-        var correctAnswers = UserAnswers.Where(ua => ua.Correct == true).ToList();
-        //var percentScore = (int)(((float)correctAnswers.Count / (float)Data.NumberOfQuestionsAsked) * 100);
-        //m_LeaderboardData.AddPlayerScore(displayName, percentScore);
-        m_LeaderboardData.AddPlayerScore(displayName, correctAnswers.Count, totalTime);
-        m_LeaderboardData.SaveLeaderboard();
-        var playerAnswerData = new List<PlayerAnswerData>();
-        foreach (var userAnswer in UserAnswers)
-        {
-            playerAnswerData.Add(new PlayerAnswerData
-            {
-                AnswerId = userAnswer.AnswerId,
-                QuestionId = userAnswer.QuestionId
-            });
-        }
-        DatabaseManager.Instance.SavePlayerScore(fullName, correctAnswers.Count, playerAnswerData);
     }
 
     private void CreateObjects()
@@ -240,8 +222,11 @@ public class PollComponent : MonoBehaviour
         YourScoreTextInstance.ShowObjects();
         YourScoreTextLabelInstance.ShowObjects();
         SetYourScore(0);
-        SetTopScore(m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault().PlayerScore);
-
+        var topScore = m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault();
+        if (topScore != null)
+        {
+            SetTopScore(topScore.PlayerScore);
+        }
     }
 
     public void HideObjects()

@@ -20,6 +20,7 @@ public class ExhibitGameManager : MonoBehaviour {
 
     private int PollScore;
     private TimeSpan? PollTotalTime;
+    private List<PollUserAnswer> PollUserAnswers;
 
     public void Awake()
     {
@@ -113,10 +114,11 @@ public class ExhibitGameManager : MonoBehaviour {
         LeaderboardManager.Instance.DestroyLeaderboard();
     }
 
-    public void OnFinishPoll(int score, TimeSpan totalTime)
+    public void OnFinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers)
     {
         PollScore = score;
         PollTotalTime = totalTime;
+        PollUserAnswers = userAnswers;
         GoToState("StartingLeaderboard");
     }
 
@@ -139,6 +141,11 @@ public class ExhibitGameManager : MonoBehaviour {
     public void OnFinishLeaderboard()
     {
         GoToState("StartingPoll");
+    }
+
+    public void OnSaveLeaderboard()
+    {
+        GoToState("StartingLeaderboard");
     }
 
     public void OnFinishScreensaver()
@@ -183,7 +190,8 @@ public class ExhibitGameManager : MonoBehaviour {
         else if (newState == "StartingLeaderboard")
         {
             PreviousGameState = previousState;
-            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PreviousGameState == "Poll");
+            ResetGame();
+            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PollUserAnswers, PreviousGameState == "Poll");
             PollScore = 0;
             PollTotalTime = null;
         }

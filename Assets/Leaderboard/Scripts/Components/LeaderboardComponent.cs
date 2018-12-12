@@ -8,8 +8,8 @@ public class LeaderboardComponent : MonoBehaviour
 {
     private LeaderboardData Data;
 
-    public LeadboardTopDownComponent LeadboardTopDownPrefab;
-    private LeadboardTopDownComponent LeadboardTopDownInstance;
+    public LeaderboardTopDownComponent LeaderboardTopDownPrefab;
+    private LeaderboardTopDownComponent LeaderboardTopDownInstance;
 
     public PollTextComponent TxtTitle;
     public PollTextComponent TxtSubTitle;
@@ -23,24 +23,60 @@ public class LeaderboardComponent : MonoBehaviour
 
     private int Score;
     private TimeSpan? TotalTime;
+    private List<PollUserAnswer> UserAnswers;
     private bool FromPoll;
 
     private bool Loading = true;
     private bool LoginHidden = false;
     private bool PollFinishedHidden = false;
+    private bool LeaderboardHidden = false;
 
     public bool Hidden;
 
-    public void ShowLeaderboard(int score, TimeSpan? totalTime, bool fromPoll)
+    public void ShowLeaderboard(int score, TimeSpan? totalTime, List<PollUserAnswer> userAnswers, bool fromPoll)
     {
+        UserAnswers = userAnswers;
         FromPoll = fromPoll;
         Score = score;
         TotalTime = totalTime;
+
+        if (fromPoll)
+        {
+            SavePlayerData();
+        }
+
         Loading = true;
         ShowObjects();
         Data = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
         StartCoroutine(Data.GetData());
         StartCoroutine(CheckIsDoneParsing());
+    }
+
+    public void SaveLeaderboard(string displayName, string fullName)
+    {
+        Data.AddPlayerScore(displayName, Score, TotalTime.Value);
+        Data.SaveLeaderboard();
+        StartCoroutine(ShowLeaderboardAfterSaving());
+    }
+
+    public void SavePlayerData()
+    {
+        var playerAnswerData = new List<PlayerAnswerData>();
+        foreach (var userAnswer in UserAnswers)
+        {
+            playerAnswerData.Add(new PlayerAnswerData
+            {
+                AnswerId = userAnswer.AnswerId,
+                QuestionId = userAnswer.QuestionId
+            });
+        }
+        DatabaseManager.Instance.SavePlayerScore(Guid.NewGuid().ToString(), Score, TotalTime.Value, playerAnswerData);
+    }
+
+    IEnumerator ShowLeaderboardAfterSaving()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ExhibitGameManager.Instance.OnSaveLeaderboard();
     }
 
     IEnumerator CheckIsDoneParsing()
@@ -59,10 +95,10 @@ public class LeaderboardComponent : MonoBehaviour
 
     public void CreateObjects()
     {
-        LeadboardTopDownInstance = Instantiate(LeadboardTopDownPrefab).GetComponent<LeadboardTopDownComponent>();
-        LeadboardTopDownInstance.transform.SetParent(transform);
-        LeadboardTopDownInstance.SetPlayerData(Data.PlayerData);
-        LeadboardTopDownInstance.CreateObjects();
+        LeaderboardTopDownInstance = Instantiate(LeaderboardTopDownPrefab).GetComponent<LeaderboardTopDownComponent>();
+        LeaderboardTopDownInstance.transform.SetParent(transform);
+        LeaderboardTopDownInstance.SetPlayerData(Data.PlayerData);
+        LeaderboardTopDownInstance.CreateObjects();
         LoginInstance = Instantiate(LoginPrefab).GetComponent<LoginComponent>();
         LoginInstance.transform.SetParent(transform);
         LoginInstance.CreateAllObjects(Score, TotalTime);
@@ -73,23 +109,35 @@ public class LeaderboardComponent : MonoBehaviour
             var lowestScore = Data.PlayerData.LastOrDefault();
             if (lowestScore != null)
             {
-                if (Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)
+                if (Score > 0 && Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)
                 {
                     ShowLogin();
-                    HideLeadboardTopDown();
+                    HideLeaderboardTopDown();
                     HideFinishPoll();
                 }
                 else
                 {
                     PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                    ShowFinishPoll();
+                    HideLeaderboardTopDown();
                     HideLogin();
                 }
             }
             else
             {
-                ShowLogin();
-                HideLeadboardTopDown();
-                HideFinishPoll();
+                if (Score > 0)
+                {
+                    ShowLogin();
+                    HideLeaderboardTopDown();
+                    HideFinishPoll();
+                }
+                else
+                {
+                    PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                    ShowFinishPoll();
+                    HideLeaderboardTopDown();
+                    HideLogin();
+                }
             }
         }
         else
@@ -99,17 +147,24 @@ public class LeaderboardComponent : MonoBehaviour
         }
     }
 
-    public void ShowLeadboardTopDown()
+    public void OnContinue()
     {
-        LeadboardTopDownInstance.gameObject.SetActive(true);
+        LoginInstance.OnContinue();
+    }
+
+    public void ShowLeaderboardTopDown()
+    {
+        LeaderboardHidden = false;
+        LeaderboardTopDownInstance.gameObject.SetActive(true);
         TxtTitle.ShowObjects();
         TxtSubTitle.ShowObjects();
         TxtPlayNow.ShowObjects();
     }
 
-    public void HideLeadboardTopDown()
+    public void HideLeaderboardTopDown()
     {
-        LeadboardTopDownInstance.gameObject.SetActive(false);
+        LeaderboardHidden = true;
+        LeaderboardTopDownInstance.gameObject.SetActive(false);
         TxtTitle.HideObjects();
         TxtSubTitle.HideObjects();
         TxtPlayNow.HideObjects();
@@ -184,7 +239,7 @@ public class LeaderboardComponent : MonoBehaviour
                         }
                     }
                 }
-                if (LoginHidden && PollFinishedHidden)
+                if (LoginHidden && PollFinishedHidden && !LeaderboardHidden)
                 {
                     LeaderboardManager.Instance.OnPlay();
                 }

@@ -1,0 +1,64 @@
+{
+  "poll_id": "0",
+  "num_questions_asked": "30",
+  "title_text": "<#000000>Question</color>",
+  "title_text_position": "-17,10,0",
+  "questions": [
+    {
+      "question_id": "0",
+      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#FF0000><size=+18>_</size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
+      "question_text_position": "-6,6,0",
+      "question_type": "TF",
+      "answers": [
+        {
+          "answer_id": "0",
+          "answer_text": "<size=+14>true</size>",
+          "answer_text_position": "30,5,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,5,-1",
+          "correct": true
+        },
+        {
+          "answer_id": "1",
+          "answer_text": "<size=+14>false</size>",
+          "answer_text_position": "30,-5,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,-5,-1",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_id": "1",
+      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#FF0000><size=+18>_</size></color><#000000> vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
+      "question_text_position": "-6,6,0",
+      "question_type": "MC",
+      "answers": [
+        {
+          "answer_id": "2",
+          "answer_text": "<size=+14>32</size>",
+          "answer_text_position": "30,10,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,10,-1",
+          "correct": true
+        },
+        {
+          "answer_id": "3",
+          "answer_text": "<size=+14>15</size>",
+          "answer_text_position": "30,0,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,0,-1",
+          "correct": false
+        },
+        {
+          "answer_id": "4",
+          "answer_text": "<size=+14>54</size>",
+          "answer_text_position": "30,-10,-1",
+          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text_position": "18,-10,-1",
+          "correct": false
+        }
+      ]
+    }
+  ]
+}

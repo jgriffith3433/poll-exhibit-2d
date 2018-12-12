@@ -4,9 +4,8 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class PollFinishedComponent : MonoBehaviour {
-    public bool submitted;
-
+public class PollFinishedComponent : MonoBehaviour
+{
     public int FramesSinceUpdateValues = 0;
 
     private int Score;
@@ -58,22 +57,9 @@ public class PollFinishedComponent : MonoBehaviour {
             }
             CorrectAnswersText.SetTextData(CurrentScore.ToString());
             CorrectAnswersText.CreateAllObjects();
-            TotalTimeLabelText.SetTextData(string.Format("{0:D2}:{1:D2}:{2:D2}", CurrentHours, CurrentMinutes, CurrentSeconds));
+            TotalTimeLabelText.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}", CurrentHours, CurrentMinutes, CurrentSeconds));
             TotalTimeLabelText.CreateAllObjects();
         }
         FramesSinceUpdateValues++;
-    }
-
-    public void StartOver()
-    {
-        LeaderboardManager.Instance.OnPlay();
-    }
-
-    public void Submit()
-    {
-        if (!submitted)
-        {
-            StartOver();
-        }
     }
 }

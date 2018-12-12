@@ -44,9 +44,9 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerScore(string displayName, int score, List<PlayerAnswerData> playerAnswerData)
+    public void SavePlayerScore(string displayName, int score, TimeSpan totalTime, List<PlayerAnswerData> playerAnswerData)
     {
-        Data.AddPlayerScore(displayName, score, playerAnswerData);
+        Data.AddPlayerScore(displayName, score, totalTime, playerAnswerData);
         Data.SaveExhibitData();
     }
 
@@ -99,7 +99,7 @@ public class DatabaseManager : MonoBehaviour
                 yield return databaseData.GetData();
                 foreach (var playerScore in databaseData.PlayerData)
                 {
-                    masterData.AddPlayerScore(playerScore.PlayerDisplayName, playerScore.PlayerScore, playerScore.PlayerAnswerData);
+                    masterData.AddPlayerScore(playerScore.PlayerDisplayName, playerScore.PlayerScore, playerScore.TotalTime, playerScore.PlayerAnswerData);
                 }
             }
             else

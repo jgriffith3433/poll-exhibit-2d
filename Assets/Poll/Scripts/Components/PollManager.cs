@@ -44,13 +44,8 @@ public class PollManager : MonoBehaviour {
         PollInstance.OnIncorrect(questionId, answerId);
     }
 
-    public void OnLogin(string displayName, string fullName)
+    public void FinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers)
     {
-        PollInstance.OnLogin(displayName, fullName);
-    }
-
-    public void FinishPoll(int score, TimeSpan totalTime)
-    {
-        ExhibitGameManager.Instance.OnFinishPoll(score, totalTime);
+        ExhibitGameManager.Instance.OnFinishPoll(score, totalTime, userAnswers);
     }
 }

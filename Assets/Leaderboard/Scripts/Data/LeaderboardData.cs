@@ -10,7 +10,7 @@ public class LeaderboardData
 {
     private string RemoteUrl;
     public bool IsDoneParsing = false;
-    public string PollLeadboardDataRawText { get; set; }
+    public string PollLeaderboardDataRawText { get; set; }
 
     public List<LeaderboardPlayerData> PlayerData { get; set; }
 
@@ -26,8 +26,8 @@ public class LeaderboardData
         if (String.IsNullOrEmpty(request.error)) {
             try
             {
-                PollLeadboardDataRawText = request.text;
-                StartParse(JSON.Parse(PollLeadboardDataRawText));
+                PollLeaderboardDataRawText = request.text;
+                StartParse(JSON.Parse(PollLeaderboardDataRawText));
             }
             catch (Exception e)
             {
@@ -69,7 +69,7 @@ public class LeaderboardData
     {
         if (PlayerData.Count == 10)
         {
-            PlayerData.RemoveAt(0);
+            PlayerData.RemoveAt(9);
         }
         for(var i = 0; i < PlayerData.Count; i++)
         {
@@ -89,9 +89,9 @@ public class LeaderboardData
         try
         {
             var rootXObj = new JSONObject();
-            foreach(var playerData in PlayerData)
+            PlayerData = PlayerData.OrderByDescending(pd => pd.PlayerScore / pd.TotalTime.TotalSeconds).ToList();
+            foreach (var playerData in PlayerData)
             {
-
                 var playerDataChild = new JSONArray();
                 var playerDataChildObject = new JSONObject();
                 playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);

@@ -75,6 +75,7 @@ public class ExhibitData
                 {
                     PlayerDisplayName = playerXObj.Value["DisplayName"].Value,
                     PlayerScore = int.Parse(playerXObj.Value["Score"].Value),
+                    TotalTime = TimeSpan.Parse(playerXObj.Value["TotalTime"].Value),
                     PlayerAnswerData = playerAnswerData
                 });
             }
@@ -85,12 +86,13 @@ public class ExhibitData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, List<PlayerAnswerData> playerAnswerData)
+    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime, List<PlayerAnswerData> playerAnswerData)
     {
         PlayerData.Add(new ExhibitPlayerData
         {
             PlayerDisplayName = displayName,
             PlayerScore = score,
+            TotalTime = totalTime,
             PlayerAnswerData = playerAnswerData
         });
     }
@@ -105,6 +107,7 @@ public class ExhibitData
                 var playerDataChildObject = new JSONObject();
                 playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
                 playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
+                playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
 
                 var playerAnswers = new JSONArray();
                 foreach(var playerAnswer in playerData.PlayerAnswerData)

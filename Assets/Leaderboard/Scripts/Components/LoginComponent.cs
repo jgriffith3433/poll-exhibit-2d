@@ -6,27 +6,52 @@ using System;
 
 public class LoginComponent : MonoBehaviour {
     public PollTextComponent LoginTitle;
-    public PollButtonComponent SubmitButton;
-    public PollTextFieldComponent DisplayNameField;
+    public KeyboardComponent KeyboardInstance;
 
     public PollTextComponent TxtScore;
     public PollTextComponent TxtTotalTime;
 
+    public PollTextFieldComponent NameInput;
+    public bool NameInputSelected;
+    public PollTextFieldComponent EmailInput;
+    public bool EmailInputSelected;
 
     public bool submitted;
 
-    public void Login(string displayName, string fullName)
+    public void Awake()
     {
-        PollManager.Instance.OnLogin(displayName, fullName);
+        KeyboardInstance.OnValueChanged += OnKeyboardValueChanged;
     }
 
-    public void Submit()
+    public void Login(string displayName, string fullName)
+    {
+        LeaderboardManager.Instance.OnLogin(displayName, fullName);
+    }
+
+    public void OnContinue()
+    {
+        Submit();
+    }
+
+    public void OnKeyboardValueChanged()
+    {
+        if (NameInputSelected)
+        {
+            NameInput.SetInputValue(KeyboardInstance.Value);
+        }
+        else if (EmailInputSelected)
+        {
+            EmailInput.SetInputValue(KeyboardInstance.Value);
+        }
+    }
+
+    private void Submit()
     {
         if (!submitted)
         {
-            if (DisplayNameField.GetInputValue() != "Enter full name..." && !string.IsNullOrEmpty(DisplayNameField.GetInputValue()))
+            if (NameInput.GetInputValue() != "First Last Name" && !string.IsNullOrEmpty(NameInput.GetInputValue()))
             {
-                string displayName = DisplayNameField.GetInputValue().Trim();
+                var displayName = NameInput.GetInputValue().Trim();
                 var nameSplit = displayName.Split(' ');
                 
                 if (nameSplit.Length > 1 && nameSplit.Length < 5)
@@ -44,11 +69,12 @@ public class LoginComponent : MonoBehaviour {
                 if (displayName.Length < 15)
                 {
                     submitted = true;
-                    Login(displayName, DisplayNameField.GetInputValue().Trim());
+                    Login(displayName, NameInput.GetInputValue().Trim());
                 }
                 else
                 {
-                    DisplayNameField.SetInputValue("");
+                    NameInput.SetInputValue("");
+                    KeyboardInstance.Value = "";
                 }
             }
         }
@@ -61,12 +87,61 @@ public class LoginComponent : MonoBehaviour {
         TxtScore.SetTextData(score.ToString());
         if (totalTime.HasValue)
         {
-            TxtTotalTime.SetTextData(string.Format("{0:D2}:{1:D2}:{2:D2}", totalTime.Value.Hours, totalTime.Value.Minutes, totalTime.Value.Seconds));
+            TxtTotalTime.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}", totalTime.Value.Hours, totalTime.Value.Minutes, totalTime.Value.Seconds));
         }
 
         TxtTotalTime.CreateAllObjects();
         TxtScore.CreateAllObjects();
-        DisplayNameField.CreateAllObjects();
-        SubmitButton.CreateAllObjects();
+        NameInput.CreateAllObjects();
+        EmailInput.CreateAllObjects();
+
+        KeyboardInstance.HideObjects();
+    }
+
+    public void Update()
+    {
+        Vector2 touchClickPosition = Vector2.zero;
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchClickPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        for (var i = 0; i < Input.touchCount; ++i)
+        {
+            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            {
+                touchClickPosition = Input.GetTouch(i).position;
+            }
+        }
+        if (touchClickPosition != Vector2.zero)
+        {
+            RaycastHit hitInfo;
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(touchClickPosition), out hitInfo))
+            {
+                if (hitInfo.collider != null)
+                {
+                    if (hitInfo.transform)
+                    {
+                        var textFieldComponent = hitInfo.transform.GetComponent<PollTextFieldComponent>();
+                        if (textFieldComponent)
+                        {
+                            if (textFieldComponent == NameInput)
+                            {
+                                KeyboardInstance.ShowObjects();
+                                NameInputSelected = true;
+                                EmailInputSelected = false;
+                                KeyboardInstance.Value = NameInput.GetInputValue();
+                            }
+                            else if (textFieldComponent == EmailInput)
+                            {
+                                KeyboardInstance.ShowObjects();
+                                NameInputSelected = false;
+                                EmailInputSelected = true;
+                                KeyboardInstance.Value = EmailInput.GetInputValue();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

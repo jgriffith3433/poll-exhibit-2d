@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3c8c8d7580f1140badf02c9be8eba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeadboardTopDownPrefab: {fileID: 114328105396999118, guid: 00511cddc08515b4da63ef9ef4b55140,
+  LeaderboardTopDownPrefab: {fileID: 114328105396999118, guid: 00511cddc08515b4da63ef9ef4b55140,
     type: 2}
   TxtTitle: {fileID: 114838665996297660}
   TxtSubTitle: {fileID: 114965731034909710}

@@ -17,6 +17,11 @@ public class PollButtonComponent : MonoBehaviour {
         Text = text;
     }
 
+    public string GetButtonText()
+    {
+        return m_textMeshPro.text;
+    }
+
     public void CreateAllObjects()
     {
         m_textMeshPro.SetText(Text);
@@ -30,16 +35,22 @@ public class PollButtonComponent : MonoBehaviour {
             answerComponent.OnChoose();
         }
 
-        var loginComponent = transform.parent.GetComponent<LoginComponent>();
-        if (loginComponent != null)
+        var keyboardComponent = transform.parent.GetComponent<KeyboardComponent>();
+        if (keyboardComponent != null)
         {
-            loginComponent.Submit();
+            keyboardComponent.PressKey(GetButtonText());
         }
 
         var databaseComponent = transform.parent.GetComponent<DatabaseManager>();
         if (databaseComponent != null)
         {
             databaseComponent.CombineDatabases();
+        }
+
+        var pollFinishedComponent = transform.parent.GetComponent<PollFinishedComponent>();
+        if (pollFinishedComponent != null)
+        {
+            LeaderboardManager.Instance.OnPlay();
         }
 
         var pollComponent = transform.parent.GetComponent<PollComponent>();
