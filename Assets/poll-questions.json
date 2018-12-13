@@ -6,7 +6,8 @@
   "questions": [
     {
       "question_id": "0",
-      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#FF0000><size=+18>_</size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
+      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18>_</size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
+	  "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18><u>32</u></size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
       "question_text_position": "-6,6,0",
       "question_type": "TF",
       "answers": [
@@ -30,7 +31,8 @@
     },
     {
       "question_id": "1",
-      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#FF0000><size=+18>_</size></color><#000000> vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
+      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</color>",
+	  "question_text_confirmation": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18><u>vel</u></size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
       "question_text_position": "-6,6,0",
       "question_type": "MC",
       "answers": [

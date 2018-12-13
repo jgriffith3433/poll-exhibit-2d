@@ -26,6 +26,11 @@ public class PollManager : MonoBehaviour {
         PollInstance.RestartPoll();
     }
 
+    public void BeginPoll()
+    {
+        PollInstance.BeginPoll();
+    }
+
     public void DestroyPoll()
     {
         if (PollInstance)

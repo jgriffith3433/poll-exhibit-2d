@@ -41,6 +41,17 @@ public class PollButtonComponent : MonoBehaviour {
             keyboardComponent.PressKey(GetButtonText());
         }
 
+        if (transform.parent.parent != null)
+        {
+            if (transform.parent.parent.parent != null)
+            {
+                var testKnowledgeComponent = transform.parent.parent.parent.GetComponent<TestKnowledgeComponent>();
+                if (testKnowledgeComponent != null)
+                {
+                    testKnowledgeComponent.PlayNow();
+                }
+            }
+        }
         var databaseComponent = transform.parent.GetComponent<DatabaseManager>();
         if (databaseComponent != null)
         {

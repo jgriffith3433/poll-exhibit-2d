@@ -192,7 +192,6 @@ public class PollQuestionComponent : MonoBehaviour
 
     public void ShowObjects()
     {
-        TransitioningAnswersIn = true;
         foreach (var pollAnswerInstance in PollAnswerInstances)
         {
             pollAnswerInstance.ShowObjects();
@@ -201,6 +200,13 @@ public class PollQuestionComponent : MonoBehaviour
         AnswerTimerInstance.ShowObjects();
         AnswerTimerInstance.Play();
         QuestionTextInstance.gameObject.SetActive(true);
+        StartCoroutine(WaitThenTransitionAnswersIn());
+    }
+
+    public IEnumerator WaitThenTransitionAnswersIn()
+    {
+        yield return new WaitForSeconds(3.0f);
+        TransitioningAnswersIn = true;
     }
 
     public void HideObjects()

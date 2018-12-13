@@ -24,8 +24,8 @@ public class PollComponent : MonoBehaviour
     public PollTextComponent YourScoreTextInstance;
     public PollTextComponent YourScoreTextLabelInstance;
 
-    public GameObject SurfaceProPrefab;
-    private GameObject SurfaceProInstance;
+    public TestKnowledgeComponent TestKnowledgePrefab;
+    private TestKnowledgeComponent TestKnowledgeInstance;
 
     private PollData Data;
 
@@ -51,16 +51,25 @@ public class PollComponent : MonoBehaviour
         YourScoreTextInstance.HideObjects();
         YourScoreTextLabelInstance.HideObjects();
 
-        StartCoroutine(ShowSurfacePro());
-        StartCoroutine(Data.GetData());
-        StartCoroutine(m_LeaderboardData.GetData());
+        ShowInstructions();
     }
 
-    public IEnumerator ShowSurfacePro()
+    public void BeginPoll()
     {
-        SurfaceProInstance = Instantiate(SurfaceProPrefab);
-        yield return new WaitForSeconds(4);
+        HideInstructions();
+        StartCoroutine(Data.GetData());
+        StartCoroutine(m_LeaderboardData.GetData());
         StartCoroutine(CheckIsDoneParsing());
+    }
+
+    public void ShowInstructions()
+    {
+        TestKnowledgeInstance = Instantiate(TestKnowledgePrefab);
+    }
+
+    public void HideInstructions()
+    {
+        Destroy(TestKnowledgeInstance.gameObject);
     }
 
     public void SetTopScore(int score)
@@ -193,7 +202,7 @@ public class PollComponent : MonoBehaviour
     private void CreateObjects()
     {
         Hidden = false;
-        Destroy(SurfaceProInstance);
+        Destroy(TestKnowledgeInstance);
 
         BtnStartOver = GetComponentInChildren<PollButtonComponent>();
         
