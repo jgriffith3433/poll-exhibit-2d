@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4287868668208180}
   - component: {fileID: 114110842614179550}
   m_Layer: 0
-  m_Name: CorrectAnswerBackground
+  m_Name: PollSelectCorrectAnswerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2eccf4f7529f24a47b8b32cbd1c521d7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bddbb47b1b24e14296a3fedac5f7d38, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -198,8 +198,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1704325077817198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224972851167535302}
   m_Father: {fileID: 4287868668208180}
@@ -207,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.8, y: 4.2}
-  m_SizeDelta: {x: 30, y: 13}
+  m_AnchoredPosition: {x: 15.8, y: 4}
+  m_SizeDelta: {x: 45, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224972851167535302
 RectTransform:
@@ -218,7 +218,7 @@ RectTransform:
   m_GameObject: {fileID: 1686797106073302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.225, y: 0.225, z: 1}
   m_Children: []
   m_Father: {fileID: 224768513082230194}
   m_RootOrder: 0
@@ -226,5 +226,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 13}
+  m_SizeDelta: {x: 90, y: 53}
   m_Pivot: {x: 0.5, y: 0.5}

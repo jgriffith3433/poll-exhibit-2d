@@ -52,9 +52,9 @@ public class LeaderboardComponent : MonoBehaviour
         StartCoroutine(CheckIsDoneParsing());
     }
 
-    public void SaveLeaderboard(string displayName, string fullName)
+    public void SaveLeaderboard(string displayName, string fullName, string email)
     {
-        Data.AddPlayerScore(displayName, Score, TotalTime.Value);
+        Data.AddPlayerScore(displayName, Score, TotalTime.Value, email);
         Data.SaveLeaderboard();
         StartCoroutine(ShowLeaderboardAfterSaving());
     }
@@ -186,6 +186,7 @@ public class LeaderboardComponent : MonoBehaviour
     {
         PollFinishedInstance.gameObject.SetActive(true);
         PollFinishedHidden = false;
+        ScreensaverManager.Instance.DiableScreensaver = false;
     }
 
     public void HideFinishPoll()

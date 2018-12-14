@@ -11,12 +11,18 @@ public class PollAnswerComponent : MonoBehaviour
     public PollButtonComponent AnswerButtonTextPrefab;
     private PollButtonComponent AnswerButtonTextInstance;
 
+    public PollImageComponent AnswerBackgroundPrefab;
+    private PollImageComponent AnswerBackgroundInstance;
+
     public PollImageComponent AnswerCorrectBackgroundPrefab;
     public PollImageComponent AnswerIncorrectBackgroundPrefab;
     private PollImageComponent CorrectOrIncorrectBackgroundInstance;
 
     public PollImageSequenceComponent SelectedImageSequencePrefab;
     private PollImageSequenceComponent SelectedImageSequenceInstance;
+
+    public PollImageComponent SelectedCorrectBackgroundPrefab;
+    private PollImageComponent SelectedCorrectBackgroundInstance;
 
     private PollQuestionComponent QuestionParent;
     private PollAnswerData Data;
@@ -59,6 +65,14 @@ public class PollAnswerComponent : MonoBehaviour
         CorrectOrIncorrectBackgroundInstance.transform.SetParent(transform);
         CorrectOrIncorrectBackgroundInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, 0.5f);
 
+        SelectedCorrectBackgroundInstance = Instantiate(SelectedCorrectBackgroundPrefab).GetComponent<PollImageComponent>();
+        SelectedCorrectBackgroundInstance.transform.SetParent(transform);
+        SelectedCorrectBackgroundInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, 0.5f);
+
+        AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab).GetComponent<PollImageComponent>();
+        AnswerBackgroundInstance.transform.SetParent(transform);
+        AnswerBackgroundInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, -1f);
+
         SelectedImageSequenceInstance = Instantiate(SelectedImageSequencePrefab).GetComponent<PollImageSequenceComponent>();
         SelectedImageSequenceInstance.transform.SetParent(transform);
         SelectedImageSequenceInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, 0.5f);
@@ -80,6 +94,7 @@ public class PollAnswerComponent : MonoBehaviour
         AnswerTextInstance.gameObject.SetActive(false);
         AnswerButtonTextInstance.gameObject.SetActive(false);
         CorrectOrIncorrectBackgroundInstance.HideObjects();
+        SelectedCorrectBackgroundInstance.HideObjects();
     }
 
     public void ShowObjects()
@@ -98,5 +113,16 @@ public class PollAnswerComponent : MonoBehaviour
     public void ShowAsCorrectOrIncorrect()
     {
         CorrectOrIncorrectBackgroundInstance.gameObject.SetActive(true);
+    }
+
+    public void ShowIfCorrect()
+    {
+        if (Data.Correct)
+        {
+            if (!CorrectOrIncorrectBackgroundInstance.gameObject.activeSelf)
+            {
+                SelectedCorrectBackgroundInstance.gameObject.SetActive(true);
+            }
+        }
     }
 }

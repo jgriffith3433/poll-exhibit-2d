@@ -88,13 +88,25 @@ public class PollQuestionComponent : MonoBehaviour
         else
         {
             PollManager.Instance.OnIncorrect(Data.QuestionId, answerId);
-
         }
+        AnswerTimerInstance.Pause();
+    }
+
+    public void OnTimerEnded()
+    {
+        PollManager.Instance.OnIncorrect(Data.QuestionId, -1);
     }
 
     public void ShowAsCorrectOrIncorrect()
     {
-        SelectedAnswer.ShowAsCorrectOrIncorrect();
+        if (SelectedAnswer != null)
+        {
+            SelectedAnswer.ShowAsCorrectOrIncorrect();
+        }
+        foreach(var answer in PollAnswerInstances)
+        {
+            answer.ShowIfCorrect();
+        }
         StartCoroutine(HideCorrectAnswerAndShowConfirmation());
     }
 
@@ -153,9 +165,9 @@ public class PollQuestionComponent : MonoBehaviour
 
     public IEnumerator HideCorrectAnswerAndShowConfirmation()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         TransitioningAnswersOut = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
         OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
 

@@ -17,8 +17,9 @@ public class PollComponent : MonoBehaviour
     public PollTextComponent TitleTextPrefab;
     private PollTextComponent TitleTextInstance;
     
-    private PollButtonComponent BtnStartOver;
+    public PollButtonComponent BtnStartOver;
 
+    public PollTextComponent TopScoreTitleInstance;
     public PollTextComponent TopScoreTextInstance;
     public PollTextComponent TopScoreTextLabelInstance;
     public PollTextComponent YourScoreTextInstance;
@@ -46,10 +47,12 @@ public class PollComponent : MonoBehaviour
         Loading = true;
         Data = new PollData(Application.dataPath + "/poll-questions.json");
         m_LeaderboardData = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
+        TopScoreTitleInstance.HideObjects();
         TopScoreTextInstance.HideObjects();
         TopScoreTextLabelInstance.HideObjects();
         YourScoreTextInstance.HideObjects();
         YourScoreTextLabelInstance.HideObjects();
+        BtnStartOver.gameObject.SetActive(false);
 
         ShowInstructions();
     }
@@ -144,7 +147,7 @@ public class PollComponent : MonoBehaviour
     public IEnumerator ShowCorrectAnswerGoToNextQuestion()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
@@ -183,10 +186,15 @@ public class PollComponent : MonoBehaviour
         StartCoroutine(ShowCorrectAnswerThenFinishPoll());
     }
 
+    public void OnTimerEnded()
+    {
+        CurrentQuestion.OnTimerEnded();
+    }
+
     public IEnumerator ShowCorrectAnswerThenFinishPoll()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         HideObjects();
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
@@ -204,8 +212,6 @@ public class PollComponent : MonoBehaviour
         Hidden = false;
         Destroy(TestKnowledgeInstance);
 
-        BtnStartOver = GetComponentInChildren<PollButtonComponent>();
-        
         TitleTextInstance = Instantiate(TitleTextPrefab).GetComponent<PollTextComponent>();
         TitleTextInstance.name = "Poll Title";
         TitleTextInstance.transform.SetParent(transform);
@@ -226,10 +232,12 @@ public class PollComponent : MonoBehaviour
             QuestionInstances.Add(pollQuestionInstance);
         }
 
+        TopScoreTitleInstance.ShowObjects();
         TopScoreTextInstance.ShowObjects();
         TopScoreTextLabelInstance.ShowObjects();
         YourScoreTextInstance.ShowObjects();
         YourScoreTextLabelInstance.ShowObjects();
+        BtnStartOver.gameObject.SetActive(false);
         SetYourScore(0);
         var topScore = m_LeaderboardData.PlayerData.OrderByDescending(pd => pd.PlayerScore).FirstOrDefault();
         if (topScore != null)
@@ -241,6 +249,7 @@ public class PollComponent : MonoBehaviour
     public void HideObjects()
     {
         Hidden = true;
+        TopScoreTitleInstance.HideObjects();
         TopScoreTextInstance.HideObjects();
         TopScoreTextLabelInstance.HideObjects();
         YourScoreTextInstance.HideObjects();

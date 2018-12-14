@@ -11,5 +11,11 @@ public class PollTimerComponent : PollImageSequenceComponent
     {
         ImageSequenceFolder = Application.dataPath + "/Poll/Images/Timer";
         base.Awake();
+        OnSequenceEnded += SequenceEnded;
+    }
+
+    protected void SequenceEnded()
+    {
+        PollManager.Instance.OnTimerEnded();
     }
 }

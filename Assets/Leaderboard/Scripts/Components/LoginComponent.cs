@@ -15,6 +15,8 @@ public class LoginComponent : MonoBehaviour {
     public bool NameInputSelected;
     public PollTextFieldComponent EmailInput;
     public bool EmailInputSelected;
+    public PollTextFieldComponent PhoneInput;
+    public bool PhoneInputSelected;
 
     public bool submitted;
 
@@ -23,9 +25,9 @@ public class LoginComponent : MonoBehaviour {
         KeyboardInstance.OnValueChanged += OnKeyboardValueChanged;
     }
 
-    public void Login(string displayName, string fullName)
+    public void Login(string displayName, string fullName, string email)
     {
-        LeaderboardManager.Instance.OnLogin(displayName, fullName);
+        LeaderboardManager.Instance.OnLogin(displayName, fullName, email);
     }
 
     public void OnContinue()
@@ -43,13 +45,19 @@ public class LoginComponent : MonoBehaviour {
         {
             EmailInput.SetInputValue(KeyboardInstance.Value);
         }
+        else if (PhoneInputSelected)
+        {
+            PhoneInput.SetInputValue(KeyboardInstance.Value);
+        }
     }
 
     private void Submit()
     {
         if (!submitted)
         {
-            if (NameInput.GetInputValue() != "First Last Name" && !string.IsNullOrEmpty(NameInput.GetInputValue()))
+            if (NameInput.GetInputValue() != "FIRST LAST NAME*" && !string.IsNullOrEmpty(NameInput.GetInputValue()) &&
+                EmailInput.GetInputValue() != "EMAIL*" && !string.IsNullOrEmpty(EmailInput.GetInputValue()) &&
+                PhoneInput.GetInputValue() != "PHONE*" && !string.IsNullOrEmpty(PhoneInput.GetInputValue()))
             {
                 var displayName = NameInput.GetInputValue().Trim();
                 var nameSplit = displayName.Split(' ');
@@ -69,7 +77,7 @@ public class LoginComponent : MonoBehaviour {
                 if (displayName.Length < 15)
                 {
                     submitted = true;
-                    Login(displayName, NameInput.GetInputValue().Trim());
+                    Login(displayName, NameInput.GetInputValue().Trim(), PhoneInput.GetInputValue().Trim());
                 }
                 else
                 {
@@ -94,6 +102,7 @@ public class LoginComponent : MonoBehaviour {
         TxtScore.CreateAllObjects();
         NameInput.CreateAllObjects();
         EmailInput.CreateAllObjects();
+        PhoneInput.CreateAllObjects();
 
         KeyboardInstance.HideObjects();
     }
@@ -129,6 +138,7 @@ public class LoginComponent : MonoBehaviour {
                                 KeyboardInstance.ShowObjects();
                                 NameInputSelected = true;
                                 EmailInputSelected = false;
+                                PhoneInputSelected = false;
                                 KeyboardInstance.Value = NameInput.GetInputValue();
                             }
                             else if (textFieldComponent == EmailInput)
@@ -136,7 +146,16 @@ public class LoginComponent : MonoBehaviour {
                                 KeyboardInstance.ShowObjects();
                                 NameInputSelected = false;
                                 EmailInputSelected = true;
+                                PhoneInputSelected = false;
                                 KeyboardInstance.Value = EmailInput.GetInputValue();
+                            }
+                            else if (textFieldComponent == PhoneInput)
+                            {
+                                KeyboardInstance.ShowObjects();
+                                NameInputSelected = false;
+                                EmailInputSelected = false;
+                                PhoneInputSelected = true;
+                                KeyboardInstance.Value = PhoneInput.GetInputValue();
                             }
                         }
                     }

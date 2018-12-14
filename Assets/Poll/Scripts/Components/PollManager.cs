@@ -24,6 +24,7 @@ public class PollManager : MonoBehaviour {
     {
         PollInstance = Instantiate(PollPrefab).GetComponent<PollComponent>();
         PollInstance.RestartPoll();
+        ScreensaverManager.Instance.DiableScreensaver = true;
     }
 
     public void BeginPoll()
@@ -47,6 +48,11 @@ public class PollManager : MonoBehaviour {
     public void OnIncorrect(int questionId, int answerId)
     {
         PollInstance.OnIncorrect(questionId, answerId);
+    }
+
+    public void OnTimerEnded()
+    {
+        PollInstance.OnTimerEnded();
     }
 
     public void FinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers)

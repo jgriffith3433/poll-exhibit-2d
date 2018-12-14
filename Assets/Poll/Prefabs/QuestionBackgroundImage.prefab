@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 114016243359660390}
   - component: {fileID: 114956298253097908}
   m_Layer: 0
-  m_Name: AnswerBackgroundImage
+  m_Name: QuestionBackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 80f3721a30e8bc446bf1b7cb441d969e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0f8a29d5beb8794db57280bd3909ec6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

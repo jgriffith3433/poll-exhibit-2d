@@ -8,12 +8,14 @@ using System.IO;
 public class PollImageSequenceComponent : PollImageComponent
 {
     private List<Sprite> Sprites;
-    private int currentSprite = 0;
+    private int currentSprite;
     public bool Playing = false;
     public bool Loop = false;
     public bool PlayOnAwake = false;
     public float SpeedDelay = 0.04f;
     public string ImageSequenceFolder;
+    public delegate void OnSequenceEndedDelegate();
+    public OnSequenceEndedDelegate OnSequenceEnded;
 
     protected virtual void Awake()
     {
@@ -57,6 +59,7 @@ public class PollImageSequenceComponent : PollImageComponent
 
     public void Play()
     {
+        currentSprite = 0;
         StartCoroutine(PlayAfterLoaded());
     }
 
@@ -91,6 +94,10 @@ public class PollImageSequenceComponent : PollImageComponent
         {
             if (currentSprite + 1 >= Sprites.Count && !Loop)
             {
+                if (OnSequenceEnded != null)
+                {
+                    OnSequenceEnded();
+                }
                 yield return null;
             }
             else

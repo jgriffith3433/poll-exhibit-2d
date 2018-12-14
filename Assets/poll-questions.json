@@ -1,29 +1,29 @@
 {
   "poll_id": "0",
   "num_questions_asked": "30",
-  "title_text": "<#000000>Question</color>",
-  "title_text_position": "-17,10,0",
+  "title_text": "<#333333>Question</color>",
+  "title_text_position": "-22,8,0",
   "questions": [
     {
       "question_id": "0",
-      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18>_</size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
-	  "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18><u>32</u></size></color><#000000> nisi ut aliquid ex ea commodi consequatur?</color>",
-      "question_text_position": "-6,6,0",
+      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam are nisi ut aliquid ex ea commodi consequatur.</color>",
+	    "question_text_confirmation": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18><u>ARE</u></size></color><#000000> nisi ut aliquid ex ea commodi consequatur.</color>",
+      "question_text_position": "-12,6,0",
       "question_type": "TF",
       "answers": [
         {
           "answer_id": "0",
-          "answer_text": "<size=+14>true</size>",
+          "answer_text": "<size=+14>TRUE</size>",
           "answer_text_position": "30,5,-1",
-          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text": "<#000000>+</color>",
           "answer_button_text_position": "18,5,-1",
           "correct": true
         },
         {
           "answer_id": "1",
-          "answer_text": "<size=+14>false</size>",
+          "answer_text": "<size=+14>FALSE</size>",
           "answer_text_position": "30,-5,-1",
-          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text": "<#000000>+</color>",
           "answer_button_text_position": "18,-5,-1",
           "correct": false
         }
@@ -31,9 +31,9 @@
     },
     {
       "question_id": "1",
-      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.</color>",
-	  "question_text_confirmation": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18><u>vel</u></size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
-      "question_text_position": "-6,6,0",
+      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18>_</size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
+      "question_text_confirmation": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18><u>32</u></size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
+      "question_text_position": "-12,6,0",
       "question_type": "MC",
       "answers": [
         {

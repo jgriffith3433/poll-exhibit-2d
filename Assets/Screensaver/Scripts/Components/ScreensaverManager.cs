@@ -7,6 +7,7 @@ public class ScreensaverManager : MonoBehaviour {
     public ScreensaverComponent ScreensaverPrefab;
     private ScreensaverComponent ScreensaverInstance;
 
+    public bool DiableScreensaver = false;
     private int InactivityUntilScreensaver = 20;
     private float LastActivityTime = 0;
     private bool CanCancel;
@@ -53,6 +54,11 @@ public class ScreensaverManager : MonoBehaviour {
 
     public void Update()
     {
+        if (DiableScreensaver)
+        {
+            LastActivityTime = Time.time;
+            return;
+        }
         if (ScreensaverInstance.Hidden)
         {
             if (Input.anyKeyDown || Input.touchCount > 0)

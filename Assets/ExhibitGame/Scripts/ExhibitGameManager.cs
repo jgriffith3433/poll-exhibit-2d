@@ -12,6 +12,8 @@ public class ExhibitGameManager : MonoBehaviour {
     public PollImageSequenceComponent ExhibitBackgroundSequencePrefab;
     private PollImageSequenceComponent ExhibitBackgroundSequenceInstance;
 
+    public PollTextComponent LoadingTextInstance;
+    
     public PollImageComponent ExhibitBackgroundPrefab;
     private PollImageComponent ExhibitBackgroundInstance;
 
@@ -70,6 +72,7 @@ public class ExhibitGameManager : MonoBehaviour {
         }
         else
         {
+            LoadingTextInstance.gameObject.SetActive(false);
             LoadTimerInstance.HideObjects();
             GoToState("StartingLeaderboard");
         }

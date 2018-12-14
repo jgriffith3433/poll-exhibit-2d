@@ -8,4 +8,5 @@ public class LeaderboardPlayerData {
     public string PlayerDisplayName { get; set; }
     public int PlayerScore { get; set; }
     public TimeSpan TotalTime { get; set; }
+    public string Email { get; set; }
 }

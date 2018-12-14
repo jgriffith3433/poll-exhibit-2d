@@ -19,11 +19,20 @@ public class LeaderboardManager : MonoBehaviour {
         LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
         LeaderboardInstance.ShowLeaderboard(score, totalTime, userAnswers, fromPoll);
         LeaderboardInstance.ShowObjects();
+        if (fromPoll)
+        {
+            ScreensaverManager.Instance.DiableScreensaver = true;
+        }
+        else
+        {
+            ScreensaverManager.Instance.DiableScreensaver = false;
+        }
     }
 
-    public void OnLogin(string displayName, string fullName)
+    public void OnLogin(string displayName, string fullName, string email)
     {
-        LeaderboardInstance.SaveLeaderboard(displayName, fullName);
+        LeaderboardInstance.SaveLeaderboard(displayName, fullName, email);
+        ScreensaverManager.Instance.DiableScreensaver = false;
     }
 
     public void OnContinue()
@@ -47,7 +56,12 @@ public class LeaderboardManager : MonoBehaviour {
             LeaderboardInstance.ShowLeaderboard(0, null, null, false);
             LeaderboardInstance.ShowObjects();
         }
-        LeaderboardInstance.ShowObjects();
+        else
+        {
+            LeaderboardInstance.ShowLeaderboardTopDown();
+            LeaderboardInstance.HideFinishPoll();
+            LeaderboardInstance.ShowObjects();
+        }
     }
 
     public void HideLeaderboardScreensaver()

@@ -12,6 +12,7 @@ public class DatabaseManager : MonoBehaviour
     private string DatabasePath;
     private ExhibitData Data;
     private bool Loading = true;
+    private bool PreviousDiableScreensaver;
 
     void Awake()
     {
@@ -66,12 +67,15 @@ public class DatabaseManager : MonoBehaviour
 
     public void ShowAdminScreen()
     {
+        PreviousDiableScreensaver = ScreensaverManager.Instance.DiableScreensaver;
+        ScreensaverManager.Instance.DiableScreensaver = true;
         BtnCombineDbs.gameObject.SetActive(true);
         TxtTitle.gameObject.SetActive(true);
     }
 
     public void HideAdminScreen()
     {
+        ScreensaverManager.Instance.DiableScreensaver = PreviousDiableScreensaver;
         BtnCombineDbs.gameObject.SetActive(false);
         TxtTitle.gameObject.SetActive(false);
     }

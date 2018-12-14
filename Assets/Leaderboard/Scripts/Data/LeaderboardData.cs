@@ -23,7 +23,7 @@ public class LeaderboardData
     public IEnumerator GetData() {
         WWW request = new WWW(RemoteUrl);
         yield return request;
-        if (String.IsNullOrEmpty(request.error)) {
+        if (string.IsNullOrEmpty(request.error)) {
             try
             {
                 PollLeaderboardDataRawText = request.text;
@@ -54,7 +54,8 @@ public class LeaderboardData
                         PlayerBaseName = playerXObj.Key,
                         PlayerDisplayName = playerXObj.Value[i]["DisplayName"].Value,
                         PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value),
-                        TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value)
+                        TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value),
+                        Email = playerXObj.Value[i]["Email"].Value
                     });
                 }
             }
@@ -65,7 +66,7 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime)
+    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime, string email)
     {
         if (PlayerData.Count == 10)
         {
@@ -80,7 +81,8 @@ public class LeaderboardData
             PlayerBaseName = "Player " + (PlayerData.Count + 1).ToString(),
             PlayerDisplayName = displayName,
             PlayerScore = score,
-            TotalTime = totalTime
+            TotalTime = totalTime,
+            Email = email
         });
     }
 
@@ -97,6 +99,7 @@ public class LeaderboardData
                 playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
                 playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
                 playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
+                playerDataChildObject["Email"] = new JSONString(playerData.Email.ToString());
                 playerDataChild.Add(playerDataChildObject);
                 rootXObj[playerData.PlayerBaseName] = playerDataChild;
             }

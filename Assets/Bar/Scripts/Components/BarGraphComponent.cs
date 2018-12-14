@@ -18,6 +18,14 @@ public class BarGraphComponent : MonoBehaviour
     {
         if (BarInstances.ContainsKey(category) == false)
         {
+            if (barColor == BarComponent.BarColor.Grey)
+            {
+                category = "<#747474>" + category + "</color>";
+            }
+            else
+            {
+                category = "<#FFFFFF>" + category + "</color>";
+            }
             var bar = Instantiate(BarPrefab).GetComponent<BarComponent>();
             bar.transform.SetParent(transform);
             bar.transform.position += new Vector3(BarInstances.Count * BarSpacing, 0, 0);
