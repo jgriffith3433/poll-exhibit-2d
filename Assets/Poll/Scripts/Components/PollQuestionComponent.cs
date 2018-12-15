@@ -81,6 +81,7 @@ public class PollQuestionComponent : MonoBehaviour
     public void OnSelectedAnswer(PollAnswerComponent selectedAnswer, int answerId, bool correct)
     {
         SelectedAnswer = selectedAnswer;
+        
         if (correct)
         {
             PollManager.Instance.OnCorrect(Data.QuestionId, answerId);
@@ -99,6 +100,8 @@ public class PollQuestionComponent : MonoBehaviour
 
     public void ShowAsCorrectOrIncorrect()
     {
+        QuestionTextInstance.SetTextData(Data.QuestionTextConfirmation);
+        QuestionTextInstance.CreateAllObjects();
         if (SelectedAnswer != null)
         {
             SelectedAnswer.ShowAsCorrectOrIncorrect();
@@ -196,6 +199,8 @@ public class PollQuestionComponent : MonoBehaviour
         else
         {
             TransitioningBarGraphIn = true;
+            yield return new WaitForSeconds(2);
+            AnswerBarGraphInstance.DoAnimation();
             yield return new WaitForSeconds(3);
             TransitioningBarGraphOut = true;
             yield return new WaitForSeconds(1);

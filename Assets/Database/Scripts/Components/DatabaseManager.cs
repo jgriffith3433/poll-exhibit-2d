@@ -3,38 +3,45 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
 public class DatabaseManager : MonoBehaviour
 {
     public static DatabaseManager Instance { get; private set; }
     private PollButtonComponent BtnCombineDbs;
     private PollTextComponent TxtTitle;
-    private string DatabasePath;
-    private ExhibitData Data;
+    private string LeaderboardDatabasePath;
+    private string ExhibitDatabasePath;
+    private ExhibitData ExhibitData;
+    private LeaderboardData LeaderboardData;
     private bool Loading = true;
     private bool PreviousDiableScreensaver;
+    public NetworkManagerHUD NetworkManager;
 
     void Awake()
     {
         Instance = this;
-        DatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-database.json";
-        LoadDatabase();
+        LeaderboardDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-leaderboard-database.json";
+        ExhibitDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-exhibit-database.json";
+        LoadDatabases();
         TxtTitle = GetComponentInChildren<PollTextComponent>();
         TxtTitle.gameObject.SetActive(false);
         BtnCombineDbs = GetComponentInChildren<PollButtonComponent>();
         BtnCombineDbs.gameObject.SetActive(false);
     }
 
-    private void LoadDatabase()
+    private void LoadDatabases()
     {
-        Data = new ExhibitData(DatabasePath);
-        StartCoroutine(Data.GetData());
+        ExhibitData = new ExhibitData();
+        LeaderboardData = new LeaderboardData();
+        StartCoroutine(ExhibitData.GetData(ExhibitDatabasePath));
+        StartCoroutine(LeaderboardData.GetData(LeaderboardDatabasePath));
         StartCoroutine(CheckIsDoneParsing());
     }
 
     IEnumerator CheckIsDoneParsing()
     {
-        if (Data != null && Data.IsDoneParsing)
+        if (ExhibitData != null && ExhibitData.IsDoneParsing && LeaderboardData.IsDoneParsing)
         {
             Loading = false;
         }
@@ -45,16 +52,32 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerScore(string displayName, int score, TimeSpan totalTime, List<PlayerAnswerData> playerAnswerData)
+    public void SavePlayerScore(string displayName, int score, string totalTime, List<PlayerAnswerData> playerAnswerData)
     {
-        Data.AddPlayerScore(displayName, score, totalTime, playerAnswerData);
-        Data.SaveExhibitData();
+        ExhibitData.AddPlayerScore(displayName, score, totalTime, playerAnswerData);
+        ExhibitData.SaveExhibitData();
+    }
+
+    public void SaveLeaderboard(string displayName, int score, string totalTime, string email)
+    {
+        LeaderboardData.AddPlayerScore(displayName, score, totalTime, email);
+        LeaderboardData.SaveLeaderboard();
+    }
+
+    public string GetExhibitDatabaseString()
+    {
+        return ExhibitData.GetDatabaseString();
+    }
+
+    public string GetLeaderboardDatabaseString()
+    {
+        return LeaderboardData.GetLeaderboardString();
     }
 
     public List<int> GetPlayerAnswersForQuestionId(int questionId)
     {
         var playerAnswers = new List<int>();
-        foreach (var playerData in Data.PlayerData)
+        foreach (var playerData in ExhibitData.PlayerData)
         {
             var playerAnswerData = playerData.PlayerAnswerData.Find(pd => pd.QuestionId == questionId);
             if (playerAnswerData != null)
@@ -71,6 +94,7 @@ public class DatabaseManager : MonoBehaviour
         ScreensaverManager.Instance.DiableScreensaver = true;
         BtnCombineDbs.gameObject.SetActive(true);
         TxtTitle.gameObject.SetActive(true);
+        NetworkManager.showGUI = true;
     }
 
     public void HideAdminScreen()
@@ -78,9 +102,10 @@ public class DatabaseManager : MonoBehaviour
         ScreensaverManager.Instance.DiableScreensaver = PreviousDiableScreensaver;
         BtnCombineDbs.gameObject.SetActive(false);
         TxtTitle.gameObject.SetActive(false);
+        NetworkManager.showGUI = false;
     }
 
-    public void CombineDatabases()
+    /*public void CombineDatabases()
     {
         StartCoroutine(StartCombineDatabases());
         ExhibitGameManager.Instance.OnAdminKeysPressed();
@@ -108,11 +133,11 @@ public class DatabaseManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Poll : URL request failed ," + request.error);
+                Debug.Log("Poll : URL request failed, " + request.error);
             }
         }
         masterData.SaveExhibitData();
-    }
+    }*/
 
     public void Update()
     {

@@ -46,7 +46,7 @@ public class PollComponent : MonoBehaviour
         UserAnswers = new List<PollUserAnswer>();
         Loading = true;
         Data = new PollData(Application.dataPath + "/poll-questions.json");
-        m_LeaderboardData = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
+        m_LeaderboardData = new LeaderboardData();
         TopScoreTitleInstance.HideObjects();
         TopScoreTextInstance.HideObjects();
         TopScoreTextLabelInstance.HideObjects();
@@ -61,7 +61,7 @@ public class PollComponent : MonoBehaviour
     {
         HideInstructions();
         StartCoroutine(Data.GetData());
-        StartCoroutine(m_LeaderboardData.GetData());
+        m_LeaderboardData.SetData(ExhibitGameManager.Instance.Player.GetLeaderboardString());
         StartCoroutine(CheckIsDoneParsing());
     }
 
@@ -147,7 +147,7 @@ public class PollComponent : MonoBehaviour
     public IEnumerator ShowCorrectAnswerGoToNextQuestion()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(8);
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
@@ -194,7 +194,7 @@ public class PollComponent : MonoBehaviour
     public IEnumerator ShowCorrectAnswerThenFinishPoll()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(8);
         HideObjects();
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();

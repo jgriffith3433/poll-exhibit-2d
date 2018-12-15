@@ -31,7 +31,12 @@ public class LeaderboardManager : MonoBehaviour {
 
     public void OnLogin(string displayName, string fullName, string email)
     {
-        LeaderboardInstance.SaveLeaderboard(displayName, fullName, email);
+        LeaderboardInstance.OnLogin(displayName, fullName, email);
+        ScreensaverManager.Instance.DiableScreensaver = false;
+    }
+
+    public void OnAddPlayerScore(string displayName, int score, string totalTime, string email)
+    {
         ScreensaverManager.Instance.DiableScreensaver = false;
     }
 

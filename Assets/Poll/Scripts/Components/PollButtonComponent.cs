@@ -52,11 +52,13 @@ public class PollButtonComponent : MonoBehaviour {
                 }
             }
         }
+
+        /*
         var databaseComponent = transform.parent.GetComponent<DatabaseManager>();
         if (databaseComponent != null)
         {
             databaseComponent.CombineDatabases();
-        }
+        }*/
 
         var pollFinishedComponent = transform.parent.GetComponent<PollFinishedComponent>();
         if (pollFinishedComponent != null)

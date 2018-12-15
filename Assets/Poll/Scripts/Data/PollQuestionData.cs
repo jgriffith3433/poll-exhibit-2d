@@ -7,6 +7,7 @@ public class PollQuestionData {
 
     public List<PollAnswerData> PollAnswersData { get; set; }
     public string QuestionText { get; set; }
+    public string QuestionTextConfirmation { get; set; }
     public Vector3 QuestionTextPosition { get; set; }
     public string QuestionType { get; set; }
     public int QuestionId { get; set; }
@@ -22,6 +23,7 @@ public class PollQuestionData {
 
         QuestionId = int.Parse(xObj["question_id"].Value);
         QuestionText = xObj["question_text"].Value;
+        QuestionTextConfirmation = xObj["question_text_confirmation"].Value;
         QuestionType = xObj["question_type"].Value;
         var allAnswers = xObj["answers"];
         PollAnswersData = new List<PollAnswerData>();

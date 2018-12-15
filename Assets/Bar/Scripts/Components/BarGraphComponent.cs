@@ -37,4 +37,12 @@ public class BarGraphComponent : MonoBehaviour
         }
         BarInstances[category].SetValue(value);
     }
+
+    public void DoAnimation()
+    {
+        foreach(var barInstance in BarInstances)
+        {
+            barInstance.Value.DoAnimation();
+        }
+    }
 }

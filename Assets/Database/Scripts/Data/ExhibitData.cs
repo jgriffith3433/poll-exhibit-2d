@@ -14,13 +14,13 @@ public class ExhibitData
 
     public List<ExhibitPlayerData> PlayerData { get; set; }
 
-    public ExhibitData(string remoteUrl)
+    public ExhibitData()
     {
         PlayerData = new List<ExhibitPlayerData>();
-        RemoteUrl = remoteUrl;
     }
 
-    public IEnumerator GetData() {
+    public IEnumerator GetData(string remoteUrl) {
+        RemoteUrl = remoteUrl;
         WWW request = new WWW(RemoteUrl);
         yield return request;
         if (string.IsNullOrEmpty(request.error)) {
@@ -50,7 +50,7 @@ public class ExhibitData
             }
             else
             {
-                Debug.LogError("Database : URL request failed ," + request.error);
+                Debug.LogError("Database : URL request failed, " + request.error);
             }
         }
         IsDoneParsing = true;
@@ -75,7 +75,7 @@ public class ExhibitData
                 {
                     PlayerDisplayName = playerXObj.Value["DisplayName"].Value,
                     PlayerScore = int.Parse(playerXObj.Value["Score"].Value),
-                    TotalTime = TimeSpan.Parse(playerXObj.Value["TotalTime"].Value),
+                    TotalTime = playerXObj.Value["TotalTime"].Value,
                     PlayerAnswerData = playerAnswerData
                 });
             }
@@ -86,7 +86,7 @@ public class ExhibitData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime, List<PlayerAnswerData> playerAnswerData)
+    public void AddPlayerScore(string displayName, int score, string totalTime, List<PlayerAnswerData> playerAnswerData)
     {
         PlayerData.Add(new ExhibitPlayerData
         {
@@ -97,31 +97,41 @@ public class ExhibitData
         });
     }
 
+    private JSONObject CreateDatabaseObject()
+    {
+        var databaseXObj = new JSONObject();
+        foreach (var playerData in PlayerData)
+        {
+            var playerDataChildObject = new JSONObject();
+            playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
+            playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
+            playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
+
+            var playerAnswers = new JSONArray();
+            foreach (var playerAnswer in playerData.PlayerAnswerData)
+            {
+                var playerAnswerDataChildObject = new JSONObject();
+                playerAnswerDataChildObject["QuestionId"] = new JSONString(playerAnswer.QuestionId.ToString());
+                playerAnswerDataChildObject["AnswerId"] = new JSONString(playerAnswer.AnswerId.ToString());
+                playerAnswers.Add(playerAnswerDataChildObject);
+            }
+            playerDataChildObject["PlayerAnswerData"] = playerAnswers;
+
+            databaseXObj.Add(playerDataChildObject);
+        }
+        return databaseXObj;
+    }
+
+    public string GetDatabaseString()
+    {
+        return CreateDatabaseObject().ToString();
+    }
+
     public void SaveExhibitData()
     {
         try
         {
-            var rootXObj = new JSONObject();
-            foreach(var playerData in PlayerData)
-            {
-                var playerDataChildObject = new JSONObject();
-                playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
-                playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
-                playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
-
-                var playerAnswers = new JSONArray();
-                foreach(var playerAnswer in playerData.PlayerAnswerData)
-                {
-                    var playerAnswerDataChildObject = new JSONObject();
-                    playerAnswerDataChildObject["QuestionId"] = new JSONString(playerAnswer.QuestionId.ToString());
-                    playerAnswerDataChildObject["AnswerId"] = new JSONString(playerAnswer.AnswerId.ToString());
-                    playerAnswers.Add(playerAnswerDataChildObject);
-                }
-                playerDataChildObject["PlayerAnswerData"] = playerAnswers;
-
-                rootXObj.Add(playerDataChildObject);
-            }
-            File.WriteAllText(RemoteUrl, rootXObj.ToString());
+            File.WriteAllText(RemoteUrl, GetDatabaseString());
         }
         catch (Exception e)
         {

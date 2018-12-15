@@ -7,6 +7,6 @@ public class ExhibitPlayerData
 {
     public string PlayerDisplayName { get; set; }
     public int PlayerScore { get; set; }
-    public TimeSpan TotalTime { get; set; }
+    public string TotalTime { get; set; }
     public List<PlayerAnswerData> PlayerAnswerData { get; set; }
 }

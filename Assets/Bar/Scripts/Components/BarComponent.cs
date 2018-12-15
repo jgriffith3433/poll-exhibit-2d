@@ -9,9 +9,10 @@ public class BarComponent : MonoBehaviour {
     public Material Grey;
 
     public float HeightScale = 10;
-    public float ScaleSpeed = 1;
+    public float ScaleSpeed = 0.1f;
     public float DefaultValue;
 
+    private bool Animate;
     private float MaxValue;
     private float Value;
     public enum BarColor
@@ -28,6 +29,11 @@ public class BarComponent : MonoBehaviour {
     public void SetValue(float value)
     {
         Value = value;
+    }
+
+    public void DoAnimation()
+    {
+        Animate = true;
     }
 
     public void SetMaxValue(float value)
@@ -62,24 +68,29 @@ public class BarComponent : MonoBehaviour {
 
     public void Update()
     {
-        var newHeight = (Value / MaxValue * 100) * HeightScale;
-        var textYPosition = (Value / MaxValue) * HeightScale * 1.5f;
-        if (BarModel.transform.localScale.z < newHeight)
+        if (Animate)
         {
-            BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, BarModel.transform.localScale.z + newHeight * ScaleSpeed * Time.deltaTime);
-            if (BarModel.transform.localScale.z > newHeight)
-            {
-                BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, newHeight);
-                Text.transform.localPosition = new Vector3(Text.transform.localPosition.x, textYPosition, Text.transform.localPosition.z);
-            }
-        }
-        else if (BarModel.transform.localScale.z > newHeight)
-        {
-            BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, BarModel.transform.localScale.z - newHeight * ScaleSpeed * Time.deltaTime);
+            var newHeight = (Value / MaxValue * 100) * HeightScale;
+            var textYPosition = (Value / MaxValue) * HeightScale * 1.5f;
             if (BarModel.transform.localScale.z < newHeight)
             {
-                BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, newHeight);
-                Text.transform.localPosition = new Vector3(Text.transform.localPosition.x, textYPosition, Text.transform.localPosition.z);
+                BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, BarModel.transform.localScale.z + newHeight * ScaleSpeed * Time.deltaTime);
+                if (BarModel.transform.localScale.z > newHeight)
+                {
+                    BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, newHeight);
+                    Text.transform.localPosition = new Vector3(Text.transform.localPosition.x, textYPosition, Text.transform.localPosition.z);
+                    Animate = false;
+                }
+            }
+            else if (BarModel.transform.localScale.z > newHeight)
+            {
+                BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, BarModel.transform.localScale.z - newHeight * ScaleSpeed * Time.deltaTime);
+                if (BarModel.transform.localScale.z < newHeight)
+                {
+                    BarModel.transform.localScale = new Vector3(BarModel.transform.localScale.x, BarModel.transform.localScale.y, newHeight);
+                    Text.transform.localPosition = new Vector3(Text.transform.localPosition.x, textYPosition, Text.transform.localPosition.z);
+                    Animate = false;
+                }
             }
         }
     }

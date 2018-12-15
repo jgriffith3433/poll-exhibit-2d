@@ -47,30 +47,28 @@ public class LeaderboardComponent : MonoBehaviour
 
         Loading = true;
         ShowObjects();
-        Data = new LeaderboardData(Application.dataPath + "/poll-leaderboard.json");
-        StartCoroutine(Data.GetData());
+        ExhibitGameManager.Instance.Player.GetDatabaseString();
+        Data = new LeaderboardData();
+        Data.SetData(ExhibitGameManager.Instance.Player.GetLeaderboardString());
         StartCoroutine(CheckIsDoneParsing());
     }
 
-    public void SaveLeaderboard(string displayName, string fullName, string email)
+    public void OnLogin(string displayName, string fullName, string email)
     {
-        Data.AddPlayerScore(displayName, Score, TotalTime.Value, email);
-        Data.SaveLeaderboard();
+        ExhibitGameManager.Instance.Player.CmdSaveLeaderboard(displayName, Score, TotalTime.Value.ToString(), email);
         StartCoroutine(ShowLeaderboardAfterSaving());
     }
 
     public void SavePlayerData()
     {
-        var playerAnswerData = new List<PlayerAnswerData>();
+        var playerAnswerDataAnswers = new List<int>();
+        var playerAnswerDataQuestions = new List<int>();
         foreach (var userAnswer in UserAnswers)
         {
-            playerAnswerData.Add(new PlayerAnswerData
-            {
-                AnswerId = userAnswer.AnswerId,
-                QuestionId = userAnswer.QuestionId
-            });
+            playerAnswerDataAnswers.Add(userAnswer.AnswerId);
+            playerAnswerDataQuestions.Add(userAnswer.QuestionId);
         }
-        DatabaseManager.Instance.SavePlayerScore(Guid.NewGuid().ToString(), Score, TotalTime.Value, playerAnswerData);
+        ExhibitGameManager.Instance.Player.CmdSavePlayerScore(Guid.NewGuid().ToString(), Score, TotalTime.Value.ToString(), playerAnswerDataAnswers.ToArray(), playerAnswerDataQuestions.ToArray());
     }
 
     IEnumerator ShowLeaderboardAfterSaving()
@@ -106,7 +104,7 @@ public class LeaderboardComponent : MonoBehaviour
         PollFinishedInstance.transform.SetParent(transform);
         if (FromPoll)
         {
-            var lowestScore = Data.PlayerData.LastOrDefault();
+            var lowestScore = Data.PlayerData.Count == 10 ? Data.PlayerData.LastOrDefault() : null;
             if (lowestScore != null)
             {
                 if (Score > 0 && Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)

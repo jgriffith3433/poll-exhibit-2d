@@ -9,6 +9,11 @@ public class ExhibitGameManager : MonoBehaviour {
     public string CurrentGameState;
     private string PreviousGameState;
     private bool UseSequenceForBackground = false;
+    public bool Connected = false;
+    public bool Started = false;
+
+    public Player Player;
+
     public PollImageSequenceComponent ExhibitBackgroundSequencePrefab;
     private PollImageSequenceComponent ExhibitBackgroundSequenceInstance;
 
@@ -51,7 +56,20 @@ public class ExhibitGameManager : MonoBehaviour {
         LoadTimerInstance.transform.SetParent(transform);
         LoadTimerInstance.CreateObjects(false);
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(CheckIsDoneLoading());
+        yield return StartCoroutine(CheckIsConnected());
+    }
+
+    IEnumerator CheckIsConnected()
+    {
+        Connected = Player != null;
+        if (Connected && !Started)
+        {
+            Player.CmdLoadInitialData();
+            Started = true;
+            yield return StartCoroutine(CheckIsDoneLoading());
+        }
+        yield return new WaitForSeconds(3);
+        StartCoroutine(CheckIsConnected());
     }
 
     IEnumerator CheckIsDoneLoading()
@@ -59,11 +77,11 @@ public class ExhibitGameManager : MonoBehaviour {
         var stillLoading = false;
         if (UseSequenceForBackground)
         {
-            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading;
+            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading || Player.Loading;
         }
         else
         {
-            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading;
+            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading || Player.Loading;
         }
         if (stillLoading)
         {
@@ -113,6 +131,7 @@ public class ExhibitGameManager : MonoBehaviour {
 
     public void ResetGame()
     {
+        Player.CmdLoadInitialData();
         PollManager.Instance.DestroyPoll();
         LeaderboardManager.Instance.DestroyLeaderboard();
     }

@@ -13,17 +13,25 @@ public class LeaderboardData
     public string PollLeaderboardDataRawText { get; set; }
 
     public List<LeaderboardPlayerData> PlayerData { get; set; }
-
-    public LeaderboardData(string remoteUrl)
+    public LeaderboardData()
     {
         PlayerData = new List<LeaderboardPlayerData>();
-        RemoteUrl = remoteUrl;
     }
 
-    public IEnumerator GetData() {
+    public void SetData(string databaseString)
+    {
+        PollLeaderboardDataRawText = databaseString;
+        StartParse(JSON.Parse(PollLeaderboardDataRawText));
+        IsDoneParsing = true;
+    }
+
+    public IEnumerator GetData(string remoteUrl) {
+        RemoteUrl = remoteUrl;
         WWW request = new WWW(RemoteUrl);
         yield return request;
-        if (string.IsNullOrEmpty(request.error)) {
+
+        if (string.IsNullOrEmpty(request.error))
+        {
             try
             {
                 PollLeaderboardDataRawText = request.text;
@@ -31,12 +39,27 @@ public class LeaderboardData
             }
             catch (Exception e)
             {
-                Debug.LogError("Poll : Invalid document format, please check your settings, with exception " + e.ToString());
+                Debug.LogError("Database : Invalid document format, please check your settings, with exception " + e.ToString());
             }
         }
         else
         {
-            Debug.LogError("Poll : URL request failed ," + request.error);
+            if (request.error.ToLower() == "404 not found")
+            {
+                try
+                {
+                    PollLeaderboardDataRawText = "{}";
+                    StartParse(JSON.Parse(PollLeaderboardDataRawText));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Database : Invalid document format, please check your settings, with exception " + e.ToString());
+                }
+            }
+            else
+            {
+                Debug.LogError("Database : URL request failed, " + request.error);
+            }
         }
         IsDoneParsing = true;
     }
@@ -66,7 +89,7 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, TimeSpan totalTime, string email)
+    public void AddPlayerScore(string displayName, int score, string totalTime, string email)
     {
         if (PlayerData.Count == 10)
         {
@@ -81,33 +104,54 @@ public class LeaderboardData
             PlayerBaseName = "Player " + (PlayerData.Count + 1).ToString(),
             PlayerDisplayName = displayName,
             PlayerScore = score,
-            TotalTime = totalTime,
+            TotalTime = TimeSpan.Parse(totalTime),
             Email = email
         });
+    }
+
+    private JSONObject CreateLeaderboardObject()
+    {
+        var leaderboardXObj = new JSONObject();
+        var orderedPlayerScoreData = PlayerData.OrderByDescending(pd => pd.PlayerScore).ToList();
+        var sortedPlayerData = new List<LeaderboardPlayerData>();
+
+        foreach(var playerScoreData in orderedPlayerScoreData)
+        {
+            if (!sortedPlayerData.Contains(playerScoreData))
+            {
+                var sameScores = orderedPlayerScoreData.Where(pd => pd.PlayerScore == playerScoreData.PlayerScore).OrderByDescending(pd => pd.PlayerScore / pd.TotalTime.TotalSeconds);
+                sortedPlayerData.AddRange(sameScores);
+            }
+        }
+
+        foreach (var playerData in sortedPlayerData)
+        {
+            var playerDataChild = new JSONArray();
+            var playerDataChildObject = new JSONObject();
+            playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
+            playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
+            playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
+            playerDataChildObject["Email"] = new JSONString(playerData.Email.ToString());
+            playerDataChild.Add(playerDataChildObject);
+            leaderboardXObj[playerData.PlayerBaseName] = playerDataChild;
+        }
+        return leaderboardXObj;
     }
 
     public void SaveLeaderboard()
     {
         try
         {
-            var rootXObj = new JSONObject();
-            PlayerData = PlayerData.OrderByDescending(pd => pd.PlayerScore / pd.TotalTime.TotalSeconds).ToList();
-            foreach (var playerData in PlayerData)
-            {
-                var playerDataChild = new JSONArray();
-                var playerDataChildObject = new JSONObject();
-                playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
-                playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
-                playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
-                playerDataChildObject["Email"] = new JSONString(playerData.Email.ToString());
-                playerDataChild.Add(playerDataChildObject);
-                rootXObj[playerData.PlayerBaseName] = playerDataChild;
-            }
-            File.WriteAllText(RemoteUrl, rootXObj.ToString());
+            File.WriteAllText(RemoteUrl, GetLeaderboardString());
         }
         catch (Exception e)
         {
             Debug.LogWarning(e.ToString());
         }
+    }
+
+    public string GetLeaderboardString()
+    {
+        return CreateLeaderboardObject().ToString();
     }
 }
