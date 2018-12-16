@@ -53,6 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnswerTextPrefab: {fileID: 114582445309752130, guid: c1e6972f1571a604582d80114def1f43,
     type: 2}
+  SelectYourAnswerTextPrefab: {fileID: 114582445309752130, guid: 13f1d3ca576994047a1c8764d383c0b7,
+    type: 2}
   AnswerButtonTextPrefab: {fileID: 114585871855852988, guid: 4c2005bcedabfe247870222df154c3f0,
     type: 2}
   AnswerBackgroundPrefab: {fileID: 114110842614179550, guid: d4f5b06898212b147aae5edcb40c4323,

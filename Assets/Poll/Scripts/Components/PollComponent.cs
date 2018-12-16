@@ -59,6 +59,7 @@ public class PollComponent : MonoBehaviour
 
     public void BeginPoll()
     {
+        ScreensaverManager.Instance.DiableScreensaver = true;
         HideInstructions();
         StartCoroutine(Data.GetData());
         m_LeaderboardData.SetData(ExhibitGameManager.Instance.Player.GetLeaderboardString());
@@ -68,11 +69,15 @@ public class PollComponent : MonoBehaviour
     public void ShowInstructions()
     {
         TestKnowledgeInstance = Instantiate(TestKnowledgePrefab);
+        TestKnowledgeInstance.transform.SetParent(transform);
     }
 
     public void HideInstructions()
     {
-        Destroy(TestKnowledgeInstance.gameObject);
+        if (TestKnowledgeInstance != null)
+        {
+            Destroy(TestKnowledgeInstance.gameObject);
+        }
     }
 
     public void SetTopScore(int score)
@@ -99,7 +104,7 @@ public class PollComponent : MonoBehaviour
 
     private PollQuestionComponent GetRandomQuestion()
     {
-        var rand = new System.Random();
+        var rand = new System.Random(DateTime.Now.Second);
         var nextQuestionIndex = -1;
         var tries = 0;
         while (nextQuestionIndex == -1 && tries < 100)

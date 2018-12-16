@@ -27,7 +27,7 @@ public class PollFinishedComponent : MonoBehaviour
 
     public void Update()
     {
-        if (FramesSinceUpdateValues > 10)
+        if (FramesSinceUpdateValues > 5)
         {
             FramesSinceUpdateValues = 0;
             if (CurrentScore < Score)

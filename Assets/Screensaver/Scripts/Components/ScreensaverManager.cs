@@ -7,7 +7,7 @@ public class ScreensaverManager : MonoBehaviour {
     public ScreensaverComponent ScreensaverPrefab;
     private ScreensaverComponent ScreensaverInstance;
 
-    public bool DiableScreensaver = false;
+    public bool DiableScreensaver = true;
     private int InactivityUntilScreensaver = 20;
     private float LastActivityTime = 0;
     private bool CanCancel;

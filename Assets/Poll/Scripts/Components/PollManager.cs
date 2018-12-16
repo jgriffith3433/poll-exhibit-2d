@@ -24,7 +24,6 @@ public class PollManager : MonoBehaviour {
     {
         PollInstance = Instantiate(PollPrefab).GetComponent<PollComponent>();
         PollInstance.RestartPoll();
-        ScreensaverManager.Instance.DiableScreensaver = true;
     }
 
     public void BeginPoll()

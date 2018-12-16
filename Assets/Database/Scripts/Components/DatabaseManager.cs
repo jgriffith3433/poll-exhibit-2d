@@ -9,7 +9,7 @@ public class DatabaseManager : MonoBehaviour
 {
     public static DatabaseManager Instance { get; private set; }
     private PollButtonComponent BtnCombineDbs;
-    private PollTextComponent TxtTitle;
+    public PollTextComponent AdminScreenText;
     private string LeaderboardDatabasePath;
     private string ExhibitDatabasePath;
     private ExhibitData ExhibitData;
@@ -24,8 +24,7 @@ public class DatabaseManager : MonoBehaviour
         LeaderboardDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-leaderboard-database.json";
         ExhibitDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-exhibit-database.json";
         LoadDatabases();
-        TxtTitle = GetComponentInChildren<PollTextComponent>();
-        TxtTitle.gameObject.SetActive(false);
+        AdminScreenText.gameObject.SetActive(false);
         BtnCombineDbs = GetComponentInChildren<PollButtonComponent>();
         BtnCombineDbs.gameObject.SetActive(false);
     }
@@ -93,7 +92,7 @@ public class DatabaseManager : MonoBehaviour
         PreviousDiableScreensaver = ScreensaverManager.Instance.DiableScreensaver;
         ScreensaverManager.Instance.DiableScreensaver = true;
         BtnCombineDbs.gameObject.SetActive(true);
-        TxtTitle.gameObject.SetActive(true);
+        AdminScreenText.gameObject.SetActive(true);
         NetworkManager.showGUI = true;
     }
 
@@ -101,7 +100,7 @@ public class DatabaseManager : MonoBehaviour
     {
         ScreensaverManager.Instance.DiableScreensaver = PreviousDiableScreensaver;
         BtnCombineDbs.gameObject.SetActive(false);
-        TxtTitle.gameObject.SetActive(false);
+        AdminScreenText.gameObject.SetActive(false);
         NetworkManager.showGUI = false;
     }
 

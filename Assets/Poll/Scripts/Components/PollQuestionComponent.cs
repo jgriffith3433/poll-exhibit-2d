@@ -18,6 +18,9 @@ public class PollQuestionComponent : MonoBehaviour
     public BarGraphComponent AnswerBarGraphPrefab;
     private BarGraphComponent AnswerBarGraphInstance;
 
+    public PieChartComponent AnswerPieChartPrefab;
+    private PieChartComponent AnswerPieChartInstance;
+
     public PollImageComponent AnswerBackgroundPrefab;
     private PollImageComponent AnswerBackgroundInstance;
     private PollTimerComponent AnswerTimerInstance;
@@ -26,7 +29,10 @@ public class PollQuestionComponent : MonoBehaviour
     private bool TransitioningAnswersOut = false;
     private bool TransitioningBarGraphIn = false;
     private bool TransitioningBarGraphOut = false;
+    private bool TransitioningPieChartIn = false;
+    private bool TransitioningPieChartOut = false;
     private Vector3 OriginalAnswerBarGraphInstancePosition;
+    private Vector3 OriginalAnswerPieChartInstancePosition;
 
     private PollAnswerComponent SelectedAnswer;
 
@@ -164,6 +170,31 @@ public class PollQuestionComponent : MonoBehaviour
                 Destroy(AnswerBarGraphInstance.gameObject);
             }
         }
+        if (TransitioningPieChartIn)
+        {
+            if (AnswerPieChartInstance.transform.position.y < OriginalAnswerPieChartInstancePosition.y)
+            {
+                AnswerPieChartInstance.transform.position += new Vector3(0, 1, 0);
+            }
+            else if (AnswerPieChartInstance.transform.position.y >= OriginalAnswerPieChartInstancePosition.y)
+            {
+                AnswerPieChartInstance.transform.position = new Vector3(AnswerPieChartInstance.transform.position.x, OriginalAnswerPieChartInstancePosition.y, AnswerPieChartInstance.transform.position.z);
+                TransitioningPieChartIn = false;
+            }
+        }
+        if (TransitioningPieChartOut)
+        {
+            if (AnswerPieChartInstance.transform.position.y > -100)
+            {
+                AnswerPieChartInstance.transform.position -= new Vector3(0, 1, 0);
+            }
+            else if (AnswerPieChartInstance.transform.position.y <= -100)
+            {
+                AnswerPieChartInstance.transform.position = new Vector3(AnswerPieChartInstance.transform.position.x, -100, AnswerPieChartInstance.transform.position.z);
+                TransitioningPieChartOut = false;
+                Destroy(AnswerPieChartInstance.gameObject);
+            }
+        }
     }
 
     public IEnumerator HideCorrectAnswerAndShowConfirmation()
@@ -171,8 +202,7 @@ public class PollQuestionComponent : MonoBehaviour
         yield return new WaitForSeconds(2);
         TransitioningAnswersOut = true;
         yield return new WaitForSeconds(0.5f);
-        AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
-        OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
+        
 
         var questionAnswers = DatabaseManager.Instance.GetPlayerAnswersForQuestionId(Data.QuestionId);
         var answerTimes = new Dictionary<string, List<int>>();
@@ -182,27 +212,48 @@ public class PollQuestionComponent : MonoBehaviour
             answerTimes.Add(pollAnswerData.AnswerText, questionAnswers.FindAll(qa => qa == pollAnswerData.AnswerId));
             answerCorrectIncorrect.Add(pollAnswerData.AnswerText, pollAnswerData.Correct);
         }
-        var mostAnswers = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
-        AnswerBarGraphInstance.MaxBarValue = mostAnswers;
 
-        foreach (var answer in answerTimes)
-        {
-            AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
-        }
-        AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
-        if (Data.QuestionType == "TF")
+        if (Data.ConfirmationType == "text")
         {
             TF_ConfirmationTextInstance.ShowObjects();
             yield return new WaitForSeconds(3);
             TF_ConfirmationTextInstance.HideObjects();
         }
-        else
+        else if (Data.ConfirmationType == "bar")
         {
+            AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
+            OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
+            foreach (var answer in answerTimes)
+            {
+                AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
+            }
+            AnswerBarGraphInstance.MaxBarValue = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
+            AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
+
             TransitioningBarGraphIn = true;
             yield return new WaitForSeconds(2);
             AnswerBarGraphInstance.DoAnimation();
             yield return new WaitForSeconds(3);
             TransitioningBarGraphOut = true;
+            yield return new WaitForSeconds(1);
+        }
+        else if (Data.ConfirmationType == "pie")
+        {
+            AnswerPieChartInstance = Instantiate(AnswerPieChartPrefab, transform).GetComponent<PieChartComponent>();
+            OriginalAnswerPieChartInstancePosition = AnswerPieChartInstance.transform.position;
+            foreach (var answer in answerTimes)
+            {
+                AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.Grey);
+            }
+            AnswerPieChartInstance.transform.position += new Vector3(0, -100, 0);
+            AnswerPieChartInstance.gameObject.SetActive(false);
+
+            TransitioningPieChartIn = true;
+            yield return new WaitForSeconds(2);
+            AnswerPieChartInstance.gameObject.SetActive(true);
+            AnswerPieChartInstance.DoAnimation();
+            yield return new WaitForSeconds(3);
+            TransitioningPieChartOut = true;
             yield return new WaitForSeconds(1);
         }
     }

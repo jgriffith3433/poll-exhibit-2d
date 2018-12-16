@@ -10,6 +10,7 @@ public class PollQuestionData {
     public string QuestionTextConfirmation { get; set; }
     public Vector3 QuestionTextPosition { get; set; }
     public string QuestionType { get; set; }
+    public string ConfirmationType { get; set; }
     public int QuestionId { get; set; }
 
     public PollQuestionData(JSONNode xObj) {
@@ -25,6 +26,7 @@ public class PollQuestionData {
         QuestionText = xObj["question_text"].Value;
         QuestionTextConfirmation = xObj["question_text_confirmation"].Value;
         QuestionType = xObj["question_type"].Value;
+        ConfirmationType = xObj["confirmation_type"].Value;
         var allAnswers = xObj["answers"];
         PollAnswersData = new List<PollAnswerData>();
         for (int i = 0; i < allAnswers.Count; i++) {

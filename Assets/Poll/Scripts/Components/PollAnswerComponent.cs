@@ -8,6 +8,9 @@ public class PollAnswerComponent : MonoBehaviour
     public PollTextComponent AnswerTextPrefab;
     private PollTextComponent AnswerTextInstance;
 
+    public PollTextComponent SelectYourAnswerTextPrefab;
+    private PollTextComponent SelectYourAnswerTextInstance;
+
     public PollButtonComponent AnswerButtonTextPrefab;
     private PollButtonComponent AnswerButtonTextInstance;
 
@@ -45,6 +48,9 @@ public class PollAnswerComponent : MonoBehaviour
         AnswerTextInstance.transform.SetParent(transform);
         AnswerTextInstance.transform.position = Data.AnswerTextPosition;
 
+        SelectYourAnswerTextInstance = Instantiate(SelectYourAnswerTextPrefab).GetComponent<PollTextComponent>();
+        SelectYourAnswerTextInstance.transform.SetParent(transform);
+
         AnswerTextInstance.SetTextData(Data.AnswerText);
         AnswerTextInstance.CreateAllObjects();
 
@@ -71,7 +77,7 @@ public class PollAnswerComponent : MonoBehaviour
 
         AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab).GetComponent<PollImageComponent>();
         AnswerBackgroundInstance.transform.SetParent(transform);
-        AnswerBackgroundInstance.transform.position = Data.AnswerButtonTextPosition + new Vector3(0, 0, -1f);
+        AnswerBackgroundInstance.transform.position = Data.AnswerButtonTextPosition;
 
         SelectedImageSequenceInstance = Instantiate(SelectedImageSequencePrefab).GetComponent<PollImageSequenceComponent>();
         SelectedImageSequenceInstance.transform.SetParent(transform);
@@ -92,6 +98,7 @@ public class PollAnswerComponent : MonoBehaviour
     public void HideObjects()
     {
         AnswerTextInstance.gameObject.SetActive(false);
+        SelectYourAnswerTextInstance.gameObject.SetActive(false);
         AnswerButtonTextInstance.gameObject.SetActive(false);
         CorrectOrIncorrectBackgroundInstance.HideObjects();
         SelectedCorrectBackgroundInstance.HideObjects();
@@ -100,6 +107,7 @@ public class PollAnswerComponent : MonoBehaviour
     public void ShowObjects()
     {
         AnswerTextInstance.gameObject.SetActive(true);
+        SelectYourAnswerTextInstance.gameObject.SetActive(true);
         AnswerButtonTextInstance.gameObject.SetActive(true);
     }
 
