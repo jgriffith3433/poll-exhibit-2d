@@ -57,6 +57,16 @@ public class PollImageSequenceComponent : PollImageComponent
         });
     }
 
+    public void ShowFirstFrame()
+    {
+        currentSprite = 0;
+        if (Sprites.Count > 1)
+        {
+            m_image.gameObject.SetActive(true);
+            SetSprite(Sprites[currentSprite]);
+        }
+    }
+
     public void Play()
     {
         currentSprite = 0;

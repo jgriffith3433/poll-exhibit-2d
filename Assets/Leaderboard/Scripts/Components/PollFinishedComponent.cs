@@ -55,9 +55,19 @@ public class PollFinishedComponent : MonoBehaviour
                     }
                 }
             }
-            CorrectAnswersText.SetTextData(CurrentScore.ToString());
+            if (CurrentScore < 10)
+            {
+                CorrectAnswersText.SetTextData("0" + CurrentScore.ToString());
+            }
+            else
+            {
+                CorrectAnswersText.SetTextData(CurrentScore.ToString());
+            }
             CorrectAnswersText.CreateAllObjects();
-            TotalTimeLabelText.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}", CurrentHours, CurrentMinutes, CurrentSeconds));
+            TotalTimeLabelText.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}", 
+                CurrentHours < 10 ? "0" + CurrentHours.ToString() : CurrentHours.ToString(), 
+                CurrentMinutes < 10 ? "0" + CurrentMinutes.ToString() : CurrentMinutes.ToString(),
+                CurrentSeconds < 10 ? "0" + CurrentSeconds.ToString() : CurrentSeconds.ToString()));
             TotalTimeLabelText.CreateAllObjects();
         }
         FramesSinceUpdateValues++;

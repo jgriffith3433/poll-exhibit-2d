@@ -51,7 +51,6 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.transform.position = Data.QuestionTextPosition;
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
-        QuestionTextInstance.AnimateFromTop();
 
         TF_ConfirmationTextInstance = Instantiate(TF_ConfirmationTextPrefab).GetComponent<PollTextComponent>();
         TF_ConfirmationTextInstance.name = "TF_ConfirmationText";
@@ -108,6 +107,8 @@ public class PollQuestionComponent : MonoBehaviour
     {
         QuestionTextInstance.SetTextData(Data.QuestionTextConfirmation);
         QuestionTextInstance.CreateAllObjects();
+        QuestionTextInstance.AnimateFadeIn(5);
+
         if (SelectedAnswer != null)
         {
             SelectedAnswer.ShowAsCorrectOrIncorrect();
@@ -130,6 +131,7 @@ public class PollQuestionComponent : MonoBehaviour
             else if (AnswersObject.transform.position.x <= 0)
             {
                 AnswersObject.transform.position = new Vector3(0, AnswersObject.transform.position.y, AnswersObject.transform.position.z);
+                AnswerTimerInstance.Play();
                 TransitioningAnswersIn = false;
             }
         }
@@ -184,7 +186,9 @@ public class PollQuestionComponent : MonoBehaviour
         }
         if (TransitioningPieChartOut)
         {
-            if (AnswerPieChartInstance.transform.position.y > -100)
+            Destroy(AnswerPieChartInstance.gameObject);
+            TransitioningPieChartOut = false;
+            /*if (AnswerPieChartInstance.transform.position.y > -100)
             {
                 AnswerPieChartInstance.transform.position -= new Vector3(0, 1, 0);
             }
@@ -193,7 +197,7 @@ public class PollQuestionComponent : MonoBehaviour
                 AnswerPieChartInstance.transform.position = new Vector3(AnswerPieChartInstance.transform.position.x, -100, AnswerPieChartInstance.transform.position.z);
                 TransitioningPieChartOut = false;
                 Destroy(AnswerPieChartInstance.gameObject);
-            }
+            }*/
         }
     }
 
@@ -223,11 +227,12 @@ public class PollQuestionComponent : MonoBehaviour
         {
             AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
             OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
+            AnswerBarGraphInstance.MaxBarValue = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
+
             foreach (var answer in answerTimes)
             {
                 AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
             }
-            AnswerBarGraphInstance.MaxBarValue = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
             AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
 
             TransitioningBarGraphIn = true;
@@ -266,8 +271,9 @@ public class PollQuestionComponent : MonoBehaviour
         }
         AnswerBackgroundInstance.ShowObjects();
         AnswerTimerInstance.ShowObjects();
-        AnswerTimerInstance.Play();
+        AnswerTimerInstance.ShowFirstFrame();
         QuestionTextInstance.gameObject.SetActive(true);
+        QuestionTextInstance.AnimateFadeIn(2);
         StartCoroutine(WaitThenTransitionAnswersIn());
     }
 

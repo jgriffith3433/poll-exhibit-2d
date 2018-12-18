@@ -365,7 +365,7 @@ MonoBehaviour:
   Text: {fileID: 114948302858932774}
   Red: {fileID: 2100000, guid: 864618ff9b42c904aac971c2587abc82, type: 2}
   Grey: {fileID: 2100000, guid: a215bbe563fb48543b6de82858987889, type: 2}
-  HeightScale: 10
+  HeightScale: 0.05
   ScaleSpeed: 1
   DefaultValue: 0
 --- !u!114 &114932103707493326

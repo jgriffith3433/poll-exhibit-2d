@@ -110,8 +110,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 0
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114567774031413138}
   ChildRectTransform: {fileID: 224298853503218402}
+  LoopAnimation: 0
 --- !u!114 &114816715372125150
 MonoBehaviour:
   m_ObjectHideFlags: 1

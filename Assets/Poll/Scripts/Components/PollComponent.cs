@@ -82,13 +82,27 @@ public class PollComponent : MonoBehaviour
 
     public void SetTopScore(int score)
     {
-        TopScoreTextInstance.SetTextData(score.ToString());
+        if (score < 10)
+        {
+            TopScoreTextInstance.SetTextData("0" + score.ToString());
+        }
+        else
+        {
+            TopScoreTextInstance.SetTextData(score.ToString());
+        }
         TopScoreTextInstance.CreateAllObjects();
     }
 
     public void SetYourScore(int score)
     {
-        YourScoreTextInstance.SetTextData(score.ToString());
+        if (score < 10)
+        {
+            YourScoreTextInstance.SetTextData("0" + score.ToString());
+        }
+        else
+        {
+            YourScoreTextInstance.SetTextData(score.ToString());
+        }
         YourScoreTextInstance.CreateAllObjects();
     }
 

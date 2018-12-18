@@ -8,7 +8,7 @@ public class BarComponent : MonoBehaviour {
     public Material Red;
     public Material Grey;
 
-    public float HeightScale = 10;
+    private float HeightScale = 15;
     public float ScaleSpeed = 0.1f;
     public float DefaultValue;
 
@@ -23,12 +23,12 @@ public class BarComponent : MonoBehaviour {
 
     public void Awake()
     {
-        Value = DefaultValue;
+        Value = DefaultValue + .01f;
     }
 
     public void SetValue(float value)
     {
-        Value = value;
+        Value = value + .01f;
     }
 
     public void DoAnimation()
@@ -38,7 +38,7 @@ public class BarComponent : MonoBehaviour {
 
     public void SetMaxValue(float value)
     {
-        MaxValue = value;
+        MaxValue = value + .01f;
     }
 
     public void SetCategory(string text)

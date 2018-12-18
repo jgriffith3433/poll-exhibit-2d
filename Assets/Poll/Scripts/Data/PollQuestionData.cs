@@ -27,9 +27,17 @@ public class PollQuestionData {
         QuestionTextConfirmation = xObj["question_text_confirmation"].Value;
         QuestionType = xObj["question_type"].Value;
         ConfirmationType = xObj["confirmation_type"].Value;
+        if (ConfirmationType == "rand")
+        {
+            var arr = new string[2];
+            arr[0] = "bar";
+            arr[1] = "pie";
+            ConfirmationType = arr[Mathf.Clamp(Random.Range(0, 2), 0, 1)];
+        }
         var allAnswers = xObj["answers"];
         PollAnswersData = new List<PollAnswerData>();
-        for (int i = 0; i < allAnswers.Count; i++) {
+        for (int i = 0; i < allAnswers.Count; i++)
+        {
             PollAnswersData.Add(new PollAnswerData(allAnswers[i]));
         }
     }

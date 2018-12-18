@@ -92,10 +92,21 @@ public class LoginComponent : MonoBehaviour {
     {
         submitted = false;
 
-        TxtScore.SetTextData(score.ToString());
+        if (score < 10)
+        {
+            TxtScore.SetTextData("0" + score.ToString());
+        }
+        else
+        {
+            TxtScore.SetTextData(score.ToString());
+        }
+
         if (totalTime.HasValue)
         {
-            TxtTotalTime.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}", totalTime.Value.Hours, totalTime.Value.Minutes, totalTime.Value.Seconds));
+            TxtTotalTime.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}",
+                totalTime.Value.Hours < 10 ? "0" + totalTime.Value.Hours.ToString() : totalTime.Value.Hours.ToString(),
+                totalTime.Value.Minutes < 10 ? "0" + totalTime.Value.Minutes.ToString() : totalTime.Value.Minutes.ToString(),
+                totalTime.Value.Seconds < 10 ? "0" + totalTime.Value.Seconds.ToString() : totalTime.Value.Seconds.ToString()));
         }
 
         TxtTotalTime.CreateAllObjects();

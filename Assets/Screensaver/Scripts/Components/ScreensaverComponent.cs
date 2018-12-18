@@ -12,23 +12,59 @@ public class ScreensaverComponent : MonoBehaviour {
     private List<PollImageComponent> ScreensaverImages;
     private int CurrentScreensaverImage = 0;
     public PollButtonComponent BtnStartOver;
+    private bool ShowScreensaverImages = false;
+
+    public PollImageSequenceComponent ScreensaverBackgroundSequencePrefab;
+    private PollImageSequenceComponent ScreensaverBackgroundSequenceInstance;
+
+    public bool Loading {
+        get {
+            if (ShowScreensaverImages)
+            {
+                if (Data == null)
+                {
+                    return true;
+                }
+                return Data.Loading;
+            }
+            else
+            {
+                if (ScreensaverBackgroundSequenceInstance == null)
+                {
+                    return true;
+                }
+                return ScreensaverBackgroundSequenceInstance.Loading;
+            }
+        }
+    }
 
     public IEnumerator CreateObjects()
     {
         //BtnStartOver = GetComponentInChildren<PollButtonComponent>();
-        Data = new ScreensaverData(Application.dataPath + "/screensaver_images");
-        yield return StartCoroutine(Data.GetData());
-        ScreensaverImages = new List<PollImageComponent>();
-        for(var i = 0; i < Data.ScreensaverImages.Count; i++)
+        if (ShowScreensaverImages)
         {
-            var screensaverImageComponent = Instantiate(ScreensaverImagePrefab).GetComponent<PollImageComponent>();
-            screensaverImageComponent.transform.SetParent(transform);
-            screensaverImageComponent.CreateObjects(Data.ScreensaverImages[i]);
-            screensaverImageComponent.HideObjects();
-            ScreensaverImages.Add(screensaverImageComponent);
+            Data = new ScreensaverData(Application.dataPath + "/Screensaver/Images/screensaver_images");
+            yield return StartCoroutine(Data.GetData());
+            ScreensaverImages = new List<PollImageComponent>();
+            for (var i = 0; i < Data.ScreensaverImages.Count; i++)
+            {
+                var screensaverImageComponent = Instantiate(ScreensaverImagePrefab).GetComponent<PollImageComponent>();
+                screensaverImageComponent.transform.SetParent(transform);
+                screensaverImageComponent.CreateObjects(Data.ScreensaverImages[i]);
+                screensaverImageComponent.HideObjects();
+                ScreensaverImages.Add(screensaverImageComponent);
+            }
+        }
+        else
+        {
+            ScreensaverBackgroundSequenceInstance = Instantiate(ScreensaverBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
+            ScreensaverBackgroundSequenceInstance.transform.SetParent(transform);
+            ScreensaverBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
+            ScreensaverBackgroundSequenceInstance.SetImageSequenceFolder("Screensaver/Images/Background");
+            ScreensaverBackgroundSequenceInstance.SetLoop(true);
+            ScreensaverBackgroundSequenceInstance.CreateObjects(false);
         }
         CountdownComponent.CreateObjects();
-        HideObjects();
     }
 
     public void ShowCountdown()
@@ -50,7 +86,15 @@ public class ScreensaverComponent : MonoBehaviour {
         Hidden = false;
         CurrentScreensaverImage = -1;
         gameObject.SetActive(true);
-        StartCoroutine(ShowNextScreensaverImage());
+        if (ShowScreensaverImages)
+        {
+            StartCoroutine(ShowNextScreensaverImage());
+        }
+        else
+        {
+            ScreensaverBackgroundSequenceInstance.ShowObjects();
+            ScreensaverBackgroundSequenceInstance.Play();
+        }
     }
 
     public IEnumerator ShowNextScreensaverImage()
@@ -81,7 +125,7 @@ public class ScreensaverComponent : MonoBehaviour {
             LeaderboardManager.Instance.HideLeaderboardScreensaver();
             //BtnStartOver.gameObject.SetActive(true);
         }
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         yield return ShowNextScreensaverImage();
     }
 
@@ -99,7 +143,7 @@ public class ScreensaverComponent : MonoBehaviour {
 
     public void Update()
     {
-        if (!Hidden)
+        if (!Hidden && !Loading)
         {
             if (Input.anyKeyDown || Input.touchCount > 0)
             {

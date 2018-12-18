@@ -97,6 +97,7 @@ public class LeaderboardComponent : MonoBehaviour
         LeaderboardTopDownInstance.transform.SetParent(transform);
         LeaderboardTopDownInstance.SetPlayerData(Data.PlayerData);
         LeaderboardTopDownInstance.CreateObjects();
+        LeaderboardTopDownInstance.AnimateFadeIn();
         LoginInstance = Instantiate(LoginPrefab).GetComponent<LoginComponent>();
         LoginInstance.transform.SetParent(transform);
         LoginInstance.CreateAllObjects(Score, TotalTime);

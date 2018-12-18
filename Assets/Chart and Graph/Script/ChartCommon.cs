@@ -108,8 +108,7 @@ namespace ChartAndGraph
 
         internal static void HideObject(GameObject obj,bool hideMode)
         {
-            return;
-            if (IsInEditMode == true)
+            /*if (IsInEditMode == true)
             {
                 obj.hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable | HideFlags.DontSaveInBuild;
                 return;
@@ -119,7 +118,7 @@ namespace ChartAndGraph
                 obj.hideFlags = HideFlags.DontSaveInEditor;
                 return;
             }
-            obj.hideFlags = HideFlags.DontSaveInEditor | HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable;
+            obj.hideFlags = HideFlags.DontSaveInEditor | HideFlags.HideInHierarchy | HideFlags.HideInInspector | HideFlags.NotEditable;*/
         }
 
         internal static float GetAutoLength(AnyChart parent, ChartOrientation orientation)

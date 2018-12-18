@@ -6,10 +6,11 @@
   "questions": [
     {
       "question_id": "0",
-      "question_text": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam are nisi ut aliquid ex ea commodi consequatur.</color>",
-	    "question_text_confirmation": "<#000000>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam </color><#ff2b00><size=+18><u>ARE</u></size></color><#000000> nisi ut aliquid ex ea commodi consequatur.</color>",
+      "question_text": "<#000000>CITY MULTI OUTDOOR UNITS ARE AVAILABLE IN BOTH AIR- AND WATER-SOURCED.</color>",
+      "question_text_confirmation": "<#000000>CITY MULTI OUTDOOR UNITS </color><#ff2b00><size=+18><u>ARE</u></size></color><#000000> AVAILABLE IN BOTH AIR- AND WATER-SOURCED.</color>",
       "question_text_position": "-12,6,0",
       "question_type": "TF",
+      "confirmation_type": "text",
       "answers": [
         {
           "answer_id": "0",
@@ -31,10 +32,11 @@
     },
     {
       "question_id": "1",
-      "question_text": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18>_</size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
-      "question_text_confirmation": "<#000000>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur </color><#ff2b00><size=+18><u>32</u></size></color><#000000> illum qui dolorem eum fugiat quo voluptas nulla pariatur?</color>",
+      "question_text": "<#000000>ACCORDING TO 2012 DATA, THE MEDIAN AGE OF U.S. BUILDINGS IS </color><#ff2b00><size=+18>_</size></color><#000000> YEARS</color>",
+      "question_text_confirmation": "<#000000>ACCORDING TO 2012 DATA, THE MEDIAN AGE OF U.S. BUILDINGS IS </color><#ff2b00><size=+18><u>32</u></size></color><#000000> YEARS</color>",
       "question_text_position": "-12,6,0",
       "question_type": "MC",
+      "confirmation_type": "bar",
       "answers": [
         {
           "answer_id": "2",
@@ -55,6 +57,40 @@
         {
           "answer_id": "4",
           "answer_text": "<size=+14>54</size>",
+          "answer_text_position": "30,-10,-1",
+          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text_position": "18,-10,-1",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "question_id": "2",
+      "question_text": "<#000000>THE CORRECT ANSWER IS </color><#ff2b00><size=+18>_</size></color><#000000>?</color>",
+      "question_text_confirmation": "<#000000>THE CORRECT ANSWER IS </color><#ff2b00><size=+18><u>1</u></size></color><#000000></color>",
+      "question_text_position": "-12,6,0",
+      "question_type": "MC",
+      "confirmation_type": "pie",
+      "answers": [
+        {
+          "answer_id": "5",
+          "answer_text": "<size=+14>1</size>",
+          "answer_text_position": "30,10,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,10,-1",
+          "correct": true
+        },
+        {
+          "answer_id": "6",
+          "answer_text": "<size=+14>2</size>",
+          "answer_text_position": "30,0,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,0,-1",
+          "correct": false
+        },
+        {
+          "answer_id": "7",
+          "answer_text": "<size=+14>3</size>",
           "answer_text_position": "30,-10,-1",
           "answer_button_text": "<#000000>C</color>",
           "answer_button_text_position": "18,-10,-1",

@@ -11,6 +11,15 @@ public class ScreensaverManager : MonoBehaviour {
     private int InactivityUntilScreensaver = 20;
     private float LastActivityTime = 0;
     private bool CanCancel;
+    public bool Loading {
+        get {
+            if (ScreensaverInstance == null)
+            {
+                return true;
+            }
+            return ScreensaverInstance.Loading;
+        }
+    }
 
     void Awake()
     {
@@ -42,7 +51,19 @@ public class ScreensaverManager : MonoBehaviour {
 
     public void FinishScreensaver()
     {
-        ScreensaverInstance.HideObjects();
+        if (!Loading)
+        {
+            ScreensaverInstance.HideObjects();
+
+        }
+    }
+
+    public void HideScreensaver()
+    {
+        if (!Loading)
+        {
+            ScreensaverInstance.HideObjects();
+        }
     }
 
     public void FinishCountdown()
@@ -54,7 +75,7 @@ public class ScreensaverManager : MonoBehaviour {
 
     public void Update()
     {
-        if (DiableScreensaver)
+        if (DiableScreensaver || Loading)
         {
             LastActivityTime = Time.time;
             return;

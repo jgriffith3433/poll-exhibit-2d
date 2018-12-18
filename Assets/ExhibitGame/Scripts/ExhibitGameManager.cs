@@ -40,8 +40,8 @@ public class ExhibitGameManager : MonoBehaviour {
         {
             ExhibitBackgroundSequenceInstance = Instantiate(ExhibitBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
             ExhibitBackgroundSequenceInstance.transform.SetParent(transform);
-            ExhibitBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
-            ExhibitBackgroundSequenceInstance.SetImageSequenceFolder("background_image_sequence");
+            ExhibitBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 6);
+            ExhibitBackgroundSequenceInstance.SetImageSequenceFolder("ExhibitGame/Images/background_image_sequence");
             ExhibitBackgroundSequenceInstance.SetLoop(true);
             ExhibitBackgroundSequenceInstance.CreateObjects(true);
         }
@@ -49,12 +49,13 @@ public class ExhibitGameManager : MonoBehaviour {
         {
             ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageComponent>();
             ExhibitBackgroundInstance.transform.SetParent(transform);
-            ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 2);
+            ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 6);
             ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.jpg");
         }
         LoadTimerInstance = Instantiate(LoadTimerPrefab).GetComponent<PollTimerComponent>();
         LoadTimerInstance.transform.SetParent(transform);
         LoadTimerInstance.CreateObjects(false);
+        LoadingTextInstance.AnimateFadeIn();
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsConnected());
     }
@@ -77,11 +78,11 @@ public class ExhibitGameManager : MonoBehaviour {
         var stillLoading = false;
         if (UseSequenceForBackground)
         {
-            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading || Player.Loading;
+            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading || Player.Loading || ScreensaverManager.Instance.Loading;
         }
         else
         {
-            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading || Player.Loading;
+            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading || Player.Loading || ScreensaverManager.Instance.Loading;
         }
         if (stillLoading)
         {
@@ -90,6 +91,7 @@ public class ExhibitGameManager : MonoBehaviour {
         }
         else
         {
+            ScreensaverManager.Instance.HideScreensaver();
             LoadingTextInstance.gameObject.SetActive(false);
             LoadTimerInstance.HideObjects();
             GoToState("StartingLeaderboard");

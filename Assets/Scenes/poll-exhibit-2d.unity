@@ -226,12 +226,12 @@ Prefab:
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}
@@ -267,6 +267,25 @@ Prefab:
         type: 2}
       propertyPath: m_fontSizeBase
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 114551771733323042, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 2}
+      propertyPath: LoopAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 2}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 2}
+      propertyPath: m_fontColor32.rgba
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1016933379540730, guid: 381edca20c6094748be0a8822202dcdb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 381edca20c6094748be0a8822202dcdb, type: 2}
@@ -662,12 +681,12 @@ Prefab:
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 2}

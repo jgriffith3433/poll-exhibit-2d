@@ -36,7 +36,7 @@
       "question_text_confirmation": "<#000000>ACCORDING TO 2012 DATA, THE MEDIAN AGE OF U.S. BUILDINGS IS </color><#ff2b00><size=+18><u>32</u></size></color><#000000> YEARS</color>",
       "question_text_position": "-12,6,0",
       "question_type": "MC",
-      "confirmation_type": "bar",
+      "confirmation_type": "rand",
       "answers": [
         {
           "answer_id": "2",
@@ -70,7 +70,7 @@
       "question_text_confirmation": "<#000000>THE CORRECT ANSWER IS </color><#ff2b00><size=+18><u>1</u></size></color><#000000></color>",
       "question_text_position": "-12,6,0",
       "question_type": "MC",
-      "confirmation_type": "pie",
+      "confirmation_type": "rand",
       "answers": [
         {
           "answer_id": "5",
