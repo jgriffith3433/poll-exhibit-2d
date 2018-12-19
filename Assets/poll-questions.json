@@ -2,97 +2,97 @@
   "poll_id": "0",
   "num_questions_asked": "30",
   "title_text": "<#333333>Question</color>",
-  "title_text_position": "-22,8,0",
+  "title_text_position": "-31,8,0",
   "questions": [
     {
       "question_id": "0",
-      "question_text": "<#000000>CITY MULTI OUTDOOR UNITS ARE AVAILABLE IN BOTH AIR- AND WATER-SOURCED.</color>",
-      "question_text_confirmation": "<#000000>CITY MULTI OUTDOOR UNITS </color><#ff2b00><size=+18><u>ARE</u></size></color><#000000> AVAILABLE IN BOTH AIR- AND WATER-SOURCED.</color>",
-      "question_text_position": "-12,6,0",
-      "question_type": "TF",
-      "confirmation_type": "text",
+      "question_text": "<#000000>A thermal battery that can displace a 1200-ton water-cooled chiller can shift how much grid demand to off-peak periods?</color>",
+      "question_text_confirmation": "<#000000>A thermal battery that can displace a 1200-ton water-cooled chiller can shift how much grid demand to off-peak periods?</color>",
+      "question_text_position": "-20,6,0",
+      "question_type": "MC",
+      "confirmation_type": "rand",
       "answers": [
         {
           "answer_id": "0",
-          "answer_text": "<size=+14>TRUE</size>",
-          "answer_text_position": "30,5,-1",
-          "answer_button_text": "<#000000>+</color>",
-          "answer_button_text_position": "18,5,-1",
+          "answer_text": "<size=+14>900 kW</size>",
+          "answer_text_position": "30,4,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,4,-1",
           "correct": true
         },
         {
           "answer_id": "1",
-          "answer_text": "<size=+14>FALSE</size>",
-          "answer_text_position": "30,-5,-1",
-          "answer_button_text": "<#000000>+</color>",
-          "answer_button_text_position": "18,-5,-1",
+          "answer_text": "<size=+14>1,500 kW</size>",
+          "answer_text_position": "30,-6,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,-6,-1",
+          "correct": false
+        },
+        {
+          "answer_id": "2",
+          "answer_text": "<size=+14>2,000 kW</size>",
+          "answer_text_position": "30,-16,-1",
+          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text_position": "18,-16,-1",
           "correct": false
         }
       ]
     },
     {
       "question_id": "1",
-      "question_text": "<#000000>ACCORDING TO 2012 DATA, THE MEDIAN AGE OF U.S. BUILDINGS IS </color><#ff2b00><size=+18>_</size></color><#000000> YEARS</color>",
-      "question_text_confirmation": "<#000000>ACCORDING TO 2012 DATA, THE MEDIAN AGE OF U.S. BUILDINGS IS </color><#ff2b00><size=+18><u>32</u></size></color><#000000> YEARS</color>",
-      "question_text_position": "-12,6,0",
+      "question_text": "<#000000>How many pounds of ice does it take to keep the average person cool in an office all day?</color>",
+      "question_text_confirmation": "<#000000>How many pounds of ice does it take to keep the average person cool in an office all day?</color>",
+      "question_text_position": "-20,6,0",
       "question_type": "MC",
       "confirmation_type": "rand",
       "answers": [
         {
-          "answer_id": "2",
-          "answer_text": "<size=+14>32</size>",
-          "answer_text_position": "30,10,-1",
-          "answer_button_text": "<#000000>A</color>",
-          "answer_button_text_position": "18,10,-1",
-          "correct": true
-        },
-        {
           "answer_id": "3",
-          "answer_text": "<size=+14>15</size>",
-          "answer_text_position": "30,0,-1",
-          "answer_button_text": "<#000000>B</color>",
-          "answer_button_text_position": "18,0,-1",
+          "answer_text": "<size=+14>1 pound</size>",
+          "answer_text_position": "30,4,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,4,-1",
           "correct": false
         },
         {
           "answer_id": "4",
-          "answer_text": "<size=+14>54</size>",
-          "answer_text_position": "30,-10,-1",
-          "answer_button_text": "<#000000>C</color>",
-          "answer_button_text_position": "18,-10,-1",
+          "answer_text": "<size=+14>50 pounds</size>",
+          "answer_text_position": "30,-6,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,-6,-1",
           "correct": false
+        },
+        {
+          "answer_id": "5",
+          "answer_text": "<size=+14>300 pounds</size>",
+          "answer_text_position": "30,-16,-1",
+          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text_position": "18,-16,-1",
+          "correct": true
         }
       ]
     },
     {
-      "question_id": "2",
-      "question_text": "<#000000>THE CORRECT ANSWER IS </color><#ff2b00><size=+18>_</size></color><#000000>?</color>",
-      "question_text_confirmation": "<#000000>THE CORRECT ANSWER IS </color><#ff2b00><size=+18><u>1</u></size></color><#000000></color>",
-      "question_text_position": "-12,6,0",
-      "question_type": "MC",
-      "confirmation_type": "rand",
+      "question_id": "15",
+      "question_text": "<#000000>CITY MULTI outdoor units are available in both air- and water-sourced.</color>",
+      "question_text_confirmation": "<#000000>CITY MULTI outdoor units </color><#ff2b00><size=+10><u>ARE</u></size></color><#000000> available in both air- and water-sourced.</color>",
+      "question_text_position": "-20,6,0",
+      "question_type": "TF",
+      "confirmation_type": "text",
       "answers": [
         {
-          "answer_id": "5",
-          "answer_text": "<size=+14>1</size>",
-          "answer_text_position": "30,10,-1",
-          "answer_button_text": "<#000000>A</color>",
-          "answer_button_text_position": "18,10,-1",
+          "answer_id": "45",
+          "answer_text": "<size=+14>TRUE</size>",
+          "answer_text_position": "30,0,-1",
+          "answer_button_text": "<#000000>+</color>",
+          "answer_button_text_position": "18,0,-1",
           "correct": true
         },
         {
-          "answer_id": "6",
-          "answer_text": "<size=+14>2</size>",
-          "answer_text_position": "30,0,-1",
-          "answer_button_text": "<#000000>B</color>",
-          "answer_button_text_position": "18,0,-1",
-          "correct": false
-        },
-        {
-          "answer_id": "7",
-          "answer_text": "<size=+14>3</size>",
+          "answer_id": "46",
+          "answer_text": "<size=+14>FALSE</size>",
           "answer_text_position": "30,-10,-1",
-          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text": "<#000000>+</color>",
           "answer_button_text_position": "18,-10,-1",
           "correct": false
         }

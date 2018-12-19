@@ -53,9 +53,9 @@ public class LeaderboardComponent : MonoBehaviour
         StartCoroutine(CheckIsDoneParsing());
     }
 
-    public void OnLogin(string displayName, string fullName, string email)
+    public void OnLogin(string displayName, string fullName, string email, string phoneNumber)
     {
-        ExhibitGameManager.Instance.Player.CmdSaveLeaderboard(displayName, Score, TotalTime.Value.ToString(), email);
+        ExhibitGameManager.Instance.Player.CmdSaveLeaderboard(displayName, fullName, Score, TotalTime.Value.ToString(), email, phoneNumber);
         StartCoroutine(ShowLeaderboardAfterSaving());
     }
 

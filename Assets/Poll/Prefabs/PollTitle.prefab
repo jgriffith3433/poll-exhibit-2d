@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114064865547470580}
   ChildRectTransform: {fileID: 224378488007362516}
+  LoopAnimation: 0
 --- !u!114 &114898802318609608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -23.2, y: 2.95}
+  m_AnchoredPosition: {x: -28.02, y: 2.95}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224074737957534088

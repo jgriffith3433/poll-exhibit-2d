@@ -10,10 +10,12 @@ public class DatabaseManager : MonoBehaviour
     public static DatabaseManager Instance { get; private set; }
     private PollButtonComponent BtnCombineDbs;
     public PollTextComponent AdminScreenText;
+    private string AllLeaderboardDatabasePath;
     private string LeaderboardDatabasePath;
     private string ExhibitDatabasePath;
     private ExhibitData ExhibitData;
     private LeaderboardData LeaderboardData;
+    private LeaderboardData AllLeaderboardData;
     private bool Loading = true;
     private bool PreviousDiableScreensaver;
     public NetworkManagerHUD NetworkManager;
@@ -21,6 +23,7 @@ public class DatabaseManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        AllLeaderboardDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-all-leaderboard-database.json";
         LeaderboardDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-leaderboard-database.json";
         ExhibitDatabasePath = Application.dataPath + "/" + SystemInfo.deviceName + "-exhibit-database.json";
         LoadDatabases();
@@ -33,14 +36,16 @@ public class DatabaseManager : MonoBehaviour
     {
         ExhibitData = new ExhibitData();
         LeaderboardData = new LeaderboardData();
+        AllLeaderboardData = new LeaderboardData();
         StartCoroutine(ExhibitData.GetData(ExhibitDatabasePath));
+        StartCoroutine(AllLeaderboardData.GetData(AllLeaderboardDatabasePath));
         StartCoroutine(LeaderboardData.GetData(LeaderboardDatabasePath));
         StartCoroutine(CheckIsDoneParsing());
     }
 
     IEnumerator CheckIsDoneParsing()
     {
-        if (ExhibitData != null && ExhibitData.IsDoneParsing && LeaderboardData.IsDoneParsing)
+        if (ExhibitData != null && ExhibitData.IsDoneParsing && LeaderboardData.IsDoneParsing && AllLeaderboardData.IsDoneParsing)
         {
             Loading = false;
         }
@@ -57,10 +62,12 @@ public class DatabaseManager : MonoBehaviour
         ExhibitData.SaveExhibitData();
     }
 
-    public void SaveLeaderboard(string displayName, int score, string totalTime, string email)
+    public void SaveLeaderboard(string displayName, string fullName, int score, string totalTime, string email, string phoneNumber)
     {
-        LeaderboardData.AddPlayerScore(displayName, score, totalTime, email);
+        LeaderboardData.AddPlayerScore(displayName, fullName, score, totalTime, email, phoneNumber);
         LeaderboardData.SaveLeaderboard();
+        AllLeaderboardData.AddPlayerScore(displayName, fullName, score, totalTime, email, phoneNumber, 999999999);
+        AllLeaderboardData.SaveLeaderboard();
     }
 
     public string GetExhibitDatabaseString()

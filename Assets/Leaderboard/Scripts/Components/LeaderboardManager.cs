@@ -29,9 +29,9 @@ public class LeaderboardManager : MonoBehaviour {
         }
     }
 
-    public void OnLogin(string displayName, string fullName, string email)
+    public void OnLogin(string displayName, string fullName, string email, string phoneNumber)
     {
-        LeaderboardInstance.OnLogin(displayName, fullName, email);
+        LeaderboardInstance.OnLogin(displayName, fullName, email, phoneNumber);
         ScreensaverManager.Instance.DiableScreensaver = false;
     }
 

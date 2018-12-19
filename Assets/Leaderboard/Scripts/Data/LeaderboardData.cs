@@ -76,9 +76,11 @@ public class LeaderboardData
                     {
                         PlayerBaseName = playerXObj.Key,
                         PlayerDisplayName = playerXObj.Value[i]["DisplayName"].Value,
+                        PlayerFullName = playerXObj.Value[i]["FullName"].Value,
                         PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value),
                         TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value),
-                        Email = playerXObj.Value[i]["Email"].Value
+                        Email = playerXObj.Value[i]["Email"].Value,
+                        PhoneNumber = playerXObj.Value[i]["PhoneNumber"].Value
                     });
                 }
             }
@@ -89,11 +91,11 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, int score, string totalTime, string email)
+    public void AddPlayerScore(string displayName, string fullName, int score, string totalTime, string email, string phoneNumber, int max = 10)
     {
-        if (PlayerData.Count == 10)
+        if (PlayerData.Count == max)
         {
-            PlayerData.RemoveAt(9);
+            PlayerData.RemoveAt(max - 1);
         }
         for(var i = 0; i < PlayerData.Count; i++)
         {
@@ -103,9 +105,11 @@ public class LeaderboardData
         {
             PlayerBaseName = "Player " + (PlayerData.Count + 1).ToString(),
             PlayerDisplayName = displayName,
+            PlayerFullName = fullName,
             PlayerScore = score,
             TotalTime = TimeSpan.Parse(totalTime),
-            Email = email
+            Email = email,
+            PhoneNumber = phoneNumber
         });
     }
 
@@ -129,9 +133,11 @@ public class LeaderboardData
             var playerDataChild = new JSONArray();
             var playerDataChildObject = new JSONObject();
             playerDataChildObject["DisplayName"] = new JSONString(playerData.PlayerDisplayName);
+            playerDataChildObject["FullName"] = new JSONString(playerData.PlayerFullName);
             playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
             playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
-            playerDataChildObject["Email"] = new JSONString(playerData.Email.ToString());
+            playerDataChildObject["Email"] = new JSONString(playerData.Email);
+            playerDataChildObject["PhoneNumber"] = new JSONString(playerData.PhoneNumber);
             playerDataChild.Add(playerDataChildObject);
             leaderboardXObj[playerData.PlayerBaseName] = playerDataChild;
         }

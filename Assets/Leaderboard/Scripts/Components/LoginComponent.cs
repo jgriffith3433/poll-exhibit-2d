@@ -25,9 +25,9 @@ public class LoginComponent : MonoBehaviour {
         KeyboardInstance.OnValueChanged += OnKeyboardValueChanged;
     }
 
-    public void Login(string displayName, string fullName, string email)
+    public void Login(string displayName, string fullName, string email, string phoneNumber)
     {
-        LeaderboardManager.Instance.OnLogin(displayName, fullName, email);
+        LeaderboardManager.Instance.OnLogin(displayName, fullName, email, phoneNumber);
     }
 
     public void OnContinue()
@@ -77,7 +77,7 @@ public class LoginComponent : MonoBehaviour {
                 if (displayName.Length < 15)
                 {
                     submitted = true;
-                    Login(displayName, NameInput.GetInputValue().Trim(), PhoneInput.GetInputValue().Trim());
+                    Login(displayName, NameInput.GetInputValue().Trim(), EmailInput.GetInputValue().Trim(), PhoneInput.GetInputValue().Trim());
                 }
                 else
                 {

@@ -1546,6 +1546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114105901320167880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1807,6 +1808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114206910606742044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1820,6 +1822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114207913401663882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1945,7 +1948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1994,6 +1997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114278345817712530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2396,6 +2400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114384283979860222
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2704,6 +2709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114384283979860222}
   ChildRectTransform: {fileID: 224337698696974770}
+  LoopAnimation: 0
 --- !u!114 &114518561535223598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3036,6 +3042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114591204867978016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3342,7 +3349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4237,6 +4244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114105901320167880}
   ChildRectTransform: {fileID: 224215705069398508}
+  LoopAnimation: 0
 --- !u!114 &114902957033237850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4570,7 +4578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
