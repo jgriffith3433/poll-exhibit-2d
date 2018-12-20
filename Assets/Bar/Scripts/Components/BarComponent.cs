@@ -7,6 +7,7 @@ public class BarComponent : MonoBehaviour {
     public PollTextComponent Text;
     public Material Red;
     public Material Grey;
+    public Material LightGrey;
 
     private float HeightScale = 15;
     public float ScaleSpeed = 0.1f;
@@ -18,7 +19,8 @@ public class BarComponent : MonoBehaviour {
     public enum BarColor
     {
         Red,
-        Grey
+        Grey,
+        LightGrey
     }
 
     public void Awake()
@@ -60,6 +62,9 @@ public class BarComponent : MonoBehaviour {
                 break;
             case BarColor.Grey:
                 BarModel.GetComponent<MeshRenderer>().material = Grey;
+                break;
+            case BarColor.LightGrey:
+                BarModel.GetComponent<MeshRenderer>().material = LightGrey;
                 break;
             default:
                 break;

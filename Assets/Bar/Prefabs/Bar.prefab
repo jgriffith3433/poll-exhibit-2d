@@ -365,7 +365,7 @@ MonoBehaviour:
   Text: {fileID: 114948302858932774}
   Red: {fileID: 2100000, guid: 864618ff9b42c904aac971c2587abc82, type: 2}
   Grey: {fileID: 2100000, guid: a215bbe563fb48543b6de82858987889, type: 2}
-  HeightScale: 0.05
+  LightGrey: {fileID: 2100000, guid: ab4d5e42452727d4a86f39845a370394, type: 2}
   ScaleSpeed: 1
   DefaultValue: 0
 --- !u!114 &114932103707493326
@@ -397,6 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114515296928704658}
   ChildRectTransform: {fileID: 224619779127364104}
+  LoopAnimation: 0
 --- !u!222 &222407636582232928
 CanvasRenderer:
   m_ObjectHideFlags: 1

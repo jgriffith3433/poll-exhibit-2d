@@ -30,6 +30,8 @@ public class PollAnswerComponent : MonoBehaviour
     private PollQuestionComponent QuestionParent;
     public PollAnswerData Data;
 
+    public bool Disabled = false;
+
     public bool IsSelected;
 
     public void SetQuestionParent(PollQuestionComponent questionParent)
@@ -113,9 +115,12 @@ public class PollAnswerComponent : MonoBehaviour
 
     public void OnChoose()
     {
-        IsSelected = true;
-        QuestionParent.OnSelectedAnswer(this, Data.AnswerId, Data.Correct);
-        SelectedImageSequenceInstance.Play();
+        if (!Disabled)
+        {
+            IsSelected = true;
+            QuestionParent.OnSelectedAnswer(this, Data.AnswerId, Data.Correct);
+            SelectedImageSequenceInstance.Play();
+        }
     }
 
     public void ShowAsCorrectOrIncorrect()

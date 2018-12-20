@@ -55,9 +55,9 @@ public class LoginComponent : MonoBehaviour {
     {
         if (!submitted)
         {
-            if (NameInput.GetInputValue() != "FIRST LAST NAME*" && !string.IsNullOrEmpty(NameInput.GetInputValue()) &&
-                EmailInput.GetInputValue() != "EMAIL*" && !string.IsNullOrEmpty(EmailInput.GetInputValue()) &&
-                PhoneInput.GetInputValue() != "PHONE*" && !string.IsNullOrEmpty(PhoneInput.GetInputValue()))
+            if (NameInput.GetInputValue() != "FIRST LAST NAME*" && !string.IsNullOrEmpty(NameInput.GetInputValue().Trim()) &&
+                EmailInput.GetInputValue() != "EMAIL*" && !string.IsNullOrEmpty(EmailInput.GetInputValue().Trim()) &&
+                PhoneInput.GetInputValue() != "PHONE*" && !string.IsNullOrEmpty(PhoneInput.GetInputValue().Trim()))
             {
                 var displayName = NameInput.GetInputValue().Trim();
                 var nameSplit = displayName.Split(' ');

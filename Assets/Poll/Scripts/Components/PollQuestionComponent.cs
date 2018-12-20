@@ -85,6 +85,10 @@ public class PollQuestionComponent : MonoBehaviour
 
     public void OnSelectedAnswer(PollAnswerComponent selectedAnswer, int answerId, bool correct)
     {
+        foreach(var answer in PollAnswerInstances)
+        {
+            answer.Disabled = true;
+        }
         SelectedAnswer = selectedAnswer;
         
         if (correct)
@@ -232,10 +236,18 @@ public class PollQuestionComponent : MonoBehaviour
             AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
             OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
             AnswerBarGraphInstance.MaxBarValue = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
-
+            var usedLightGrey = false;
             foreach (var answer in answerTimes)
             {
-                AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
+                if (!usedLightGrey)
+                {
+                    usedLightGrey = true;
+                    AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.LightGrey);
+                }
+                else
+                {
+                    AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
+                }
             }
             AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
 
