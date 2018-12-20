@@ -20,11 +20,49 @@ public class KeyboardComponent : MonoBehaviour
         }
     }
     public bool Hidden = false;
+    public bool Capitalize = true;
+    public GameObject Symbols;
+    public GameObject Capital_A_B_Cs;
+    public GameObject Lower_A_B_Cs;
 
     public void ShowObjects()
     {
         gameObject.SetActive(true);
         Hidden = false;
+    }
+
+    public void ShowCaptial()
+    {
+        Capital_A_B_Cs.SetActive(true);
+        Lower_A_B_Cs.SetActive(false);
+        Capitalize = true;
+    }
+
+    public void ShowLower()
+    {
+        Capital_A_B_Cs.SetActive(false);
+        Lower_A_B_Cs.SetActive(true);
+        Capitalize = false;
+    }
+
+    public void ShowABCs()
+    {
+        Symbols.SetActive(false);
+        if (Capitalize)
+        {
+            ShowCaptial();
+        }
+        else
+        {
+            ShowLower();
+        }
+    }
+
+    public void ShowSymbols()
+    {
+        Symbols.SetActive(true);
+        Capital_A_B_Cs.SetActive(false);
+        Lower_A_B_Cs.SetActive(false);
     }
 
     public void HideObjects()
@@ -35,49 +73,43 @@ public class KeyboardComponent : MonoBehaviour
 
     public void PressKey(string keyButtonValue)
     {
-        switch(keyButtonValue.ToLower())
+        switch (keyButtonValue.ToLower())
         {
-            case "continue":
-                LeaderboardManager.Instance.OnContinue();
+            case "enter":
+                LeaderboardManager.Instance.OnEnter();
                 break;
-            case "<":
+            case "123 sym":
+                ShowSymbols();
+                break;
+            case "abc":
+                ShowABCs();
+                break;
+            case "capitalize":
+                if (Capitalize)
+                {
+                    ShowLower();
+                }
+                else
+                {
+                    ShowCaptial();
+                }
+                break;
+            case "backspace":
                 if (Value.Length > 0)
                 {
                     Value = Value.Substring(0, Value.Length - 1);
                 }
                 break;
-            case "a":
-            case "b":
-            case "c":
-            case "d":
-            case "e":
-            case "f":
-            case "g":
-            case "h":
-            case "i":
-            case "j":
-            case "k":
-            case "l":
-            case "m":
-            case "n":
-            case "o":
-            case "p":
-            case "q":
-            case "r":
-            case "s":
-            case "t":
-            case "u":
-            case "v":
-            case "w":
-            case "x":
-            case "y":
-            case "z":
-                Value += keyButtonValue;
-                break;
             case "space":
                 Value += " ";
+                ShowCaptial();
                 break;
             default:
+                Value += keyButtonValue;
+                if (Capitalize)
+                {
+                    ShowLower();
+                }
                 break;
         }
     }

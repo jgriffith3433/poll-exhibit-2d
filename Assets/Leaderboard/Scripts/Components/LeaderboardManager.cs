@@ -40,9 +40,9 @@ public class LeaderboardManager : MonoBehaviour {
         ScreensaverManager.Instance.DiableScreensaver = false;
     }
 
-    public void OnContinue()
+    public void OnEnter()
     {
-        LeaderboardInstance.OnContinue();
+        LeaderboardInstance.OnEnter();
     }
 
     public void OnInactive()

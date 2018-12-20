@@ -213,6 +213,10 @@ public class PollQuestionComponent : MonoBehaviour
         var answerCorrectIncorrect = new Dictionary<string, bool>();
         foreach (var pollAnswerData in Data.PollAnswersData)
         {
+            if (pollAnswerData.AnswerId == SelectedAnswer.Data.AnswerId)
+            {
+                questionAnswers.Add(SelectedAnswer.Data.AnswerId);
+            }
             answerTimes.Add(pollAnswerData.AnswerText, questionAnswers.FindAll(qa => qa == pollAnswerData.AnswerId));
             answerCorrectIncorrect.Add(pollAnswerData.AnswerText, pollAnswerData.Correct);
         }
@@ -246,9 +250,18 @@ public class PollQuestionComponent : MonoBehaviour
         {
             AnswerPieChartInstance = Instantiate(AnswerPieChartPrefab, transform).GetComponent<PieChartComponent>();
             OriginalAnswerPieChartInstancePosition = AnswerPieChartInstance.transform.position;
+            var usedLightGray = false;
             foreach (var answer in answerTimes)
             {
-                AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.Grey);
+                if (!usedLightGray)
+                {
+                    usedLightGray = true;
+                    AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.LightGray);
+                }
+                else
+                {
+                    AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.Grey);
+                }
             }
             AnswerPieChartInstance.transform.position += new Vector3(0, -100, 0);
             AnswerPieChartInstance.gameObject.SetActive(false);

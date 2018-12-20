@@ -146,9 +146,9 @@ public class LeaderboardComponent : MonoBehaviour
         }
     }
 
-    public void OnContinue()
+    public void OnEnter()
     {
-        LoginInstance.OnContinue();
+        LoginInstance.OnEnter();
     }
 
     public void ShowLeaderboardTopDown()

@@ -1046,6 +1046,10 @@ MonoBehaviour:
     type: 2}
   LoadTimerPrefab: {fileID: 114320355675464998, guid: c1ce911295950cd44afa4f56d7f64f76,
     type: 2}
+  LoadCorrectPrefab: {fileID: 114584228834900726, guid: ea11241eea2528448b2ab6ba78a51f3f,
+    type: 2}
+  LoadIncorrectPrefab: {fileID: 114584228834900726, guid: ea11241eea2528448b2ab6ba78a51f3f,
+    type: 2}
 --- !u!114 &1995646087
 MonoBehaviour:
   m_ObjectHideFlags: 0

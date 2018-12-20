@@ -8,10 +8,12 @@ public class PieChartComponent : MonoBehaviour
     public enum PieChartColor
     {
         Red,
-        Grey
+        Grey,
+        LightGray
     }
     public Material Red;
     public Material Gray;
+    public Material LightGray;
     public PieChart Pie;
     private float AnimateSpeed = 5.0f;
 
@@ -22,7 +24,10 @@ public class PieChartComponent : MonoBehaviour
             if (pieChartColor == PieChartColor.Grey)
             {
                 Pie.DataSource.AddCategory(category, Gray);
-
+            }
+            else if (pieChartColor == PieChartColor.LightGray)
+            {
+                Pie.DataSource.AddCategory(category, LightGray);
             }
             else if (pieChartColor == PieChartColor.Red)
             {

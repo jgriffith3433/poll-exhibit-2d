@@ -30,7 +30,7 @@ public class LoginComponent : MonoBehaviour {
         LeaderboardManager.Instance.OnLogin(displayName, fullName, email, phoneNumber);
     }
 
-    public void OnContinue()
+    public void OnEnter()
     {
         Submit();
     }

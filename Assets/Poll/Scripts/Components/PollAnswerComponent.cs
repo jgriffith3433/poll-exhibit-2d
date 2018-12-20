@@ -28,7 +28,7 @@ public class PollAnswerComponent : MonoBehaviour
     private PollImageComponent SelectedCorrectBackgroundInstance;
 
     private PollQuestionComponent QuestionParent;
-    private PollAnswerData Data;
+    public PollAnswerData Data;
 
     public bool IsSelected;
 
