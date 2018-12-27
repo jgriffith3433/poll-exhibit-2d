@@ -31,7 +31,7 @@ public class KeyboardComponent : MonoBehaviour
         Hidden = false;
     }
 
-    public void ShowCaptial()
+    public void ShowCapital()
     {
         Capital_A_B_Cs.SetActive(true);
         Lower_A_B_Cs.SetActive(false);
@@ -45,16 +45,40 @@ public class KeyboardComponent : MonoBehaviour
         Capitalize = false;
     }
 
+    public IEnumerator WaitAndShowLower()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ShowLower();
+    }
+
+    public IEnumerator WaitAndShowCapital()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ShowCapital();
+    }
+
+    public void OnSelectedNewInput()
+    {
+        if (!string.IsNullOrEmpty(Value))
+        {
+            ShowLower();
+        }
+        else
+        {
+            ShowCapital();
+        }
+    }
+
     public void ShowABCs()
     {
         Symbols.SetActive(false);
         if (Capitalize)
         {
-            ShowCaptial();
+            StartCoroutine(WaitAndShowCapital());
         }
         else
         {
-            ShowLower();
+            StartCoroutine(WaitAndShowLower());
         }
     }
 
@@ -87,11 +111,11 @@ public class KeyboardComponent : MonoBehaviour
             case "capitalize":
                 if (Capitalize)
                 {
-                    ShowLower();
+                    StartCoroutine(WaitAndShowLower());
                 }
                 else
                 {
-                    ShowCaptial();
+                    StartCoroutine(WaitAndShowCapital());
                 }
                 break;
             case "backspace":
@@ -102,13 +126,13 @@ public class KeyboardComponent : MonoBehaviour
                 break;
             case "space":
                 Value += " ";
-                ShowCaptial();
+                ShowCapital();
                 break;
             default:
                 Value += keyButtonValue;
                 if (Capitalize)
                 {
-                    ShowLower();
+                    StartCoroutine(WaitAndShowLower());
                 }
                 break;
         }

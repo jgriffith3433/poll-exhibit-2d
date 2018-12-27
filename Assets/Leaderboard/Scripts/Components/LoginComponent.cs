@@ -5,117 +5,87 @@ using TMPro;
 using System;
 
 public class LoginComponent : MonoBehaviour {
-    public PollTextComponent LoginTitle;
     public KeyboardComponent KeyboardInstance;
 
-    public PollTextComponent TxtScore;
-    public PollTextComponent TxtTotalTime;
+    public PollTextFieldComponent FirstNameInput;
+    public bool FirstNameInputSelected;
+    public PollTextFieldComponent LastNameInput;
+    public bool LastNameInputSelected;
 
-    public PollTextFieldComponent NameInput;
-    public bool NameInputSelected;
-    public PollTextFieldComponent EmailInput;
-    public bool EmailInputSelected;
-    public PollTextFieldComponent PhoneInput;
-    public bool PhoneInputSelected;
+    public bool ValuesFilled = false;
 
-    public bool submitted;
+    public string DisplayName;
+    public string FirstName;
+    public string LastName;
+    
 
     public void Awake()
     {
         KeyboardInstance.OnValueChanged += OnKeyboardValueChanged;
     }
 
-    public void Login(string displayName, string fullName, string email, string phoneNumber)
-    {
-        LeaderboardManager.Instance.OnLogin(displayName, fullName, email, phoneNumber);
-    }
-
     public void OnEnter()
     {
-        Submit();
+        //Submit();
     }
 
     public void OnKeyboardValueChanged()
     {
-        if (NameInputSelected)
+        if (FirstNameInputSelected)
         {
-            NameInput.SetInputValue(KeyboardInstance.Value);
+            FirstNameInput.SetInputValue(KeyboardInstance.Value);
         }
-        else if (EmailInputSelected)
+        else if (LastNameInputSelected)
         {
-            EmailInput.SetInputValue(KeyboardInstance.Value);
-        }
-        else if (PhoneInputSelected)
-        {
-            PhoneInput.SetInputValue(KeyboardInstance.Value);
+            LastNameInput.SetInputValue(KeyboardInstance.Value);
         }
     }
 
-    private void Submit()
+    public void FillValues()
     {
-        if (!submitted)
+        ValuesFilled = false;
+        if (FirstNameInput.GetInputValue() != "FIRST NAME*" && !string.IsNullOrEmpty(FirstNameInput.GetInputValue().Trim()) &&
+            LastNameInput.GetInputValue() != "LAST NAME*" && !string.IsNullOrEmpty(LastNameInput.GetInputValue().Trim()))
         {
-            if (NameInput.GetInputValue() != "FIRST LAST NAME*" && !string.IsNullOrEmpty(NameInput.GetInputValue().Trim()) &&
-                EmailInput.GetInputValue() != "EMAIL*" && !string.IsNullOrEmpty(EmailInput.GetInputValue().Trim()) &&
-                PhoneInput.GetInputValue() != "PHONE*" && !string.IsNullOrEmpty(PhoneInput.GetInputValue().Trim()))
-            {
-                var displayName = NameInput.GetInputValue().Trim();
-                var nameSplit = displayName.Split(' ');
+            var displayName = FirstNameInput.GetInputValue().Trim() + " " + LastNameInput.GetInputValue().Trim();
+            var nameSplit = displayName.Split(' ');
                 
-                if (nameSplit.Length > 1 && nameSplit.Length < 5)
+            if (nameSplit.Length > 1 && nameSplit.Length < 5)
+            {
+                var initials = "";
+                foreach (var name in nameSplit)
                 {
-                    var initials = "";
-                    foreach (var name in nameSplit)
+                    if (name.Length > 0)
                     {
-                        if (name.Length > 0)
-                        {
-                            initials += name[0].ToString().ToUpper() + ". ";
-                        }
+                        initials += name[0].ToString().ToUpper() + ". ";
                     }
-                    displayName = initials.Trim();
                 }
-                if (displayName.Length < 15)
-                {
-                    submitted = true;
-                    Login(displayName, NameInput.GetInputValue().Trim(), EmailInput.GetInputValue().Trim(), PhoneInput.GetInputValue().Trim());
-                }
-                else
-                {
-                    NameInput.SetInputValue("");
-                    KeyboardInstance.Value = "";
-                }
+                displayName = initials.Trim();
+            }
+            if (displayName.Length < 15)
+            {
+                ValuesFilled = true;
+                DisplayName = displayName;
+                FirstName = FirstNameInput.GetInputValue().Trim();
+                LastName = LastNameInput.GetInputValue().Trim();
+            }
+            else
+            {
+                FirstNameInput.SetInputValue("");
+                LastNameInput.SetInputValue("");
+                KeyboardInstance.Value = "";
             }
         }
     }
 
-    public void CreateAllObjects(int score, TimeSpan? totalTime)
+    public void CreateAllObjects()
     {
-        submitted = false;
+        ValuesFilled = false;
 
-        if (score < 10)
-        {
-            TxtScore.SetTextData("0" + score.ToString());
-        }
-        else
-        {
-            TxtScore.SetTextData(score.ToString());
-        }
+        FirstNameInput.CreateAllObjects();
+        LastNameInput.CreateAllObjects();
 
-        if (totalTime.HasValue)
-        {
-            TxtTotalTime.SetTextData(string.Format("{0:N0}:{1:N0}:{2:N0}",
-                totalTime.Value.Hours < 10 ? "0" + totalTime.Value.Hours.ToString() : totalTime.Value.Hours.ToString(),
-                totalTime.Value.Minutes < 10 ? "0" + totalTime.Value.Minutes.ToString() : totalTime.Value.Minutes.ToString(),
-                totalTime.Value.Seconds < 10 ? "0" + totalTime.Value.Seconds.ToString() : totalTime.Value.Seconds.ToString()));
-        }
-
-        TxtTotalTime.CreateAllObjects();
-        TxtScore.CreateAllObjects();
-        NameInput.CreateAllObjects();
-        EmailInput.CreateAllObjects();
-        PhoneInput.CreateAllObjects();
-
-        KeyboardInstance.HideObjects();
+        KeyboardInstance.ShowObjects();
     }
 
     public void Update()
@@ -144,30 +114,21 @@ public class LoginComponent : MonoBehaviour {
                         var textFieldComponent = hitInfo.transform.GetComponent<PollTextFieldComponent>();
                         if (textFieldComponent)
                         {
-                            if (textFieldComponent == NameInput)
+                            if (textFieldComponent == FirstNameInput)
                             {
                                 KeyboardInstance.ShowObjects();
-                                NameInputSelected = true;
-                                EmailInputSelected = false;
-                                PhoneInputSelected = false;
-                                KeyboardInstance.Value = NameInput.GetInputValue();
+                                FirstNameInputSelected = true;
+                                LastNameInputSelected = false;
+                                KeyboardInstance.Value = FirstNameInput.GetInputValue();
                             }
-                            else if (textFieldComponent == EmailInput)
+                            else if (textFieldComponent == LastNameInput)
                             {
                                 KeyboardInstance.ShowObjects();
-                                NameInputSelected = false;
-                                EmailInputSelected = true;
-                                PhoneInputSelected = false;
-                                KeyboardInstance.Value = EmailInput.GetInputValue();
+                                FirstNameInputSelected = false;
+                                LastNameInputSelected = true;
+                                KeyboardInstance.Value = LastNameInput.GetInputValue();
                             }
-                            else if (textFieldComponent == PhoneInput)
-                            {
-                                KeyboardInstance.ShowObjects();
-                                NameInputSelected = false;
-                                EmailInputSelected = false;
-                                PhoneInputSelected = true;
-                                KeyboardInstance.Value = PhoneInput.GetInputValue();
-                            }
+                            KeyboardInstance.OnSelectedNewInput();
                         }
                     }
                 }

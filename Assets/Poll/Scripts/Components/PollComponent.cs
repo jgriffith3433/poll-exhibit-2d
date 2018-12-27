@@ -33,6 +33,10 @@ public class PollComponent : MonoBehaviour
     private int TopScore;
     private int YourScore;
 
+    private string DisplayName;
+    private string FirstName;
+    private string LastName;
+
     private bool Loading = true;
     private bool Hidden = false;
 
@@ -78,6 +82,13 @@ public class PollComponent : MonoBehaviour
         {
             Destroy(TestKnowledgeInstance.gameObject);
         }
+    }
+
+    public void Login(string displayName, string firstName, string lastName)
+    {
+        DisplayName = displayName;
+        FirstName = firstName;
+        LastName = lastName;
     }
 
     public void SetTopScore(int score)
@@ -172,7 +183,7 @@ public class PollComponent : MonoBehaviour
             HideObjects();
             var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
             var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
-            PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers);
+            PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers, DisplayName, FirstName, LastName);
         }
         else
         {
@@ -217,7 +228,7 @@ public class PollComponent : MonoBehaviour
         HideObjects();
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
-        PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers);
+        PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers, DisplayName, FirstName, LastName);
     }
 
     public void StartOver()

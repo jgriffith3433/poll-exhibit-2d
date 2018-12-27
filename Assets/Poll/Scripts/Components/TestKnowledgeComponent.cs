@@ -7,18 +7,34 @@ public class TestKnowledgeComponent : MonoBehaviour
     public GameObject TopScoresGameObject;
     public GameObject RulesGameObject;
 
+    public LoginComponent LoginPrefab;
+    private LoginComponent LoginInstance;
+
     private bool OnFirstScreen = true;
+
+    public void Awake()
+    {
+        LoginInstance = Instantiate(LoginPrefab).GetComponent<LoginComponent>();
+        LoginInstance.transform.SetParent(transform);
+        LoginInstance.CreateAllObjects();
+        LoginInstance.gameObject.SetActive(false);
+    }
     
     private void GoToNextScreen()
     {
         OnFirstScreen = false;
         TopScoresGameObject.SetActive(false);
         RulesGameObject.SetActive(true);
+        LoginInstance.gameObject.SetActive(true);
     }
 
     public void PlayNow()
     {
-        PollManager.Instance.BeginPoll();
+        LoginInstance.FillValues();
+        if (LoginInstance.ValuesFilled)
+        {
+            PollManager.Instance.BeginPoll(LoginInstance.DisplayName, LoginInstance.FirstName, LoginInstance.LastName);
+        }
     }
 
     public void Update()

@@ -32,6 +32,10 @@ public class ExhibitGameManager : MonoBehaviour {
     private PollImageSequenceComponent LoadIncorrectInstance;
 
     private int PollScore;
+    private string DisplayName;
+    private string FirstName;
+    private string LastName;
+
     private TimeSpan? PollTotalTime;
     private List<PollUserAnswer> PollUserAnswers;
 
@@ -157,9 +161,12 @@ public class ExhibitGameManager : MonoBehaviour {
         LeaderboardManager.Instance.DestroyLeaderboard();
     }
 
-    public void OnFinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers)
+    public void OnFinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers, string displayName, string firstName, string lastName)
     {
         PollScore = score;
+        DisplayName = displayName;
+        FirstName = firstName;
+        LastName = lastName;
         PollTotalTime = totalTime;
         PollUserAnswers = userAnswers;
         GoToState("StartingLeaderboard");
@@ -234,9 +241,12 @@ public class ExhibitGameManager : MonoBehaviour {
         {
             PreviousGameState = previousState;
             ResetGame();
-            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PollUserAnswers, PreviousGameState == "Poll");
+            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PollUserAnswers, PreviousGameState == "Poll", DisplayName, FirstName, LastName);
+            /*DisplayName = null;
+            FirstName = null;
+            LastName = null;
             PollScore = 0;
-            PollTotalTime = null;
+            PollTotalTime = null;*/
         }
         else if (newState == "Leaderboard")
         {

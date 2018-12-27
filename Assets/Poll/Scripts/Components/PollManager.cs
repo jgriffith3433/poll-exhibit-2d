@@ -13,7 +13,6 @@ public class PollManager : MonoBehaviour {
 
     public PollComponent PollPrefab;
     private PollComponent PollInstance;
-    private string DisplayName;
 
     public void Awake()
     {
@@ -26,8 +25,9 @@ public class PollManager : MonoBehaviour {
         PollInstance.RestartPoll();
     }
 
-    public void BeginPoll()
+    public void BeginPoll(string displayName, string firstName, string lastName)
     {
+        PollInstance.Login(displayName, firstName, lastName);
         PollInstance.BeginPoll();
     }
 
@@ -54,8 +54,8 @@ public class PollManager : MonoBehaviour {
         PollInstance.OnTimerEnded();
     }
 
-    public void FinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers)
+    public void FinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers, string displayName, string firstName, string lastName)
     {
-        ExhibitGameManager.Instance.OnFinishPoll(score, totalTime, userAnswers);
+        ExhibitGameManager.Instance.OnFinishPoll(score, totalTime, userAnswers, displayName, firstName, lastName);
     }
 }

@@ -62,11 +62,11 @@ public class DatabaseManager : MonoBehaviour
         ExhibitData.SaveExhibitData();
     }
 
-    public void SaveLeaderboard(string displayName, string fullName, int score, string totalTime, string email, string phoneNumber)
+    public void SaveLeaderboard(string displayName, string firstName, string lastName, int score, string totalTime)
     {
-        LeaderboardData.AddPlayerScore(displayName, fullName, score, totalTime, email, phoneNumber);
+        LeaderboardData.AddPlayerScore(displayName, firstName, lastName, score, totalTime);
         LeaderboardData.SaveLeaderboard();
-        AllLeaderboardData.AddPlayerScore(displayName, fullName, score, totalTime, email, phoneNumber, 999999999);
+        AllLeaderboardData.AddPlayerScore(displayName, firstName, lastName, score, totalTime, 999999999);
         AllLeaderboardData.SaveLeaderboard();
     }
 

@@ -283,8 +283,6 @@ MonoBehaviour:
   TxtTitle: {fileID: 114838665996297660}
   TxtSubTitle: {fileID: 114965731034909710}
   TxtPlayNow: {fileID: 114220709892472468}
-  LoginPrefab: {fileID: 114269727429866448, guid: d0471a618aedbe1419ff12cb4b046dc0,
-    type: 2}
   PollFinishedPrefab: {fileID: 114606904332190170, guid: 0cc8c34412ef84d4e81d9762b913725c,
     type: 2}
   Hidden: 0
@@ -301,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114274939934488098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -564,8 +563,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: The top three scores with the lowest times at the end of AHR will win the
-    prizes.
+  m_text: 'Win $5 if you make the leaderboard.
+
+    Win $25 if you answer all the questions correctly.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
   m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
@@ -634,12 +634,12 @@ MonoBehaviour:
   m_margin: {x: -0.16843987, y: 0, z: -27.933506, w: 6.668362}
   m_textInfo:
     textComponent: {fileID: 114735065197823436}
-    characterCount: 81
+    characterCount: 86
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 17
+    spaceCount: 15
+    wordCount: 16
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -681,6 +681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!114 &114965731034909710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -694,6 +695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 0}
   ChildRectTransform: {fileID: 0}
+  LoopAnimation: 0
 --- !u!222 &222048898210683732
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -755,7 +757,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 18.31}
+  m_AnchoredPosition: {x: -13, y: 18.9}
   m_SizeDelta: {x: 26.762276, y: 9.853713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224736468068623788
@@ -773,6 +775,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 12.81}
+  m_AnchoredPosition: {x: -13, y: 14.29}
   m_SizeDelta: {x: 26.762276, y: 9.853713}
   m_Pivot: {x: 0.5, y: 0.5}

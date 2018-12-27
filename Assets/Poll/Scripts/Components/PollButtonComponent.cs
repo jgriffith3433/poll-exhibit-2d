@@ -27,6 +27,13 @@ public class PollButtonComponent : MonoBehaviour {
         m_textMeshPro.SetText(Text);
     }
 
+    public IEnumerator AnimatePress()
+    {
+        m_textMeshPro.fontSize += 10;
+        yield return new WaitForSeconds(0.2f);
+        m_textMeshPro.fontSize -= 10;
+    }
+
     public void OnClick()
     {
         var answerComponent = transform.parent.GetComponent<PollAnswerComponent>();
@@ -44,6 +51,7 @@ public class PollButtonComponent : MonoBehaviour {
                     var keyboardComponent = transform.parent.parent.parent.parent.GetComponent<KeyboardComponent>();
                     if (keyboardComponent != null)
                     {
+                        StartCoroutine(AnimatePress());
                         keyboardComponent.PressKey(GetButtonText());
                     }
                 }

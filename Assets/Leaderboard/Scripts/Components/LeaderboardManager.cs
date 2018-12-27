@@ -14,10 +14,10 @@ public class LeaderboardManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void ShowLeaderboard(int score, TimeSpan? totalTime, List<PollUserAnswer> userAnswers, bool fromPoll)
+    public void ShowLeaderboard(int score, TimeSpan? totalTime, List<PollUserAnswer> userAnswers, bool fromPoll, string displayName, string firstName, string lastName)
     {
         LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-        LeaderboardInstance.ShowLeaderboard(score, totalTime, userAnswers, fromPoll);
+        LeaderboardInstance.ShowLeaderboard(score, totalTime, userAnswers, fromPoll, displayName, firstName, lastName);
         LeaderboardInstance.ShowObjects();
         if (fromPoll)
         {
@@ -29,12 +29,6 @@ public class LeaderboardManager : MonoBehaviour {
         }
     }
 
-    public void OnLogin(string displayName, string fullName, string email, string phoneNumber)
-    {
-        LeaderboardInstance.OnLogin(displayName, fullName, email, phoneNumber);
-        ScreensaverManager.Instance.DiableScreensaver = false;
-    }
-
     public void OnAddPlayerScore(string displayName, int score, string totalTime, string email)
     {
         ScreensaverManager.Instance.DiableScreensaver = false;
@@ -42,7 +36,6 @@ public class LeaderboardManager : MonoBehaviour {
 
     public void OnEnter()
     {
-        LeaderboardInstance.OnEnter();
     }
 
     public void OnInactive()
@@ -58,7 +51,7 @@ public class LeaderboardManager : MonoBehaviour {
         if (LeaderboardInstance == null)
         {
             LeaderboardInstance = Instantiate(LeaderboardPrefab).GetComponent<LeaderboardComponent>();
-            LeaderboardInstance.ShowLeaderboard(0, null, null, false);
+            LeaderboardInstance.ShowLeaderboard(0, null, null, false, null, null, null);
             LeaderboardInstance.ShowObjects();
         }
         else
