@@ -882,8 +882,8 @@
     },
     {
       "question_id": "26",
-      "question_text": "<#000000>More than <#ff2b00><size=+10><u>__%</u></size></color> of U.S. college campuses were built before 1990.*</color>",
-      "question_text_confirmation": "<#000000>More than <#ff2b00><size=+10><u>50%</u></size></color> of U.S. college campuses were built before 1990.*</color>",
+      "question_text": "<#000000>More than <#ff2b00><size=+10><u>__%</u></size></color> of U.S. college campuses were built before 1990.</color>",
+      "question_text_confirmation": "<#000000>More than <#ff2b00><size=+10><u>50%</u></size></color> of U.S. college campuses were built before 1990.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
       "confirmation_type": "rand",

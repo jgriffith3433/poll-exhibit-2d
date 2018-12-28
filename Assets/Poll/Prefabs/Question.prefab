@@ -55,11 +55,11 @@ MonoBehaviour:
     type: 2}
   QuestionTextPrefab: {fileID: 114551771733323042, guid: 381edca20c6094748be0a8822202dcdb,
     type: 2}
-  TF_ConfirmationTextPrefab: {fileID: 114869469422517568, guid: 11ab119fcb1a8ef488709c34d8b608b1,
+  BubbleSingleConfirmationPrefab: {fileID: 114922146704183244, guid: 44c2b4364187fdb46900ee2eb0564759,
     type: 2}
-  AnswerBarGraphPrefab: {fileID: 114710084767836360, guid: ebb44ad2c8158484abfac172de81c4dd,
+  PieConfirmationPrefab: {fileID: 114598703730504386, guid: 3959b34427191924bb6f6f7d66899681,
     type: 2}
-  AnswerPieChartPrefab: {fileID: 114371865501767526, guid: 55ff5c43b4eb1e14f916e4663e28b93a,
+  BarConfirmationPrefab: {fileID: 114422943726268082, guid: 0479549d099c2fc45ad05e2dd164822c,
     type: 2}
   AnswerBackgroundPrefab: {fileID: 114956298253097908, guid: 51bac87c2a34de744ac9705768310d7d,
     type: 2}

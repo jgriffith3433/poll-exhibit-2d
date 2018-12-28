@@ -8029,7 +8029,7 @@ GameObject:
   - component: {fileID: 4528576875667918}
   - component: {fileID: 114269727429866448}
   m_Layer: 0
-  m_Name: Login
+  m_Name: OldLogin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24187,17 +24187,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d462d10c7ad1440b58e2bcd837050f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoginTitle: {fileID: 114206910606742044}
   KeyboardInstance: {fileID: 114799838130302586}
-  TxtScore: {fileID: 114897157967718016}
-  TxtTotalTime: {fileID: 114504626950366248}
-  NameInput: {fileID: 114396451959572944}
-  NameInputSelected: 0
-  EmailInput: {fileID: 114359122762403066}
-  EmailInputSelected: 0
-  PhoneInput: {fileID: 114344345243481788}
-  PhoneInputSelected: 0
-  submitted: 0
+  FirstNameInput: {fileID: 0}
+  FirstNameInputSelected: 0
+  LastNameInput: {fileID: 0}
+  LastNameInputSelected: 0
+  ValuesFilled: 0
+  DisplayName: 
+  FirstName: 
+  LastName: 
 --- !u!114 &114269807809014652
 MonoBehaviour:
   m_ObjectHideFlags: 1

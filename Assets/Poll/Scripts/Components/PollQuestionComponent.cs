@@ -12,14 +12,11 @@ public class PollQuestionComponent : MonoBehaviour
     public PollTextComponent QuestionTextPrefab;
     private PollTextComponent QuestionTextInstance;
 
-    public PollTextComponent TF_ConfirmationTextPrefab;
-    private PollTextComponent TF_ConfirmationTextInstance;
+    public PollConfirmationSingle BubbleSingleConfirmationPrefab;
+    public PollConfirmationPie PieConfirmationPrefab;
+    public PollConfirmationBar BarConfirmationPrefab;
 
-    public BarGraphComponent AnswerBarGraphPrefab;
-    private BarGraphComponent AnswerBarGraphInstance;
-
-    public PieChartComponent AnswerPieChartPrefab;
-    private PieChartComponent AnswerPieChartInstance;
+    private PollConfirmation ConfirmationInstance;
 
     public PollImageComponent AnswerBackgroundPrefab;
     private PollImageComponent AnswerBackgroundInstance;
@@ -27,12 +24,6 @@ public class PollQuestionComponent : MonoBehaviour
 
     private bool TransitioningAnswersIn = false;
     private bool TransitioningAnswersOut = false;
-    private bool TransitioningBarGraphIn = false;
-    private bool TransitioningBarGraphOut = false;
-    private bool TransitioningPieChartIn = false;
-    private bool TransitioningPieChartOut = false;
-    private Vector3 OriginalAnswerBarGraphInstancePosition;
-    private Vector3 OriginalAnswerPieChartInstancePosition;
 
     private PollAnswerComponent SelectedAnswer;
 
@@ -52,10 +43,6 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
 
-        TF_ConfirmationTextInstance = Instantiate(TF_ConfirmationTextPrefab).GetComponent<PollTextComponent>();
-        TF_ConfirmationTextInstance.name = "TF_ConfirmationText";
-        TF_ConfirmationTextInstance.transform.SetParent(transform);
-
         AnswersObject = new GameObject("Answers");
         AnswersObject.transform.SetParent(transform);
         PollAnswerInstances = new List<PollAnswerComponent>();
@@ -68,13 +55,7 @@ public class PollQuestionComponent : MonoBehaviour
             pollAnswerInstance.SetPollAnswerData(Data.PollAnswersData[i]);
             pollAnswerInstance.CreateObjects();
             PollAnswerInstances.Add(pollAnswerInstance);
-            if (Data.PollAnswersData[i].Correct)
-            {
-                TF_ConfirmationTextInstance.SetTextData(Data.PollAnswersData[i].AnswerText);
-                TF_ConfirmationTextInstance.CreateAllObjects();
-            }
         }
-        TF_ConfirmationTextInstance.HideObjects();
         AnswerBackgroundInstance = Instantiate(AnswerBackgroundPrefab, AnswersObject.transform).GetComponent<PollImageComponent>();
         AnswerTimerInstance = AnswerBackgroundInstance.GetComponentInChildren<PollTimerComponent>();
         AnswerTimerInstance.CreateObjects(false);
@@ -151,58 +132,6 @@ public class PollQuestionComponent : MonoBehaviour
                 TransitioningAnswersOut = false;
             }
         }
-        if (TransitioningBarGraphIn)
-        {
-            if (AnswerBarGraphInstance.transform.position.y < OriginalAnswerBarGraphInstancePosition.y)
-            {
-                AnswerBarGraphInstance.transform.position += new Vector3(0, 1, 0);
-            }
-            else if (AnswerBarGraphInstance.transform.position.y >= OriginalAnswerBarGraphInstancePosition.y)
-            {
-                AnswerBarGraphInstance.transform.position = new Vector3(AnswerBarGraphInstance.transform.position.x, OriginalAnswerBarGraphInstancePosition.y, AnswerBarGraphInstance.transform.position.z);
-                TransitioningBarGraphIn = false;
-            }
-        }
-        if (TransitioningBarGraphOut)
-        {
-            if (AnswerBarGraphInstance.transform.position.y > -100)
-            {
-                AnswerBarGraphInstance.transform.position -= new Vector3(0, 1, 0);
-            }
-            else if (AnswerBarGraphInstance.transform.position.y <= -100)
-            {
-                AnswerBarGraphInstance.transform.position = new Vector3(AnswerBarGraphInstance.transform.position.x, -100, AnswerBarGraphInstance.transform.position.z);
-                TransitioningBarGraphOut = false;
-                Destroy(AnswerBarGraphInstance.gameObject);
-            }
-        }
-        if (TransitioningPieChartIn)
-        {
-            if (AnswerPieChartInstance.transform.position.y < OriginalAnswerPieChartInstancePosition.y)
-            {
-                AnswerPieChartInstance.transform.position += new Vector3(0, 1, 0);
-            }
-            else if (AnswerPieChartInstance.transform.position.y >= OriginalAnswerPieChartInstancePosition.y)
-            {
-                AnswerPieChartInstance.transform.position = new Vector3(AnswerPieChartInstance.transform.position.x, OriginalAnswerPieChartInstancePosition.y, AnswerPieChartInstance.transform.position.z);
-                TransitioningPieChartIn = false;
-            }
-        }
-        if (TransitioningPieChartOut)
-        {
-            Destroy(AnswerPieChartInstance.gameObject);
-            TransitioningPieChartOut = false;
-            /*if (AnswerPieChartInstance.transform.position.y > -100)
-            {
-                AnswerPieChartInstance.transform.position -= new Vector3(0, 1, 0);
-            }
-            else if (AnswerPieChartInstance.transform.position.y <= -100)
-            {
-                AnswerPieChartInstance.transform.position = new Vector3(AnswerPieChartInstance.transform.position.x, -100, AnswerPieChartInstance.transform.position.z);
-                TransitioningPieChartOut = false;
-                Destroy(AnswerPieChartInstance.gameObject);
-            }*/
-        }
     }
 
     public IEnumerator HideCorrectAnswerAndShowConfirmation()
@@ -227,63 +156,42 @@ public class PollQuestionComponent : MonoBehaviour
 
         if (Data.ConfirmationType == "text")
         {
-            TF_ConfirmationTextInstance.ShowObjects();
+            ConfirmationInstance = Instantiate(BubbleSingleConfirmationPrefab).GetComponent<PollConfirmation>();
+            ConfirmationInstance.transform.SetParent(transform);
+            ConfirmationInstance.SetData(answerTimes, answerCorrectIncorrect, Data.PollAnswersData);
+            ConfirmationInstance.CreateObjects();
+            ConfirmationInstance.ShowObjects();
             yield return new WaitForSeconds(3);
-            TF_ConfirmationTextInstance.HideObjects();
+            ConfirmationInstance.HideObjects();
         }
         else if (Data.ConfirmationType == "bar")
         {
-            AnswerBarGraphInstance = Instantiate(AnswerBarGraphPrefab, transform).GetComponent<BarGraphComponent>();
-            OriginalAnswerBarGraphInstancePosition = AnswerBarGraphInstance.transform.position;
-            AnswerBarGraphInstance.MaxBarValue = answerTimes.OrderByDescending(at => at.Value.Count).FirstOrDefault().Value.Count;
-            var usedLightGrey = false;
-            foreach (var answer in answerTimes)
-            {
-                if (!usedLightGrey)
-                {
-                    usedLightGrey = true;
-                    AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.LightGrey);
-                }
-                else
-                {
-                    AnswerBarGraphInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? BarComponent.BarColor.Red : BarComponent.BarColor.Grey);
-                }
-            }
-            AnswerBarGraphInstance.transform.position += new Vector3(0, -100, 0);
+            ConfirmationInstance = Instantiate(BarConfirmationPrefab).GetComponent<PollConfirmationBar>();
+            ConfirmationInstance.transform.SetParent(transform);
+            ConfirmationInstance.SetData(answerTimes, answerCorrectIncorrect, Data.PollAnswersData);
+            ConfirmationInstance.CreateObjects();
+            ConfirmationInstance.ShowObjects();
 
-            TransitioningBarGraphIn = true;
+            ConfirmationInstance.TransitionIn();
             yield return new WaitForSeconds(2);
-            AnswerBarGraphInstance.DoAnimation();
+            ConfirmationInstance.DoAnimation();
             yield return new WaitForSeconds(3);
-            TransitioningBarGraphOut = true;
+            ConfirmationInstance.TransitionOut();
             yield return new WaitForSeconds(1);
         }
         else if (Data.ConfirmationType == "pie")
         {
-            AnswerPieChartInstance = Instantiate(AnswerPieChartPrefab, transform).GetComponent<PieChartComponent>();
-            OriginalAnswerPieChartInstancePosition = AnswerPieChartInstance.transform.position;
-            var usedLightGray = false;
-            foreach (var answer in answerTimes)
-            {
-                if (!usedLightGray)
-                {
-                    usedLightGray = true;
-                    AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.LightGray);
-                }
-                else
-                {
-                    AnswerPieChartInstance.SetValue(answer.Key, answer.Value.Count, answerCorrectIncorrect[answer.Key] ? PieChartComponent.PieChartColor.Red : PieChartComponent.PieChartColor.Grey);
-                }
-            }
-            AnswerPieChartInstance.transform.position += new Vector3(0, -100, 0);
-            AnswerPieChartInstance.gameObject.SetActive(false);
+            ConfirmationInstance = Instantiate(PieConfirmationPrefab).GetComponent<PollConfirmationPie>();
+            ConfirmationInstance.transform.SetParent(transform);
+            ConfirmationInstance.SetData(answerTimes, answerCorrectIncorrect, Data.PollAnswersData);
+            ConfirmationInstance.CreateObjects();
+            ConfirmationInstance.ShowObjects();
 
-            TransitioningPieChartIn = true;
+            ConfirmationInstance.TransitionIn();
             yield return new WaitForSeconds(2);
-            AnswerPieChartInstance.gameObject.SetActive(true);
-            AnswerPieChartInstance.DoAnimation();
+            ConfirmationInstance.DoAnimation();
             yield return new WaitForSeconds(3);
-            TransitioningPieChartOut = true;
+            ConfirmationInstance.TransitionOut();
             yield return new WaitForSeconds(1);
         }
     }
