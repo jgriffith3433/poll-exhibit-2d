@@ -382,6 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114337033093146936}
   ChildRectTransform: {fileID: 224310135737086050}
+  LoopAnimation: 0
 --- !u!114 &114217829502622630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -395,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChildTextMeshPro: {fileID: 114734058739267490}
   ChildRectTransform: {fileID: 224457939592685290}
+  LoopAnimation: 0
 --- !u!114 &114303114628994236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,15 +436,16 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
+  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294938624
-  m_fontColor: {r: 0, g: 0.56699324, b: 1, a: 1}
+    rgba: 4278201343
+  m_fontColor: {r: 1, g: 0.16862746, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -765,15 +768,16 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: are you still playing?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
+  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294938624
-  m_fontColor: {r: 0, g: 0.56699324, b: 1, a: 1}
+    rgba: 4278201343
+  m_fontColor: {r: 1, g: 0.16862746, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}

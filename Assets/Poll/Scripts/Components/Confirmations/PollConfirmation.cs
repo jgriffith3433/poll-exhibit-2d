@@ -15,12 +15,26 @@ public class PollConfirmation : MonoBehaviour
     protected GameObject ConfirmationObjectInstance;
     protected bool TransitioningIn;
     protected bool TransitioningOut;
+    protected bool Test = true;
 
     public void SetData(Dictionary<string, List<int>> answerTimes, Dictionary<string, bool> answerCorrectIncorrect, List<PollAnswerData> pollAnswers)
     {
         PollAnswers = pollAnswers;
         AnswerTimes = answerTimes;
         AnswerCorrectIncorrect = answerCorrectIncorrect;
+    }
+
+    public void Awake()
+    {
+        if (Test)
+        {
+            StartCoroutine(DoTest());
+        }
+    }
+
+    public virtual IEnumerator DoTest()
+    {
+        yield return null;
     }
 
     public virtual void CreateObjects()
@@ -60,7 +74,7 @@ public class PollConfirmation : MonoBehaviour
         TransitioningOut = true;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (TransitioningIn)
         {

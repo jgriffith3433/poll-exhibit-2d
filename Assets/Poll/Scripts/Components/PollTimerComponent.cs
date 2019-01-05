@@ -9,7 +9,7 @@ public class PollTimerComponent : PollImageSequenceComponent
 {
     protected override void Awake()
     {
-        ImageSequenceFolder = Application.dataPath + "/Poll/Images/Timer";
+        ImageSequenceFolder = Application.dataPath + "/Resources/Poll/Images/Timer";
         base.Awake();
         OnSequenceEnded += SequenceEnded;
     }

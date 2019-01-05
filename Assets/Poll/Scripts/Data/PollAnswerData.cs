@@ -13,7 +13,16 @@ public class PollAnswerData {
     public bool Correct { get; set; }
     public int AnswerId { get; set; }
 
-    public PollAnswerData(JSONNode xObj) {
+    public PollAnswerData(string answerText, string answerButtonText, bool correct, int answerId)
+    {
+        AnswerText = answerText;
+        AnswerButtonText = answerButtonText;
+        Correct = correct;
+        AnswerId = answerId;
+    }
+
+    public PollAnswerData(JSONNode xObj)
+    {
         ParseData(xObj);
     }
 

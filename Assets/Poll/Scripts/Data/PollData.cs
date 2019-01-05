@@ -53,8 +53,13 @@ public class PollData
         try
         {
             QuestionsData = new List<PollQuestionData>();
-            for (int i = 0; i < allQuestions.Count; i++) {
-                QuestionsData.Add(new PollQuestionData(allQuestions[i]));
+            for (int i = 0; i < allQuestions.Count; i++)
+            {
+                var qd = new PollQuestionData(allQuestions[i]);
+                if (qd.Enabled)
+                {
+                    QuestionsData.Add(qd);
+                }
             }
         }
         catch (Exception e)

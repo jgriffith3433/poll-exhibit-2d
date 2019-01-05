@@ -28,7 +28,7 @@ public class PollImageSequenceComponent : PollImageComponent
 
     public void SetImageSequenceFolder(string imageSequenceFolder)
     {
-        ImageSequenceFolder = Application.dataPath + "/" + imageSequenceFolder;
+        ImageSequenceFolder = Application.dataPath + "/Resources/" + imageSequenceFolder;
     }
 
     public void SetLoop(bool loop)

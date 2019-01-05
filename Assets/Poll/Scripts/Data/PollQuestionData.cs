@@ -11,7 +11,9 @@ public class PollQuestionData {
     public Vector3 QuestionTextPosition { get; set; }
     public string QuestionType { get; set; }
     public string ConfirmationType { get; set; }
+    public string ConfirmationDirectory { get; set; }
     public int QuestionId { get; set; }
+    public bool Enabled { get; set; }
 
     public PollQuestionData(JSONNode xObj) {
         ParseData(xObj);
@@ -23,10 +25,12 @@ public class PollQuestionData {
         QuestionTextPosition = new Vector3(float.Parse(questionTextPositionSplit[0]), float.Parse(questionTextPositionSplit[1]), float.Parse(questionTextPositionSplit[2]));
 
         QuestionId = int.Parse(xObj["question_id"].Value);
+        Enabled = xObj["question_id"].AsBool;
         QuestionText = xObj["question_text"].Value;
         QuestionTextConfirmation = xObj["question_text_confirmation"].Value;
         QuestionType = xObj["question_type"].Value;
         ConfirmationType = xObj["confirmation_type"].Value;
+        ConfirmationDirectory = xObj["confirmation_directory"].Value;
         if (ConfirmationType == "rand")
         {
             var arr = new string[2];

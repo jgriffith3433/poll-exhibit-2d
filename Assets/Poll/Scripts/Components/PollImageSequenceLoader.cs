@@ -78,7 +78,12 @@ public class PollImageSequenceLoader : MonoBehaviour
         var sprites = new List<Sprite>();
         foreach (var fi in imageFileInfo.OrderBy(i => i.Name))
         {
-            var request = new WWW(fi.FullName);
+            var dir = fi.Directory.FullName.Replace('\\', '/');
+            dir = dir.Substring(dir.IndexOf("Resources/") + 10);
+            var texture = Resources.Load<Texture2D>(dir + "/" + Path.GetFileNameWithoutExtension(fi.Name));
+            sprites.Add(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0)));
+            yield return new WaitForSeconds(.01f);
+            /*var request = new WWW(fi.FullName);
             yield return request;
             if (string.IsNullOrEmpty(request.error))
             {
@@ -87,7 +92,7 @@ public class PollImageSequenceLoader : MonoBehaviour
             else
             {
                 Debug.Log("URL request failed:" + request.error);
-            }
+            }*/
         }
         LoadedImageSequences.Add(imageBasePath, sprites);
     }

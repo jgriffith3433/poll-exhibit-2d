@@ -5,12 +5,14 @@
   "title_text_position": "-31,8,0",
   "questions": [
     {
-      "question_id": "0",
+      "question_id": "3",
+      "enabled": true,
       "question_text": "<#000000>A thermal battery that can displace a 1200-ton water-cooled chiller can shift how much grid demand to off-peak periods?</color>",
       "question_text_confirmation": "<#000000>A thermal battery that can displace a 1200-ton water-cooled chiller can shift how much grid demand to off-peak periods?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "03",
       "answers": [
         {
           "answer_id": "0",
@@ -39,12 +41,14 @@
       ]
     },
     {
-      "question_id": "1",
+      "question_id": "4",
+      "enabled": true,
       "question_text": "<#000000>How many pounds of ice does it take to keep the average person cool in an office all day?</color>",
       "question_text_confirmation": "<#000000>How many pounds of ice does it take to keep the average person cool in an office all day?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "04",
       "answers": [
         {
           "answer_id": "3",
@@ -73,12 +77,14 @@
       ]
     },
     {
-      "question_id": "2",
+      "question_id": "5",
+      "enabled": true,
       "question_text": "<#000000>How many average-sized thermal battery energy storage tanks fit in a typical parking space?</color>",
       "question_text_confirmation": "<#000000>How many average-sized thermal battery energy storage tanks fit in a typical parking space?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "05",
       "answers": [
         {
           "answer_id": "6",
@@ -107,12 +113,14 @@
       ]
     },
     {
-      "question_id": "3",
+      "question_id": "6",
+      "enabled": true,
       "question_text": "<#000000>R-513A, a next-generation low-GWP refrigerant used in Agility™ centrifugal chillers, delivers <#ff2b00><size=+10><u>___</u></size></color> lower GWP than R-134a.</color>",
       "question_text_confirmation": "<#000000>R-513A, a next-generation low-GWP refrigerant used in Agility™ centrifugal chillers, delivers <#ff2b00><size=+10><u>55%</u></size></color> lower GWP than R-134a.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "06",
       "answers": [
         {
           "answer_id": "9",
@@ -141,12 +149,14 @@
       ]
     },
     {
-      "question_id": "4",
+      "question_id": "7",
+      "enabled": true,
       "question_text": "<#000000>The IntelliPak® with Symbio™ 800 controller is capable of supporting which of the following?</color>",
       "question_text_confirmation": "<#000000>The IntelliPak® with Symbio™ 800 controller is capable of supporting which of the following?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "07",
       "answers": [
         {
           "answer_id": "12",
@@ -175,12 +185,14 @@
       ]
     },
     {
-      "question_id": "5",
+      "question_id": "8",
+      "enabled": true,
       "question_text": "<#000000>How many open standard communication protocols can be supported by the IntelliPak® with Symbio™ 800 controller?</color>",
       "question_text_confirmation": "<#000000>How many open standard communication protocols can be supported by the IntelliPak® with Symbio™ 800 controller?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "08",
       "answers": [
         {
           "answer_id": "15",
@@ -209,12 +221,14 @@
       ]
     },
     {
-      "question_id": "6",
+      "question_id": "9",
+      "enabled": true,
       "question_text": "<#000000>Trane control systems are compatible with which of the following?</color>",
       "question_text_confirmation": "<#000000>Trane control systems are compatible with which of the following?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "09",
       "answers": [
         {
           "answer_id": "18",
@@ -243,12 +257,14 @@
       ]
     },
     {
-      "question_id": "7",
+      "question_id": "10",
+      "enabled": true,
       "question_text": "<#000000>How much more efficient is VariTrane® equipment than traditional VAV systems?</color>",
       "question_text_confirmation": "<#000000>How much more efficient is VariTrane® equipment than traditional VAV systems?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "10",
       "answers": [
         {
           "answer_id": "21",
@@ -277,12 +293,14 @@
       ]
     },
     {
-      "question_id": "8",
+      "question_id": "11",
+      "enabled": true,
       "question_text": "<#000000>The Tracer® Concierge™ System for Small Buildings is ideal for HVAC systems that integrate with <#ff2b00><size=+10><u>_______</u></size></color>.</color>",
       "question_text_confirmation": "<#000000>The Tracer® Concierge™ System for Small Buildings is ideal for HVAC systems that integrate with <#ff2b00><size=+10><u>Lighting Systems</u></size></color>.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "11",
       "answers": [
         {
           "answer_id": "24",
@@ -311,12 +329,14 @@
       ]
     },
     {
-      "question_id": "9",
+      "question_id": "12",
+      "enabled": true,
       "question_text": "<#000000>What Trane system with prepackaged controls features sensible-cooling terminals with dedicated outdoor air?</color>",
       "question_text_confirmation": "<#000000>What Trane system with prepackaged controls features sensible-cooling terminals with dedicated outdoor air?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "12",
       "answers": [
         {
           "answer_id": "27",
@@ -345,12 +365,14 @@
       ]
     },
     {
-      "question_id": "10",
+      "question_id": "13",
+      "enabled": true,
       "question_text": "<#000000>The newest line of Trane residential furnaces, S8X1 and S8X2, have what percentage annual fuel utilization efficiency?</color>",
       "question_text_confirmation": "<#000000>The newest line of Trane residential furnaces, S8X1 and S8X2, have what percentage annual fuel utilization efficiency?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "13",
       "answers": [
         {
           "answer_id": "30",
@@ -379,12 +401,14 @@
       ]
     },
     {
-      "question_id": "11",
+      "question_id": "14",
+      "enabled": true,
       "question_text": "<#000000>What is the lowest sound level of the Trane XV19 heat pump, the quietest heat pump in our offering?</color>",
       "question_text_confirmation": "<#000000>What is the lowest sound level of the Trane XV19 heat pump, the quietest heat pump in our offering?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "14",
       "answers": [
         {
           "answer_id": "33",
@@ -413,12 +437,14 @@
       ]
     },
     {
-      "question_id": "12",
+      "question_id": "15",
+      "enabled": true,
       "question_text": "<#000000>According to 2012 data, the median age of U.S. buildings is <#ff2b00><size=+10><u>__</u></size></color> years.</color>",
       "question_text_confirmation": "<#000000>According to 2012 data, the median age of U.S. buildings is <#ff2b00><size=+10><u>32</u></size></color> years.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "15",
       "answers": [
         {
           "answer_id": "36",
@@ -447,12 +473,14 @@
       ]
     },
     {
-      "question_id": "13",
+      "question_id": "16",
+      "enabled": true,
       "question_text": "<#000000>Modernizing your commercial building can increase building efficiency by up to <#ff2b00><size=+10><u>__%</u></size></color>.</color>",
       "question_text_confirmation": "<#000000>Modernizing your commercial building can increase building efficiency by up to <#ff2b00><size=+10><u>40%</u></size></color>.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "16",
       "answers": [
         {
           "answer_id": "39",
@@ -481,12 +509,14 @@
       ]
     },
     {
-      "question_id": "14",
+      "question_id": "17",
+      "enabled": true,
       "question_text": "<#000000>What is the expected life of a commercial self-contained unit?</color>",
       "question_text_confirmation": "<#000000>What is the expected life of a commercial self-contained unit?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "17",
       "answers": [
         {
           "answer_id": "42",
@@ -515,12 +545,14 @@
       ]
     },
     {
-      "question_id": "15",
+      "question_id": "18",
+      "enabled": true,
       "question_text": "<#000000>CITY MULTI® outdoor units are available in both air- and water-sourced.</color>",
       "question_text_confirmation": "<#000000>CITY MULTI® outdoor units <#ff2b00><size=+10><u>ARE</u></size></color> available in both air- and water-sourced.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "TF",
-      "confirmation_type": "text",
+      "confirmation_type": "anim",
+      "confirmation_directory": "18",
       "answers": [
         {
           "answer_id": "45",
@@ -541,12 +573,14 @@
       ]
     },
     {
-      "question_id": "16",
+      "question_id": "19",
+      "enabled": true,
       "question_text": "<#000000>The maximum number of ports on a branch controller for CITY MULTI® heat recovery is: <#ff2b00><size=+10><u>__</u></size></color></color>",
       "question_text_confirmation": "<#000000>The maximum number of ports on a branch controller for CITY MULTI® heat recovery is: <#ff2b00><size=+10><u>16</u></size></color></color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "19",
       "answers": [
         {
           "answer_id": "47",
@@ -575,12 +609,14 @@
       ]
     },
     {
-      "question_id": "17",
+      "question_id": "20",
+      "enabled": true,
       "question_text": "<#000000>The projected VRF compound annual growth rate from 2018 to 2027 is: <#ff2b00><size=+10><u>__%</u></size></color></color>",
       "question_text_confirmation": "<#000000>The projected VRF compound annual growth rate from 2018 to 2027 is: <#ff2b00><size=+10><u>12%</u></size></color></color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "20",
       "answers": [
         {
           "answer_id": "50",
@@ -609,12 +645,14 @@
       ]
     },
     {
-      "question_id": "18",
+      "question_id": "21",
+      "enabled": false,
       "question_text": "<#000000><#ff2b00><size=+10><u>______</u></size></color> is the most common driver for using VRF.</color>",
       "question_text_confirmation": "<#000000><#ff2b00><size=+10><u>Efficiency</u></size></color> is the most common driver for using VRF.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "21",
       "answers": [
         {
           "answer_id": "53",
@@ -643,12 +681,14 @@
       ]
     },
     {
-      "question_id": "19",
+      "question_id": "22",
+      "enabled": true,
       "question_text": "<#000000>The reported controls growth rate in the last three to five years is: <#ff2b00><size=+10><u>__%</u></size></color></color>",
       "question_text_confirmation": "<#000000>The reported controls growth rate in the last three to five years is: <#ff2b00><size=+10><u>26%</u></size></color></color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "22",
       "answers": [
         {
           "answer_id": "56",
@@ -677,12 +717,14 @@
       ]
     },
     {
-      "question_id": "20",
+      "question_id": "23",
+      "enabled": true,
       "question_text": "<#000000>Solar panels in the Georgia World Congress Center Authority's truck marshalling yard produce enough electricity to power <#ff2b00><size=+10><u>__</u></size></color> homes in Georgia each year.</color>",
       "question_text_confirmation": "<#000000>Solar panels in the Georgia World Congress Center Authority's truck marshalling yard produce enough electricity to power <#ff2b00><size=+10><u>89</u></size></color> homes in Georgia each year.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "23",
       "answers": [
         {
           "answer_id": "59",
@@ -711,12 +753,14 @@
       ]
     },
     {
-      "question_id": "21",
+      "question_id": "24",
+      "enabled": true,
       "question_text": "<#000000>The Georgia World Congress Center Authority realized a <#ff2b00><size=+10><u>__%</u></size></color> reduction in energy use after installing new Trane equipment.</color>",
       "question_text_confirmation": "<#000000>The Georgia World Congress Center Authority realized a <#ff2b00><size=+10><u>39%</u></size></color> reduction in energy use after installing new Trane equipment.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "24",
       "answers": [
         {
           "answer_id": "62",
@@ -745,12 +789,14 @@
       ]
     },
     {
-      "question_id": "22",
+      "question_id": "25",
+      "enabled": true,
       "question_text": "<#000000>How many systems are part of the Zoned Rooftop System offering?</color>",
       "question_text_confirmation": "<#000000>How many systems are part of the Zoned Rooftop System offering?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "25",
       "answers": [
         {
           "answer_id": "65",
@@ -779,12 +825,14 @@
       ]
     },
     {
-      "question_id": "23",
+      "question_id": "26",
+      "enabled": true,
       "question_text": "<#000000><#ff2b00><size=+10><u>__%</u></size></color> of end users installed building automation systems in their last controls project. </color>",
       "question_text_confirmation": "<#000000><#ff2b00><size=+10><u>82%</u></size></color> of end users installed building automation systems in their last controls project. </color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "26",
       "answers": [
         {
           "answer_id": "68",
@@ -813,12 +861,14 @@
       ]
     },
     {
-      "question_id": "24",
+      "question_id": "27",
+      "enabled": true,
       "question_text": "<#000000><#ff2b00><size=+10><u>__%</u></size></color> of companies have an on-site resource that can service and troubleshoot HVAC systems. </color>",
       "question_text_confirmation": "<#000000><#ff2b00><size=+10><u>81%</u></size></color> of companies have an on-site resource that can service and troubleshoot HVAC systems. </color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "27",
       "answers": [
         {
           "answer_id": "71",
@@ -847,12 +897,14 @@
       ]
     },
     {
-      "question_id": "25",
+      "question_id": "28",
+      "enabled": true,
       "question_text": "<#000000>Approximately 50% of U.S. commercial buildings were built before what year?</color>",
       "question_text_confirmation": "<#000000>Approximately 50% of U.S. commercial buildings were built before what year?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "28",
       "answers": [
         {
           "answer_id": "74",
@@ -881,12 +933,14 @@
       ]
     },
     {
-      "question_id": "26",
+      "question_id": "29",
+      "enabled": true,
       "question_text": "<#000000>More than <#ff2b00><size=+10><u>__%</u></size></color> of U.S. college campuses were built before 1990.</color>",
       "question_text_confirmation": "<#000000>More than <#ff2b00><size=+10><u>50%</u></size></color> of U.S. college campuses were built before 1990.</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "29",
       "answers": [
         {
           "answer_id": "77",
@@ -915,12 +969,14 @@
       ]
     },
     {
-      "question_id": "27",
+      "question_id": "30",
+      "enabled": true,
       "question_text": "<#000000>According to Trane research, it's most common that a building automation system would be used in which vertical?</color>",
       "question_text_confirmation": "<#000000>According to Trane research, it's most common that a building automation system would be used in which vertical?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "30",
       "answers": [
         {
           "answer_id": "80",
@@ -949,12 +1005,14 @@
       ]
     },
     {
-      "question_id": "28",
+      "question_id": "31",
+      "enabled": true,
       "question_text": "<#000000>Building automation systems are used in buildings of all sizes. According to research, which size is the most common?</color>",
       "question_text_confirmation": "<#000000>Building automation systems are used in buildings of all sizes. According to research, which size is the most common?</color>",
       "question_text_position": "-20,6,0",
       "question_type": "MC",
-      "confirmation_type": "rand",
+      "confirmation_type": "anim",
+      "confirmation_directory": "31",
       "answers": [
         {
           "answer_id": "83",
@@ -975,6 +1033,42 @@
         {
           "answer_id": "85",
           "answer_text": "<size=+4>75,001 - 200,000 sq. ft.</size>",
+          "answer_text_position": "30,-16,-1",
+          "answer_button_text": "<#000000>C</color>",
+          "answer_button_text_position": "18,-16,-1",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "question_id": "32",
+      "enabled": true,
+      "question_text": "<#000000>Based on the 2018 Nissan Leaf Battery capacity of 40kWh, one Model 1190 Thermal Battery has the equivalent electrical capacity of <#ff2b00><size=+10><u>____</u></size></color></color>",
+      "question_text_confirmation": "<#000000>Based on the 2018 Nissan Leaf Battery capacity of 40kWh, one Model 1190 Thermal Battery has the equivalent electrical capacity of <#ff2b00><size=+10><u>6 electric vehicles</u></size></color></color>",
+      "question_text_position": "-20,6,0",
+      "question_type": "MC",
+      "confirmation_type": "anim",
+      "confirmation_directory": "32",
+      "answers": [
+        {
+          "answer_id": "86",
+          "answer_text": "<size=+4>1 electric vehicle</size>",
+          "answer_text_position": "30,4,-1",
+          "answer_button_text": "<#000000>A</color>",
+          "answer_button_text_position": "18,4,-1",
+          "correct": false
+        },
+        {
+          "answer_id": "87",
+          "answer_text": "<size=+4>6 electric vehicles</size>",
+          "answer_text_position": "30,-6,-1",
+          "answer_button_text": "<#000000>B</color>",
+          "answer_button_text_position": "18,-6,-1",
+          "correct": false
+        },
+        {
+          "answer_id": "88",
+          "answer_text": "<size=+4>10 electric vehicles</size>",
           "answer_text_position": "30,-16,-1",
           "answer_button_text": "<#000000>C</color>",
           "answer_button_text_position": "18,-16,-1",

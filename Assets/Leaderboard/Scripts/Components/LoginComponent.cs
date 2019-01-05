@@ -52,12 +52,21 @@ public class LoginComponent : MonoBehaviour {
                 
             if (nameSplit.Length > 1 && nameSplit.Length < 5)
             {
+                var firstName = true;
                 var initials = "";
                 foreach (var name in nameSplit)
                 {
                     if (name.Length > 0)
                     {
-                        initials += name[0].ToString().ToUpper() + ". ";
+                        if (firstName)
+                        {
+                            initials += name.ToString() + " ";
+                            firstName = false;
+                        }
+                        else
+                        {
+                            initials += name[0].ToString().ToUpper() + ". ";
+                        }
                     }
                 }
                 displayName = initials.Trim();

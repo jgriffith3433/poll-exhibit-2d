@@ -55,8 +55,9 @@ public class PollTextComponent : MonoBehaviour {
         StartCoroutine(AnimateVertexColors(255));
     }
 
-    public void AnimateFadeOut()
+    public void AnimateFadeOut(int animSpeed = 5)
     {
+        AnimateSpeed = animSpeed;
         StartCoroutine(AnimateVertexColors(0));
     }
 
@@ -125,7 +126,7 @@ public class PollTextComponent : MonoBehaviour {
             }
             else
             {
-                AnimateFadeOut();
+                AnimateFadeIn();
             }
         }
     }

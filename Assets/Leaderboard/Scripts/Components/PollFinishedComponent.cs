@@ -19,15 +19,22 @@ public class PollFinishedComponent : MonoBehaviour
     public PollTextComponent CorrectAnswersText;
     public PollTextComponent TotalTimeLabelText;
 
+    private int SlowTime = 5;
+
     public void SetValues(int score, TimeSpan totalTime)
     {
         Score = score;
         TotalTime = totalTime;
+        SlowTime -= (int)totalTime.TotalMinutes;
+        if (SlowTime < 1)
+        {
+            SlowTime = 1;
+        }
     }
 
     public void Update()
     {
-        if (FramesSinceUpdateValues > 5)
+        if (FramesSinceUpdateValues > SlowTime)
         {
             FramesSinceUpdateValues = 0;
             if (CurrentScore < Score)

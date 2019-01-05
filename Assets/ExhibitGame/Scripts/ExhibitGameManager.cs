@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,15 +22,18 @@ public class ExhibitGameManager : MonoBehaviour {
     
     public PollImageComponent ExhibitBackgroundPrefab;
     private PollImageComponent ExhibitBackgroundInstance;
+    private PollData PollData;
 
+    public PollImageSequenceComponent LoadPrefab;
     public PollTimerComponent LoadTimerPrefab;
-    private PollTimerComponent LoadTimerInstance;
-
     public PollImageSequenceComponent LoadCorrectPrefab;
-    private PollImageSequenceComponent LoadCorrectInstance;
-
     public PollImageSequenceComponent LoadIncorrectPrefab;
-    private PollImageSequenceComponent LoadIncorrectInstance;
+
+    private GameObject ConfirmationObj;
+    private int LoadConfirmationSequenceIndex;
+    private bool LoadedConfirmationSequences = false;
+    private List<PollImageSequenceComponent> LoadConfirmationSequenceInstances;
+    private List<PollImageSequenceComponent> LoadSequenceInstances;
 
     private int PollScore;
     private string DisplayName;
@@ -42,6 +46,10 @@ public class ExhibitGameManager : MonoBehaviour {
     public void Awake()
     {
         Instance = this;
+        LoadSequenceInstances = new List<PollImageSequenceComponent>();
+        LoadConfirmationSequenceInstances = new List<PollImageSequenceComponent>();
+        PollData = new PollData(Application.dataPath + "/poll-questions.json");
+        StartCoroutine(PollData.GetData());
     }
 
     IEnumerator Start()
@@ -62,30 +70,74 @@ public class ExhibitGameManager : MonoBehaviour {
             ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 6);
             ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.jpg");
         }
-        LoadTimerInstance = Instantiate(LoadTimerPrefab).GetComponent<PollTimerComponent>();
-        LoadTimerInstance.transform.SetParent(transform);
-        LoadTimerInstance.CreateObjects(false);
+        var loadTimerInstance = Instantiate(LoadTimerPrefab).GetComponent<PollTimerComponent>();
+        loadTimerInstance.transform.SetParent(transform);
+        loadTimerInstance.CreateObjects(false);
+        LoadSequenceInstances.Add(loadTimerInstance);
 
-        LoadCorrectInstance = Instantiate(LoadCorrectPrefab).GetComponent<PollImageSequenceComponent>();
-        LoadCorrectInstance.transform.SetParent(transform);
-        LoadCorrectInstance.SetImageSequenceFolder("Poll/Images/CorrectAnswer");
-        LoadCorrectInstance.CreateObjects(false);
+        var loadCorrectInstance = Instantiate(LoadCorrectPrefab).GetComponent<PollImageSequenceComponent>();
+        loadCorrectInstance.transform.SetParent(transform);
+        loadCorrectInstance.SetImageSequenceFolder("Poll/Images/CorrectAnswer");
+        loadCorrectInstance.CreateObjects(false);
+        LoadSequenceInstances.Add(loadCorrectInstance);
 
-        LoadIncorrectInstance = Instantiate(LoadIncorrectPrefab).GetComponent<PollImageSequenceComponent>();
-        LoadIncorrectInstance.transform.SetParent(transform);
-        LoadIncorrectInstance.SetImageSequenceFolder("Poll/Images/IncorrectAnswer");
-        LoadIncorrectInstance.CreateObjects(false);
+        var loadIncorrectInstance = Instantiate(LoadIncorrectPrefab).GetComponent<PollImageSequenceComponent>();
+        loadIncorrectInstance.transform.SetParent(transform);
+        loadIncorrectInstance.SetImageSequenceFolder("Poll/Images/IncorrectAnswer");
+        loadIncorrectInstance.CreateObjects(false);
+        LoadSequenceInstances.Add(loadIncorrectInstance);
         
         LoadingTextInstance.AnimateFadeIn();
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsConnected());
     }
 
+    private void LoadNextConfirmationSequence()
+    {
+        var percentLoaded = ((float)(LoadConfirmationSequenceIndex) / PollData.QuestionsData.Count) * 100;
+        LoadingTextInstance.SetTextData("LOADING... (" + percentLoaded.ToString("00") + "%)");
+        LoadingTextInstance.CreateAllObjects();
+
+        if (LoadConfirmationSequenceIndex > PollData.QuestionsData.Count - 1)
+        {
+            LoadedConfirmationSequences = true;
+        }
+        else
+        {
+            var loadConfirmationInstance = Instantiate(LoadPrefab).GetComponent<PollImageSequenceComponent>();
+            loadConfirmationInstance.transform.SetParent(ConfirmationObj.transform);
+            loadConfirmationInstance.SetImageSequenceFolder("Poll/Images/Confirmations/" + PollData.QuestionsData[LoadConfirmationSequenceIndex].ConfirmationDirectory);
+            loadConfirmationInstance.CreateObjects(false);
+            LoadConfirmationSequenceInstances.Add(loadConfirmationInstance);
+            StartCoroutine(CheckConfirmationImageSequence());
+        }
+    }
+
+    IEnumerator CheckConfirmationImageSequence()
+    {
+        if (LoadConfirmationSequenceInstances[LoadConfirmationSequenceIndex].Loading == false)
+        {
+            LoadConfirmationSequenceIndex++;
+            LoadNextConfirmationSequence();
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+            StartCoroutine(CheckConfirmationImageSequence());
+        }
+    }
+
     IEnumerator CheckIsConnected()
     {
-        Connected = Player != null;
+        Connected = Player != null && PollData.IsDoneParsing;
+
         if (Connected && !Started)
         {
+            ConfirmationObj = new GameObject("Confirmation Sequences");
+            ConfirmationObj.transform.SetParent(transform);
+            LoadConfirmationSequenceIndex = 0;
+            LoadNextConfirmationSequence();
+
             Player.CmdLoadInitialData();
             Started = true;
             yield return StartCoroutine(CheckIsDoneLoading());
@@ -99,11 +151,11 @@ public class ExhibitGameManager : MonoBehaviour {
         var stillLoading = false;
         if (UseSequenceForBackground)
         {
-            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadTimerInstance.Loading || LoadCorrectInstance.Loading || LoadIncorrectInstance.Loading || Player.Loading || ScreensaverManager.Instance.Loading;
+            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadSequenceInstances.Count(lsi => lsi.Loading) > 0 || Player.Loading || ScreensaverManager.Instance.Loading || !LoadedConfirmationSequences;
         }
         else
         {
-            stillLoading = ExhibitBackgroundInstance.Loading || LoadTimerInstance.Loading || LoadCorrectInstance.Loading || LoadIncorrectInstance.Loading || Player.Loading || ScreensaverManager.Instance.Loading;
+            stillLoading = ExhibitBackgroundInstance.Loading || LoadSequenceInstances.Count(lsi => lsi.Loading) > 0 || Player.Loading || ScreensaverManager.Instance.Loading || !LoadedConfirmationSequences;
         }
         if (stillLoading)
         {
@@ -114,9 +166,10 @@ public class ExhibitGameManager : MonoBehaviour {
         {
             ScreensaverManager.Instance.HideScreensaver();
             LoadingTextInstance.gameObject.SetActive(false);
-            LoadTimerInstance.HideObjects();
-            LoadCorrectInstance.HideObjects();
-            LoadIncorrectInstance.HideObjects();
+            foreach (var lsi in LoadSequenceInstances)
+            {
+                lsi.HideObjects();//destroy??
+            }
             GoToState("StartingLeaderboard");
         }
     }

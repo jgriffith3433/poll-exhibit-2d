@@ -59,6 +59,8 @@ MonoBehaviour:
     type: 2}
   PieConfirmationPrefab: {fileID: 114598703730504386, guid: 3959b34427191924bb6f6f7d66899681,
     type: 2}
+  AnimBarConfirmationPrefab: {fileID: 114191732764829496, guid: bbe8b2c066ad6ed47b4baaf616172590,
+    type: 2}
   BarConfirmationPrefab: {fileID: 114422943726268082, guid: 0479549d099c2fc45ad05e2dd164822c,
     type: 2}
   AnswerBackgroundPrefab: {fileID: 114956298253097908, guid: 51bac87c2a34de744ac9705768310d7d,
