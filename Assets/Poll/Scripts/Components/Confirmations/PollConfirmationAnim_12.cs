@@ -2,25 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PollConfirmationAnim_12 : PollConfirmation
+public class PollConfirmationAnim_12 : PollConfirmationAnim
 {
-    public PollImageSequenceComponent ConfirmationSequenceInstance;
-    public string AnimDirectoryName;
-
     public override void CreateObjects()
     {
+        Single = true;
         base.CreateObjects();
-        ConfirmationObjectInstance = ConfirmationSequenceInstance.gameObject;
-        ConfirmationSequenceInstance.transform.SetParent(transform);
-        ConfirmationSequenceInstance.transform.position += new Vector3(0, 0, 6);
-        ConfirmationSequenceInstance.SetImageSequenceFolder("Poll/Images/Confirmations/" + AnimDirectoryName);
-        ConfirmationSequenceInstance.SetLoop(false);
-        ConfirmationSequenceInstance.CreateObjects(false);
-        ConfirmationSequenceInstance.ShowFirstFrame();
-    }
-
-    public override void DoAnimation()
-    {
-        ConfirmationSequenceInstance.Play();
     }
 }

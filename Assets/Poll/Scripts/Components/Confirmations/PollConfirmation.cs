@@ -15,7 +15,7 @@ public class PollConfirmation : MonoBehaviour
     protected GameObject ConfirmationObjectInstance;
     protected bool TransitioningIn;
     protected bool TransitioningOut;
-    protected bool Test = true;
+    protected bool Test = false;
 
     public void SetData(Dictionary<string, List<int>> answerTimes, Dictionary<string, bool> answerCorrectIncorrect, List<PollAnswerData> pollAnswers)
     {

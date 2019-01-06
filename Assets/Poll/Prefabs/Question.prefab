@@ -59,7 +59,65 @@ MonoBehaviour:
     type: 2}
   PieConfirmationPrefab: {fileID: 114598703730504386, guid: 3959b34427191924bb6f6f7d66899681,
     type: 2}
-  AnimBarConfirmationPrefab: {fileID: 114191732764829496, guid: bbe8b2c066ad6ed47b4baaf616172590,
+  AnimConfirmationPrefab_03: {fileID: 114191732764829496, guid: bbe8b2c066ad6ed47b4baaf616172590,
+    type: 2}
+  AnimConfirmationPrefab_04: {fileID: 114293507646248578, guid: a01d3598894b14b4099dfc616f1c9a6f,
+    type: 2}
+  AnimConfirmationPrefab_05: {fileID: 114221652064743178, guid: c7001f7ec1d0ac641b1af290b973a975,
+    type: 2}
+  AnimConfirmationPrefab_06: {fileID: 114194147902390862, guid: b5b94e081c857224e8c3102b52c968ae,
+    type: 2}
+  AnimConfirmationPrefab_07: {fileID: 114160925553005306, guid: 2f7b67a7d7bbc9c4daa07b256bd436b6,
+    type: 2}
+  AnimConfirmationPrefab_08: {fileID: 114891335809402766, guid: bf233072e385140488eef590f572f633,
+    type: 2}
+  AnimConfirmationPrefab_09: {fileID: 114548472385770116, guid: eeb9d94d5a96e414690ea9c13a591381,
+    type: 2}
+  AnimConfirmationPrefab_10: {fileID: 114521245451910714, guid: cb8303aa090e9f143a3d8e6af083a38e,
+    type: 2}
+  AnimConfirmationPrefab_11: {fileID: 114145815277960492, guid: a29f81bddb9bb5649877e275e5a97638,
+    type: 2}
+  AnimConfirmationPrefab_12: {fileID: 114946605635711770, guid: 550ac29198ba1e443935e6d01e615b42,
+    type: 2}
+  AnimConfirmationPrefab_13: {fileID: 114032146492115882, guid: 8450a8b4b88f6204e83e05d6a05248da,
+    type: 2}
+  AnimConfirmationPrefab_14: {fileID: 114643059777617064, guid: f08bb962d492330419167c9636a447de,
+    type: 2}
+  AnimConfirmationPrefab_15: {fileID: 114235568114517176, guid: a05dd15ff38415b48a543de2483f2f8e,
+    type: 2}
+  AnimConfirmationPrefab_16: {fileID: 114495880311203912, guid: ad441bfe1a3e43b4bb22cf86ff25ef33,
+    type: 2}
+  AnimConfirmationPrefab_17: {fileID: 114172034013021268, guid: 292c400d2e61f744590e8a0291c333ab,
+    type: 2}
+  AnimConfirmationPrefab_18: {fileID: 114230096512643654, guid: 9eb29faf4b7ff774c88cf2f5176f2d82,
+    type: 2}
+  AnimConfirmationPrefab_19: {fileID: 114385238822552836, guid: e0f0392260f89b344b3c97cef641770e,
+    type: 2}
+  AnimConfirmationPrefab_20: {fileID: 114973149947124128, guid: 641f26ea329e4e546bd36132ba588e8e,
+    type: 2}
+  AnimConfirmationPrefab_21: {fileID: 114448041123495954, guid: af197b344fdb97e4f8e419fecdbfd806,
+    type: 2}
+  AnimConfirmationPrefab_22: {fileID: 114705846355859528, guid: a9d4a566d4ca0904c87d59e475883abe,
+    type: 2}
+  AnimConfirmationPrefab_23: {fileID: 114250499571312414, guid: dae7ca19e6885a44daedf73adfef7e0d,
+    type: 2}
+  AnimConfirmationPrefab_24: {fileID: 114541001971139966, guid: 9e8858181b7d62d4c8a548ececc8d052,
+    type: 2}
+  AnimConfirmationPrefab_25: {fileID: 114928125000309062, guid: 9f66283022296b044b6397c4190893b0,
+    type: 2}
+  AnimConfirmationPrefab_26: {fileID: 114924342604219692, guid: e26fd756cf211d241849b4d2884c5972,
+    type: 2}
+  AnimConfirmationPrefab_27: {fileID: 114389296497568706, guid: 97e870de2a3aef14781ec7ecd994b09a,
+    type: 2}
+  AnimConfirmationPrefab_28: {fileID: 114744098417165630, guid: 3ef2767710dd6724387c9db0bcb99cd5,
+    type: 2}
+  AnimConfirmationPrefab_29: {fileID: 114155215464224608, guid: a858a3818f7ed8a47bdb209c70bb5244,
+    type: 2}
+  AnimConfirmationPrefab_30: {fileID: 114851488692738106, guid: 2d4c08b8ce7931343b8320b3456751c5,
+    type: 2}
+  AnimConfirmationPrefab_31: {fileID: 114590959916332546, guid: cbaa7cd0211126c4da3b1e3d6ba73c61,
+    type: 2}
+  AnimConfirmationPrefab_32: {fileID: 114548182010301426, guid: 785321ff706afd343b3e8352d145a4df,
     type: 2}
   BarConfirmationPrefab: {fileID: 114422943726268082, guid: 0479549d099c2fc45ad05e2dd164822c,
     type: 2}
