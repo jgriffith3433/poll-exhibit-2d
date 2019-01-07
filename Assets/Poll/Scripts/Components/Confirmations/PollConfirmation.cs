@@ -98,7 +98,7 @@ public class PollConfirmation : MonoBehaviour
             {
                 ConfirmationObjectInstance.transform.position = new Vector3(ConfirmationObjectInstance.transform.position.x, -100, ConfirmationObjectInstance.transform.position.z);
                 TransitioningOut = false;
-                Destroy(ConfirmationObjectInstance);
+                Destroy(gameObject);
             }
         }
     }

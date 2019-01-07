@@ -338,8 +338,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>24 years</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -367,8 +366,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 84
+  m_fontSizeBase: 84
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -408,9 +407,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 75.45721, z: -260.98462, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114083206227787060}
-    characterCount: 16
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 3
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -484,8 +483,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConfirmationTextInstances:
   - {fileID: 114023018562844016}
-  - {fileID: 114523931515423276}
   - {fileID: 114035243583974808}
+  - {fileID: 114523931515423276}
   ConfirmationSequenceInstance: {fileID: 114675301080126420}
   AnimDirectoryName: 17
 --- !u!114 &114205503452584660
@@ -661,8 +660,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>13 years</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -672,8 +670,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -731,9 +729,9 @@ MonoBehaviour:
   m_margin: {x: -149.29959, y: 75.45721, z: 39.902588, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114757336061039210}
-    characterCount: 16
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 3
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -808,8 +806,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>38 years</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -819,8 +816,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -878,9 +875,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 75.45721, z: -260.98462, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114975523697317166}
-    characterCount: 16
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 3
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -1101,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 115.9, y: 31.3}
+  m_AnchoredPosition: {x: 115.5, y: 31.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224205489356242516
@@ -1216,7 +1213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100.7, y: 4.6}
+  m_AnchoredPosition: {x: 106.3, y: 14.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224387644874872526
@@ -1310,7 +1307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 84.5, y: 8.1}
+  m_AnchoredPosition: {x: 89.9, y: 12.7}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224861876219806816

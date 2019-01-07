@@ -222,6 +222,10 @@ public class ExhibitGameManager : MonoBehaviour {
         LastName = lastName;
         PollTotalTime = totalTime;
         PollUserAnswers = userAnswers;
+    }
+
+    public void OnFinishPollInactive()
+    {
         GoToState("StartingLeaderboard");
     }
 

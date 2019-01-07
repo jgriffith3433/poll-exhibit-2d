@@ -177,13 +177,14 @@ public class PollComponent : MonoBehaviour
     public IEnumerator ShowCorrectAnswerGoToNextQuestion()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(10);
         if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
         {
             HideObjects();
             var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
             var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
             PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers, DisplayName, FirstName, LastName);
+            PollManager.Instance.OnFinishPollInactive();
         }
         else
         {
@@ -224,11 +225,12 @@ public class PollComponent : MonoBehaviour
     public IEnumerator ShowCorrectAnswerThenFinishPoll()
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(10);
         HideObjects();
         var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
         var yourScore = UserAnswers.Where(ua => ua.Correct == true).Count();
         PollManager.Instance.FinishPoll(yourScore, elapsedTime, UserAnswers, DisplayName, FirstName, LastName);
+        PollManager.Instance.OnFinishPollInactive();
     }
 
     public void StartOver()

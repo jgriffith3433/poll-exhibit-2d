@@ -338,8 +338,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>2,000 kW</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -349,8 +348,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -408,10 +407,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 75.45721, z: -260.98462, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114083206227787060}
-    characterCount: 16
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 2
+    spaceCount: 1
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -661,8 +660,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>900 kW</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -690,8 +688,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -731,9 +729,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 75.45721, z: -260.98462, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114757336061039210}
-    characterCount: 16
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 3
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -808,8 +806,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color><#000000>
+  m_text: <size=+14>1,500 kW</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -819,8 +816,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -878,10 +875,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 75.45721, z: -260.98462, w: 101.13975}
   m_textInfo:
     textComponent: {fileID: 114975523697317166}
-    characterCount: 16
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 2
+    spaceCount: 1
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1101,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 115.9, y: 54.1}
+  m_AnchoredPosition: {x: 120.8, y: 57.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224205489356242516
@@ -1216,7 +1213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100.7, y: 32.1}
+  m_AnchoredPosition: {x: 105.6, y: 35.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224387644874872526
@@ -1310,7 +1307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 84.5, y: 11.8}
+  m_AnchoredPosition: {x: 84.5, y: 15.000001}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224861876219806816

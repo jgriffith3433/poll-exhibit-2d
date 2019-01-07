@@ -176,14 +176,17 @@ public class PollQuestionComponent : MonoBehaviour
         var questionAnswers = DatabaseManager.Instance.GetPlayerAnswersForQuestionId(Data.QuestionId);
         var answerTimes = new Dictionary<string, List<int>>();
         var answerCorrectIncorrect = new Dictionary<string, bool>();
-        foreach (var pollAnswerData in Data.PollAnswersData)
+        if (SelectedAnswer != null)
         {
-            if (pollAnswerData.AnswerId == SelectedAnswer.Data.AnswerId)
+            foreach (var pollAnswerData in Data.PollAnswersData)
             {
-                questionAnswers.Add(SelectedAnswer.Data.AnswerId);
+                if (pollAnswerData.AnswerId == SelectedAnswer.Data.AnswerId)
+                {
+                    questionAnswers.Add(SelectedAnswer.Data.AnswerId);
+                }
+                answerTimes.Add(pollAnswerData.AnswerText, questionAnswers.FindAll(qa => qa == pollAnswerData.AnswerId));
+                answerCorrectIncorrect.Add(pollAnswerData.AnswerText, pollAnswerData.Correct);
             }
-            answerTimes.Add(pollAnswerData.AnswerText, questionAnswers.FindAll(qa => qa == pollAnswerData.AnswerId));
-            answerCorrectIncorrect.Add(pollAnswerData.AnswerText, pollAnswerData.Correct);
         }
 
         if (Data.ConfirmationType == "text")

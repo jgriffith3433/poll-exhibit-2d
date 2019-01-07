@@ -58,4 +58,9 @@ public class PollManager : MonoBehaviour {
     {
         ExhibitGameManager.Instance.OnFinishPoll(score, totalTime, userAnswers, displayName, firstName, lastName);
     }
+
+    public void OnFinishPollInactive()
+    {
+        ExhibitGameManager.Instance.OnFinishPollInactive();
+    }
 }

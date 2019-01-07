@@ -310,15 +310,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '<#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-
-'
+  m_text: <size=+14>27</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -328,8 +320,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -367,7 +359,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
-  m_isTextTruncated: 1
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 1
   checkPaddingRequired: 0
@@ -387,12 +379,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 13.05466, z: 0, w: 11.2718}
   m_textInfo:
     textComponent: {fileID: 114050667355631636}
-    characterCount: 50
+    characterCount: 2
     spriteCount: 0
-    spaceCount: 11
-    wordCount: 6
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 3
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -474,16 +466,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '<#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-'
+  m_text: <size=+14>10</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -493,8 +476,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -511,8 +494,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -552,12 +535,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 64.73589, z: 0, w: 67.50126}
   m_textInfo:
     textComponent: {fileID: 114117892154524370}
-    characterCount: 68
+    characterCount: 2
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 8
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 4
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -613,15 +596,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: '<#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000>
-    Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-    <#000000>Question  </color><#FF0000><size=+18>_</color></size><#000000> Text</color>
-
-
-'
+  m_text: <size=+14>16</size>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
@@ -649,8 +624,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -690,12 +665,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 51.232307, z: 0, w: 54.95059}
   m_textInfo:
     textComponent: {fileID: 114254045349971918}
-    characterCount: 52
+    characterCount: 2
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 6
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 4
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -764,8 +739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConfirmationTextInstances:
   - {fileID: 114303214199688172}
-  - {fileID: 114954196910940694}
   - {fileID: 114403802782089078}
+  - {fileID: 114954196910940694}
   ConfirmationSequenceInstance: {fileID: 114505283860223462}
   AnimDirectoryName: 19
 --- !u!114 &114390654763797892
@@ -1160,7 +1135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -37, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224150289530305372
@@ -1234,7 +1209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 99.3, y: 55.6}
+  m_AnchoredPosition: {x: 64.5, y: 55.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224559338954082002
@@ -1271,7 +1246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 104.4, y: 20.1}
+  m_AnchoredPosition: {x: 83.1, y: 20.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224770019673698070
@@ -1350,7 +1325,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 127.8, y: -11}
+  m_AnchoredPosition: {x: 119.8, y: -11.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224968156737744842
