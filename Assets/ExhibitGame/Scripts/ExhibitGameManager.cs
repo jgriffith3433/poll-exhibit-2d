@@ -17,6 +17,7 @@ public class ExhibitGameManager : MonoBehaviour
 
     public PollBackgroundSequences PollBackgroundSequencesPrefab;
     private PollBackgroundSequences PollBackgroundSequencesInstance;
+    private bool DisablePollBackgroundSequences = true;
 
     public PollTextComponent LoadingTextInstance;
 
@@ -160,8 +161,11 @@ public class ExhibitGameManager : MonoBehaviour
         }
         else
         {
-            PollBackgroundSequencesInstance = Instantiate(PollBackgroundSequencesPrefab);
-            PollBackgroundSequencesInstance.transform.SetParent(transform);
+            if (!DisablePollBackgroundSequences)
+            {
+                PollBackgroundSequencesInstance = Instantiate(PollBackgroundSequencesPrefab);
+                PollBackgroundSequencesInstance.transform.SetParent(transform);
+            }
 
             ScreensaverManager.Instance.HideScreensaver();
             LoadingTextInstance.gameObject.SetActive(false);

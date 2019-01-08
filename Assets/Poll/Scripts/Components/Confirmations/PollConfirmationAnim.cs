@@ -67,7 +67,8 @@ public class PollConfirmationAnim : PollConfirmation
 
         for (var i = 0; i < ConfirmationTextInstances.Length; i++)
         {
-            ConfirmationTextInstances[i].AnimateFadeOut(255);
+            ConfirmationTextInstances[i].HideObjects();
+            //ConfirmationTextInstances[i].AnimateFadeOut(255);
         }
 
         ConfirmationObjectInstance = ConfirmationSequenceInstance.gameObject;
@@ -96,7 +97,8 @@ public class PollConfirmationAnim : PollConfirmation
         yield return new WaitForSeconds(2);
         for (var i = 0; i < ConfirmationTextInstances.Length; i++)
         {
-            ConfirmationTextInstances[i].AnimateFadeIn();
+            ConfirmationTextInstances[i].ShowObjects();
+            //ConfirmationTextInstances[i].AnimateFadeIn();
         }
     }
 

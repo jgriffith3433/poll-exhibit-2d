@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -937,7 +938,8 @@ MonoBehaviour:
       xAdvance: 0
       yAdvance: 0
     xOffset: 0
-  fallbackFontAssets: []
+  fallbackFontAssets:
+  - {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: c3a8bb6dd3e5aff4e8557735b8650499
@@ -987,7 +989,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: OpenSans-Bold SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ShaderKeywords: 
@@ -1085,7 +1088,8 @@ Material:
 Texture2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: OpenSans-Bold SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
