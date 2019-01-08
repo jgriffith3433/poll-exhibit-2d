@@ -39,9 +39,9 @@ public class Player : NetworkBehaviour
     }
 
     [Command]
-    public void CmdSaveLeaderboard(string displayName, string firstName, string lastName, int score, string totalTime)
+    public void CmdSaveLeaderboard(string displayName, string firstName, string lastName, int score, string totalTime, bool madeLeaderboard)
     {
-        DatabaseManager.Instance.SaveLeaderboard(displayName, firstName, lastName, score, totalTime);
+        DatabaseManager.Instance.SaveLeaderboard(displayName, firstName, lastName, score, totalTime, madeLeaderboard);
 
         RpcUpdateLeaderboard(DatabaseManager.Instance.GetLeaderboardDatabaseString());
     }

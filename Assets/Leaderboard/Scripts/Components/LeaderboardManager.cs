@@ -66,8 +66,9 @@ public class LeaderboardManager : MonoBehaviour {
     {
         if (LeaderboardInstance != null)
         {
-            LeaderboardInstance.HideObjects();
+            DestroyLeaderboard();
         }
+        ShowLeaderboardScreensaver();
     }
 
     public void DestroyLeaderboard()

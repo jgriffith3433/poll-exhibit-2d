@@ -92,6 +92,7 @@ public class LoginComponent : MonoBehaviour {
         ValuesFilled = false;
 
         FirstNameInput.CreateAllObjects();
+        FirstNameInputSelected = true;
         LastNameInput.CreateAllObjects();
 
         KeyboardInstance.ShowObjects();

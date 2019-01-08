@@ -9,6 +9,8 @@ public class PollQuestionData {
     public string QuestionText { get; set; }
     public string QuestionTextConfirmation { get; set; }
     public Vector3 QuestionTextPosition { get; set; }
+    public string QuestionLegalText { get; set; }
+    public Vector3 QuestionLegalTextPosition { get; set; }
     public string QuestionType { get; set; }
     public string ConfirmationType { get; set; }
     public string ConfirmationDirectory { get; set; }
@@ -24,9 +26,13 @@ public class PollQuestionData {
         var questionTextPositionSplit = xObj["question_text_position"].Value.Split(',');
         QuestionTextPosition = new Vector3(float.Parse(questionTextPositionSplit[0]), float.Parse(questionTextPositionSplit[1]), float.Parse(questionTextPositionSplit[2]));
 
+        var questionLegalTextPositionSplit = xObj["question_legal_text_position"].Value.Split(',');
+        QuestionLegalTextPosition = new Vector3(float.Parse(questionLegalTextPositionSplit[0]), float.Parse(questionLegalTextPositionSplit[1]), float.Parse(questionLegalTextPositionSplit[2]));
+
         QuestionId = int.Parse(xObj["question_id"].Value);
         Enabled = xObj["question_id"].AsBool;
         QuestionText = xObj["question_text"].Value;
+        QuestionLegalText = xObj["question_legal_text"].Value;
         QuestionTextConfirmation = xObj["question_text_confirmation"].Value;
         QuestionType = xObj["question_type"].Value;
         ConfirmationType = xObj["confirmation_type"].Value;

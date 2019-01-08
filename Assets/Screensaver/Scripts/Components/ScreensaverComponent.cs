@@ -61,7 +61,7 @@ public class ScreensaverComponent : MonoBehaviour {
             ScreensaverBackgroundSequenceInstance.transform.SetParent(transform);
             ScreensaverBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
             ScreensaverBackgroundSequenceInstance.SetImageSequenceFolder("Screensaver/Images/Background");
-            ScreensaverBackgroundSequenceInstance.SetLoop(true);
+            ScreensaverBackgroundSequenceInstance.SetLoop(false);
             ScreensaverBackgroundSequenceInstance.CreateObjects(false);
         }
         CountdownComponent.CreateObjects();
@@ -94,7 +94,19 @@ public class ScreensaverComponent : MonoBehaviour {
         {
             ScreensaverBackgroundSequenceInstance.ShowObjects();
             ScreensaverBackgroundSequenceInstance.Play();
+            StartCoroutine(WaitThenShowLeaderboard());
         }
+    }
+
+    public IEnumerator WaitThenShowLeaderboard()
+    {
+        yield return new WaitForSeconds(6);
+        if (Hidden)
+        {
+            yield return null;
+        }
+        FinishScreensaver();
+        ExhibitGameManager.Instance.OnActive();
     }
 
     public IEnumerator ShowNextScreensaverImage()

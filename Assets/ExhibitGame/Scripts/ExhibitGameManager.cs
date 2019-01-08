@@ -4,22 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExhibitGameManager : MonoBehaviour {
+public class ExhibitGameManager : MonoBehaviour
+{
     public static ExhibitGameManager Instance { get; private set; }
-    
+
     public string CurrentGameState;
     private string PreviousGameState;
-    private bool UseSequenceForBackground = false;
     public bool Connected = false;
     public bool Started = false;
 
     public Player Player;
 
-    public PollImageSequenceComponent ExhibitBackgroundSequencePrefab;
-    private PollImageSequenceComponent ExhibitBackgroundSequenceInstance;
+    public PollBackgroundSequences PollBackgroundSequencesPrefab;
+    private PollBackgroundSequences PollBackgroundSequencesInstance;
 
     public PollTextComponent LoadingTextInstance;
-    
+
+    public PollImageComponent ExhibitLogoPrefab;
+    private PollImageComponent ExhibitLogoInstance;
+
     public PollImageComponent ExhibitBackgroundPrefab;
     private PollImageComponent ExhibitBackgroundInstance;
     private PollData PollData;
@@ -34,6 +37,7 @@ public class ExhibitGameManager : MonoBehaviour {
     private bool LoadedConfirmationSequences = false;
     private List<PollImageSequenceComponent> LoadConfirmationSequenceInstances;
     private List<PollImageSequenceComponent> LoadSequenceInstances;
+    private PollImageSequenceComponent LoadBackgroundSequenceInstance;
 
     private int PollScore;
     private string DisplayName;
@@ -54,22 +58,22 @@ public class ExhibitGameManager : MonoBehaviour {
 
     IEnumerator Start()
     {
-        if (UseSequenceForBackground)
-        {
-            ExhibitBackgroundSequenceInstance = Instantiate(ExhibitBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
-            ExhibitBackgroundSequenceInstance.transform.SetParent(transform);
-            ExhibitBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 6);
-            ExhibitBackgroundSequenceInstance.SetImageSequenceFolder("ExhibitGame/Images/background_image_sequence");
-            ExhibitBackgroundSequenceInstance.SetLoop(true);
-            ExhibitBackgroundSequenceInstance.CreateObjects(true);
-        }
-        else
-        {
-            ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageComponent>();
-            ExhibitBackgroundInstance.transform.SetParent(transform);
-            ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 6);
-            ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.jpg");
-        }
+        LoadBackgroundSequenceInstance = Instantiate(LoadPrefab).GetComponent<PollImageSequenceComponent>();
+        LoadBackgroundSequenceInstance.transform.SetParent(transform);
+        LoadBackgroundSequenceInstance.SetImageSequenceFolder("ExhibitGame/Images/background_image_sequence");
+        LoadBackgroundSequenceInstance.CreateObjects(false);
+
+        ExhibitBackgroundInstance = Instantiate(ExhibitBackgroundPrefab).GetComponent<PollImageComponent>();
+        ExhibitBackgroundInstance.transform.SetParent(transform);
+        ExhibitBackgroundInstance.transform.position += new Vector3(0, 0, 6);
+        ExhibitBackgroundInstance.CreateObjects("ExhibitGame/Images/BackgroundImage.png");
+
+        ExhibitLogoInstance = Instantiate(ExhibitLogoPrefab).GetComponent<PollImageComponent>();
+        ExhibitLogoInstance.name = "Logo";
+        ExhibitLogoInstance.transform.SetParent(transform);
+        ExhibitLogoInstance.transform.position += new Vector3(0, 0, 1);
+        ExhibitLogoInstance.CreateObjects("ExhibitGame/Images/Logo.png");
+
         var loadTimerInstance = Instantiate(LoadTimerPrefab).GetComponent<PollTimerComponent>();
         loadTimerInstance.transform.SetParent(transform);
         loadTimerInstance.CreateObjects(false);
@@ -86,7 +90,7 @@ public class ExhibitGameManager : MonoBehaviour {
         loadIncorrectInstance.SetImageSequenceFolder("Poll/Images/IncorrectAnswer");
         loadIncorrectInstance.CreateObjects(false);
         LoadSequenceInstances.Add(loadIncorrectInstance);
-        
+
         LoadingTextInstance.AnimateFadeIn();
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(CheckIsConnected());
@@ -148,15 +152,7 @@ public class ExhibitGameManager : MonoBehaviour {
 
     IEnumerator CheckIsDoneLoading()
     {
-        var stillLoading = false;
-        if (UseSequenceForBackground)
-        {
-            stillLoading = ExhibitBackgroundSequenceInstance.Loading || LoadSequenceInstances.Count(lsi => lsi.Loading) > 0 || Player.Loading || ScreensaverManager.Instance.Loading || !LoadedConfirmationSequences;
-        }
-        else
-        {
-            stillLoading = ExhibitBackgroundInstance.Loading || LoadSequenceInstances.Count(lsi => lsi.Loading) > 0 || Player.Loading || ScreensaverManager.Instance.Loading || !LoadedConfirmationSequences;
-        }
+        var stillLoading = ExhibitBackgroundInstance.Loading || LoadBackgroundSequenceInstance.Loading || LoadSequenceInstances.Count(lsi => lsi.Loading) > 0 || Player.Loading || ScreensaverManager.Instance.Loading || !LoadedConfirmationSequences;
         if (stillLoading)
         {
             yield return new WaitForSeconds(1);
@@ -164,6 +160,9 @@ public class ExhibitGameManager : MonoBehaviour {
         }
         else
         {
+            PollBackgroundSequencesInstance = Instantiate(PollBackgroundSequencesPrefab);
+            PollBackgroundSequencesInstance.transform.SetParent(transform);
+
             ScreensaverManager.Instance.HideScreensaver();
             LoadingTextInstance.gameObject.SetActive(false);
             foreach (var lsi in LoadSequenceInstances)
@@ -186,7 +185,7 @@ public class ExhibitGameManager : MonoBehaviour {
                 GoToState("Poll");
                 break;
             case "Poll":
-               break;
+                break;
             case "StartingLeaderboard":
                 GoToState("Leaderboard");
                 break;

@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 2}
   QuestionTextPrefab: {fileID: 114551771733323042, guid: 381edca20c6094748be0a8822202dcdb,
     type: 2}
+  QuestionLegalTextPrefab: {fileID: 114551771733323042, guid: 425703e38f4a5664b9023ce091f54314,
+    type: 2}
   BubbleSingleConfirmationPrefab: {fileID: 114922146704183244, guid: 44c2b4364187fdb46900ee2eb0564759,
     type: 2}
   PieConfirmationPrefab: {fileID: 114598703730504386, guid: 3959b34427191924bb6f6f7d66899681,
@@ -118,6 +120,8 @@ MonoBehaviour:
   AnimConfirmationPrefab_31: {fileID: 114590959916332546, guid: cbaa7cd0211126c4da3b1e3d6ba73c61,
     type: 2}
   AnimConfirmationPrefab_32: {fileID: 114548182010301426, guid: 785321ff706afd343b3e8352d145a4df,
+    type: 2}
+  AnimConfirmationPrefab_33: {fileID: 114788835158860684, guid: 15c7f72f9349aa54493961abc0725f9b,
     type: 2}
   BarConfirmationPrefab: {fileID: 114422943726268082, guid: 0479549d099c2fc45ad05e2dd164822c,
     type: 2}

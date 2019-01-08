@@ -7,4 +7,5 @@ public class LeaderboardPlayerData {
     public int PlayerScore { get; set; }
     public TimeSpan TotalTime { get; set; }
     public string PlayerLastName { get; set; }
+    public bool MadeTheLeaderboard { get; set; }
 }

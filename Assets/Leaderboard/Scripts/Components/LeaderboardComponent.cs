@@ -10,7 +10,7 @@ public class LeaderboardComponent : MonoBehaviour
 
     public LeaderboardTopDownComponent LeaderboardTopDownPrefab;
     private LeaderboardTopDownComponent LeaderboardTopDownInstance;
-
+    
     public PollTextComponent TxtTitle;
     public PollTextComponent TxtSubTitle;
     public PollTextComponent TxtPlayNow;
@@ -45,11 +45,7 @@ public class LeaderboardComponent : MonoBehaviour
         DisplayName = displayName;
         FirstName = firstName;
         LastName = lastName;
-        if (fromPoll)
-        {
-            SavePlayerData();
-        }
-
+        
         Loading = true;
         ShowObjects();
         ExhibitGameManager.Instance.Player.GetDatabaseString();
@@ -60,7 +56,7 @@ public class LeaderboardComponent : MonoBehaviour
 
     public void SaveLeaderboard()
     {
-        ExhibitGameManager.Instance.Player.CmdSaveLeaderboard(DisplayName, FirstName, LastName, Score, TotalTime.Value.ToString());
+        ExhibitGameManager.Instance.Player.CmdSaveLeaderboard(DisplayName, FirstName, LastName, Score, TotalTime.Value.ToString(), MadeTopTenLeaderboard);
         StartCoroutine(ShowLeaderboardAfterSaving());
     }
 
@@ -87,6 +83,10 @@ public class LeaderboardComponent : MonoBehaviour
         if (Data != null && Data.IsDoneParsing)
         {
             CreateObjects();
+            if (FromPoll)
+            {
+                SavePlayerData();
+            }
             Loading = false;
         }
         else
@@ -108,8 +108,6 @@ public class LeaderboardComponent : MonoBehaviour
         PollFinishedInstance.transform.SetParent(transform);
         if (FromPoll)
         {
-            SaveLeaderboard();
-
             var lowestScore = Data.PlayerData.Count == 10 ? Data.PlayerData.LastOrDefault() : null;
             if (lowestScore != null)
             {
@@ -145,16 +143,12 @@ public class LeaderboardComponent : MonoBehaviour
                     MadeTopTenLeaderboard = false;
                 }
             }
+            SaveLeaderboard();
         }
         else
         {
             HideFinishPoll();
             MadeTopTenLeaderboard = false;
-        }
-
-        if (MadeTopTenLeaderboard)
-        {
-
         }
     }
 

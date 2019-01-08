@@ -79,7 +79,8 @@ public class LeaderboardData
                         PlayerFirstName = playerXObj.Value[i]["FirstName"].Value,
                         PlayerLastName = playerXObj.Value[i]["LastName"].Value,
                         PlayerScore = int.Parse(playerXObj.Value[i]["Score"].Value),
-                        TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value)
+                        TotalTime = TimeSpan.Parse(playerXObj.Value[i]["TotalTime"].Value),
+                        MadeTheLeaderboard = playerXObj.Value[i]["MadeTheLeaderboard"].AsBool
                     });
                 }
             }
@@ -90,7 +91,7 @@ public class LeaderboardData
         }
     }
 
-    public void AddPlayerScore(string displayName, string firstName, string lastName, int score, string totalTime, int max = 10)
+    public void AddPlayerScore(string displayName, string firstName, string lastName, int score, string totalTime, bool madeLeaderboard, int max = 10)
     {
         if (PlayerData.Count == max)
         {
@@ -107,7 +108,8 @@ public class LeaderboardData
             PlayerFirstName = firstName,
             PlayerLastName = lastName,
             PlayerScore = score,
-            TotalTime = TimeSpan.Parse(totalTime)
+            TotalTime = TimeSpan.Parse(totalTime),
+            MadeTheLeaderboard = madeLeaderboard
         });
     }
 
@@ -135,6 +137,7 @@ public class LeaderboardData
             playerDataChildObject["LastName"] = new JSONString(playerData.PlayerLastName);
             playerDataChildObject["Score"] = new JSONString(playerData.PlayerScore.ToString());
             playerDataChildObject["TotalTime"] = new JSONString(playerData.TotalTime.ToString());
+            playerDataChildObject["MadeTheLeaderboard"] = new JSONString(playerData.MadeTheLeaderboard.ToString());
             playerDataChild.Add(playerDataChildObject);
             leaderboardXObj[playerData.PlayerBaseName] = playerDataChild;
         }

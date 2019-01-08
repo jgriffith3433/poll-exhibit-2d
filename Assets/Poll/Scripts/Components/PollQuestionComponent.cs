@@ -11,6 +11,8 @@ public class PollQuestionComponent : MonoBehaviour
     public PollAnswerComponent AnswerPrefab;
     public PollTextComponent QuestionTextPrefab;
     private PollTextComponent QuestionTextInstance;
+    public PollTextComponent QuestionLegalTextPrefab;
+    private PollTextComponent QuestionLegalTextInstance;
 
     public PollConfirmationSingle BubbleSingleConfirmationPrefab;
     public PollConfirmationPie PieConfirmationPrefab;
@@ -45,6 +47,7 @@ public class PollQuestionComponent : MonoBehaviour
     public PollConfirmationAnim_30 AnimConfirmationPrefab_30;
     public PollConfirmationAnim_31 AnimConfirmationPrefab_31;
     public PollConfirmationAnim_32 AnimConfirmationPrefab_32;
+    public PollConfirmationAnim_33 AnimConfirmationPrefab_33;
 
     public PollConfirmationBar BarConfirmationPrefab;
 
@@ -74,6 +77,13 @@ public class PollQuestionComponent : MonoBehaviour
         QuestionTextInstance.transform.position = Data.QuestionTextPosition;
         QuestionTextInstance.SetTextData(Data.QuestionText);
         QuestionTextInstance.CreateAllObjects();
+
+        QuestionLegalTextInstance = Instantiate(QuestionLegalTextPrefab).GetComponent<PollTextComponent>();
+        QuestionLegalTextInstance.name = "Question Legal Text";
+        QuestionLegalTextInstance.transform.SetParent(transform);
+        QuestionLegalTextInstance.transform.position = Data.QuestionLegalTextPosition;
+        QuestionLegalTextInstance.SetTextData(Data.QuestionLegalText);
+        QuestionLegalTextInstance.CreateAllObjects();
 
         AnswersObject = new GameObject("Answers");
         AnswersObject.transform.SetParent(transform);
@@ -353,6 +363,10 @@ public class PollQuestionComponent : MonoBehaviour
                     ConfirmationInstance = Instantiate(AnimConfirmationPrefab_32);
                     ConfirmationInstance.GetComponent<PollConfirmationAnim_32>().AnimDirectoryName = Data.ConfirmationDirectory;
                     break;
+                case "33":
+                    ConfirmationInstance = Instantiate(AnimConfirmationPrefab_33);
+                    ConfirmationInstance.GetComponent<PollConfirmationAnim_33>().AnimDirectoryName = Data.ConfirmationDirectory;
+                    break;
                 default:
                     break;
             }
@@ -364,7 +378,7 @@ public class PollQuestionComponent : MonoBehaviour
                 ConfirmationInstance.ShowObjects();
 
                 ConfirmationInstance.TransitionIn();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSeconds(.1f);
                 ConfirmationInstance.DoAnimation();
                 yield return new WaitForSeconds(5);
                 ConfirmationInstance.TransitionOut();
@@ -382,6 +396,8 @@ public class PollQuestionComponent : MonoBehaviour
         AnswerBackgroundInstance.ShowObjects();
         AnswerTimerInstance.ShowObjects();
         AnswerTimerInstance.ShowFirstFrame();
+        QuestionLegalTextInstance.gameObject.SetActive(true);
+        QuestionLegalTextInstance.AnimateFadeIn(2);
         QuestionTextInstance.gameObject.SetActive(true);
         QuestionTextInstance.AnimateFadeIn(2);
         StartCoroutine(WaitThenTransitionAnswersIn());
@@ -402,5 +418,6 @@ public class PollQuestionComponent : MonoBehaviour
         AnswerBackgroundInstance.HideObjects();
         AnswerTimerInstance.HideObjects();
         QuestionTextInstance.gameObject.SetActive(false);
+        QuestionLegalTextInstance.gameObject.SetActive(false);
     }
 }

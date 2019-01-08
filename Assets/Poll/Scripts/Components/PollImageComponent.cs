@@ -26,6 +26,7 @@ public class PollImageComponent : MonoBehaviour {
         }
         else
         {
+            Debug.Log("m_ImagePath: " + m_ImagePath);
             Debug.Log("Poll : URL request failed, " + request.error);
         }
         Loading = false;
