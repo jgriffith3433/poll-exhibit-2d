@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TestKnowledgeComponent : MonoBehaviour
 {
+    public GameObject ConsentGameObject;
     public GameObject TopScoresGameObject;
     public GameObject RulesGameObject;
 
     public LoginComponent LoginPrefab;
     private LoginComponent LoginInstance;
 
-    private bool OnFirstScreen = true;
+    private int ScreenIndex;
 
     public void Awake()
     {
@@ -18,22 +19,42 @@ public class TestKnowledgeComponent : MonoBehaviour
         LoginInstance.transform.SetParent(transform);
         LoginInstance.CreateAllObjects();
         LoginInstance.gameObject.SetActive(false);
-    }
-    
-    private void GoToNextScreen()
-    {
-        OnFirstScreen = false;
-        TopScoresGameObject.SetActive(false);
-        RulesGameObject.SetActive(true);
-        LoginInstance.gameObject.SetActive(true);
+        ScreenIndex = 0;
     }
 
-    public void PlayNow()
+    private void GoToNextScreen()
     {
-        LoginInstance.FillValues();
-        if (LoginInstance.ValuesFilled)
+        ScreenIndex++;
+        switch(ScreenIndex)
         {
-            PollManager.Instance.BeginPoll(LoginInstance.DisplayName, LoginInstance.FirstName, LoginInstance.LastName);
+            case 1:
+                ScreensaverManager.Instance.DiableScreensaver = false;
+                ConsentGameObject.SetActive(false);
+                TopScoresGameObject.SetActive(true);
+                break;
+            case 2:
+                TopScoresGameObject.SetActive(false);
+                RulesGameObject.SetActive(true);
+                LoginInstance.gameObject.SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ButtonPress()
+    {
+        if (ScreenIndex == 0)
+        {
+            GoToNextScreen();
+        }
+        else if (ScreenIndex == 2)
+        {
+            LoginInstance.FillValues();
+            if (LoginInstance.ValuesFilled)
+            {
+                PollManager.Instance.BeginPoll(LoginInstance.DisplayName, LoginInstance.FirstName, LoginInstance.LastName);
+            }
         }
     }
 
@@ -53,7 +74,7 @@ public class TestKnowledgeComponent : MonoBehaviour
         }
         if (touchClickPosition != Vector2.zero)
         {
-            if (OnFirstScreen)
+            if (ScreenIndex == 1)
             {
                 GoToNextScreen();
             }

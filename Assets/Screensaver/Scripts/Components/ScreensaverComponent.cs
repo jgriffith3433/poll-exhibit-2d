@@ -14,8 +14,13 @@ public class ScreensaverComponent : MonoBehaviour {
     public PollButtonComponent BtnStartOver;
     private bool ShowScreensaverImages = false;
 
-    public PollImageSequenceComponent ScreensaverBackgroundSequencePrefab;
-    private PollImageSequenceComponent ScreensaverBackgroundSequenceInstance;
+    public GameObject ScreensaverTextInstance;
+
+    public PollImageSequenceComponent LeftScreensaverBackgroundSequencePrefab;
+    private PollImageSequenceComponent LeftScreensaverBackgroundSequenceInstance;
+
+    public PollImageSequenceComponent RightScreensaverBackgroundSequencePrefab;
+    private PollImageSequenceComponent RightScreensaverBackgroundSequenceInstance;
 
     public bool Loading {
         get {
@@ -29,11 +34,11 @@ public class ScreensaverComponent : MonoBehaviour {
             }
             else
             {
-                if (ScreensaverBackgroundSequenceInstance == null)
+                if (LeftScreensaverBackgroundSequenceInstance == null || RightScreensaverBackgroundSequenceInstance == null)
                 {
                     return true;
                 }
-                return ScreensaverBackgroundSequenceInstance.Loading;
+                return LeftScreensaverBackgroundSequenceInstance.Loading || RightScreensaverBackgroundSequenceInstance.Loading;
             }
         }
     }
@@ -57,12 +62,19 @@ public class ScreensaverComponent : MonoBehaviour {
         }
         else
         {
-            ScreensaverBackgroundSequenceInstance = Instantiate(ScreensaverBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
-            ScreensaverBackgroundSequenceInstance.transform.SetParent(transform);
-            ScreensaverBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
-            ScreensaverBackgroundSequenceInstance.SetImageSequenceFolder("Screensaver/Images/Background");
-            ScreensaverBackgroundSequenceInstance.SetLoop(false);
-            ScreensaverBackgroundSequenceInstance.CreateObjects(false);
+            LeftScreensaverBackgroundSequenceInstance = Instantiate(LeftScreensaverBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
+            LeftScreensaverBackgroundSequenceInstance.transform.SetParent(transform);
+            LeftScreensaverBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
+            LeftScreensaverBackgroundSequenceInstance.SetImageSequenceFolder("Screensaver/Images/LeftScreenBars");
+            LeftScreensaverBackgroundSequenceInstance.SetLoop(true);
+            LeftScreensaverBackgroundSequenceInstance.CreateObjects(false);
+
+            RightScreensaverBackgroundSequenceInstance = Instantiate(RightScreensaverBackgroundSequencePrefab).GetComponent<PollImageSequenceComponent>();
+            RightScreensaverBackgroundSequenceInstance.transform.SetParent(transform);
+            RightScreensaverBackgroundSequenceInstance.transform.position += new Vector3(0, 0, 2);
+            RightScreensaverBackgroundSequenceInstance.SetImageSequenceFolder("Screensaver/Images/RightScreenBars");
+            RightScreensaverBackgroundSequenceInstance.SetLoop(true);
+            RightScreensaverBackgroundSequenceInstance.CreateObjects(false);
         }
         CountdownComponent.CreateObjects();
     }
@@ -92,21 +104,24 @@ public class ScreensaverComponent : MonoBehaviour {
         }
         else
         {
-            ScreensaverBackgroundSequenceInstance.ShowObjects();
-            ScreensaverBackgroundSequenceInstance.Play();
+            ScreensaverTextInstance.SetActive(true);
+            LeftScreensaverBackgroundSequenceInstance.ShowObjects();
+            LeftScreensaverBackgroundSequenceInstance.Play();
+            RightScreensaverBackgroundSequenceInstance.ShowObjects();
+            RightScreensaverBackgroundSequenceInstance.Play();
             StartCoroutine(WaitThenShowLeaderboard());
         }
     }
 
     public IEnumerator WaitThenShowLeaderboard()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(40);
         if (Hidden)
         {
             yield return null;
         }
         FinishScreensaver();
-        ExhibitGameManager.Instance.OnActive();
+        ExhibitGameManager.Instance.OnFinishScreensaver();
     }
 
     public IEnumerator ShowNextScreensaverImage()
@@ -146,6 +161,9 @@ public class ScreensaverComponent : MonoBehaviour {
         Hidden = true;
         CountdownHidden = true;
         gameObject.SetActive(false);
+        LeftScreensaverBackgroundSequenceInstance.HideObjects();
+        RightScreensaverBackgroundSequenceInstance.HideObjects();
+        ScreensaverTextInstance.SetActive(false);
     }
 
     public void FinishScreensaver()

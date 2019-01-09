@@ -122,6 +122,7 @@ public class ExhibitGameManager : MonoBehaviour
     {
         if (LoadConfirmationSequenceInstances[LoadConfirmationSequenceIndex].Loading == false)
         {
+            LoadConfirmationSequenceInstances[LoadConfirmationSequenceIndex].HideObjects();
             LoadConfirmationSequenceIndex++;
             LoadNextConfirmationSequence();
         }
@@ -240,7 +241,7 @@ public class ExhibitGameManager : MonoBehaviour
 
     public void OnActive()
     {
-        GoToState("StartingLeaderboard");
+        GoToState("StartingPoll");
     }
 
     public void OnCancelScreensaver()

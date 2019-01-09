@@ -68,7 +68,6 @@ public class PollConfirmationAnim : PollConfirmation
         for (var i = 0; i < ConfirmationTextInstances.Length; i++)
         {
             ConfirmationTextInstances[i].HideObjects();
-            //ConfirmationTextInstances[i].AnimateFadeOut(255);
         }
 
         ConfirmationObjectInstance = ConfirmationSequenceInstance.gameObject;
@@ -88,26 +87,24 @@ public class PollConfirmationAnim : PollConfirmation
 
     public override void TransitionOut()
     {
+        TransitionAnswerOut();
         base.TransitionOut();
-        StartCoroutine(TransitionAnswerOut());
     }
 
     private IEnumerator TransitionAnswerIn()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         for (var i = 0; i < ConfirmationTextInstances.Length; i++)
         {
             ConfirmationTextInstances[i].ShowObjects();
-            //ConfirmationTextInstances[i].AnimateFadeIn();
         }
     }
 
-    private IEnumerator TransitionAnswerOut()
+    private void TransitionAnswerOut()
     {
         for (var i = 0; i < ConfirmationTextInstances.Length; i++)
         {
-            ConfirmationTextInstances[i].AnimateFadeOut(255);
+            ConfirmationTextInstances[i].HideObjects();
         }
-        yield return null;
     }
 }

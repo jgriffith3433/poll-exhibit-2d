@@ -30,7 +30,7 @@ public class PollQuestionData {
         QuestionLegalTextPosition = new Vector3(float.Parse(questionLegalTextPositionSplit[0]), float.Parse(questionLegalTextPositionSplit[1]), float.Parse(questionLegalTextPositionSplit[2]));
 
         QuestionId = int.Parse(xObj["question_id"].Value);
-        Enabled = xObj["question_id"].AsBool;
+        Enabled = xObj["enabled"].AsBool;
         QuestionText = xObj["question_text"].Value;
         QuestionLegalText = xObj["question_legal_text"].Value;
         QuestionTextConfirmation = xObj["question_text_confirmation"].Value;

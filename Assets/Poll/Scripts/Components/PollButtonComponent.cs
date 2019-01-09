@@ -58,7 +58,7 @@ public class PollButtonComponent : MonoBehaviour {
                 var testKnowledgeComponent = transform.parent.parent.parent.GetComponent<TestKnowledgeComponent>();
                 if (testKnowledgeComponent != null)
                 {
-                    testKnowledgeComponent.PlayNow();
+                    testKnowledgeComponent.ButtonPress();
                 }
             }
         }

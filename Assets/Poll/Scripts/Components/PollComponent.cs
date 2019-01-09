@@ -72,6 +72,7 @@ public class PollComponent : MonoBehaviour
 
     public void ShowInstructions()
     {
+        ScreensaverManager.Instance.DiableScreensaver = true;
         TestKnowledgeInstance = Instantiate(TestKnowledgePrefab);
         TestKnowledgeInstance.transform.SetParent(transform);
     }
@@ -178,7 +179,7 @@ public class PollComponent : MonoBehaviour
     {
         CurrentQuestion.ShowAsCorrectOrIncorrect();
         yield return new WaitForSeconds(10);
-        if (AskedQuestions.Count == Data.NumberOfQuestionsAsked || AskedQuestions.Count == QuestionInstances.Count)
+        if (AskedQuestions.Count == Data.NumberOfQuestionsAsked)
         {
             HideObjects();
             var elapsedTime = (TimeSpan.FromSeconds(Time.time) - StartedTime);
