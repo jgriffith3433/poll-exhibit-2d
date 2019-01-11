@@ -91,7 +91,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 14.29}
+  m_AnchoredPosition: {x: -15.13, y: 14.29}
   m_SizeDelta: {x: 26.762276, y: 9.853713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &33211693237828322
@@ -119,7 +119,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
+  - {fileID: 21851537623349528, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,12 +159,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Win <#FF2B00>$5</color> if you make the leaderboard.
+  m_text: '<#FF2B00>Win $5</color> if you make the leaderboard.
 
-    Win <#FF2B00>$25</color> if you answer all the questions correctly.'
+    <#FF2B00>Win $25</color> if you answer all the questions correctly.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
-  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+  m_sharedMaterial: {fileID: 21851537623349528, guid: c476708a64b11ab41b628a79acb58d0f,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -352,7 +352,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
+  - {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_text: <#ff2b00>Tap anywhere to play now</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
-  m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
+  m_sharedMaterial: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -606,7 +606,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 18.9}
+  m_AnchoredPosition: {x: -14.5, y: 19.5}
   m_SizeDelta: {x: 26.762276, y: 9.853713}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &33894426433411872
@@ -634,7 +634,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
+  - {fileID: 21449963062756248, guid: 109cf0f9db05e004d9e8d8191b13943a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -676,8 +676,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: LEADERBOARD
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
-  m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
+  m_fontAsset: {fileID: 11400000, guid: 109cf0f9db05e004d9e8d8191b13943a, type: 2}
+  m_sharedMaterial: {fileID: 21449963062756248, guid: 109cf0f9db05e004d9e8d8191b13943a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -703,8 +703,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 33
+  m_fontSizeBase: 33
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 24

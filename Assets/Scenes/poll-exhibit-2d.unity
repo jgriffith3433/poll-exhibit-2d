@@ -192,6 +192,18 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0,
+        type: 2}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
+        type: 2}
     - target: {fileID: 224539581129791782, guid: 381edca20c6094748be0a8822202dcdb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -497,6 +509,11 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 3.49
       objectReference: {fileID: 0}
+    - target: {fileID: 23344302837534588, guid: 4c2005bcedabfe247870222df154c3f0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c2005bcedabfe247870222df154c3f0, type: 3}
 --- !u!114 &340190045 stripped
@@ -632,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
         type: 3}
@@ -644,6 +661,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0,
+        type: 2}
+    - target: {fileID: 114693722251441084, guid: 381edca20c6094748be0a8822202dcdb,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
+        type: 2}
     - target: {fileID: 224539581129791782, guid: 381edca20c6094748be0a8822202dcdb,
         type: 3}
       propertyPath: m_LocalPosition.x

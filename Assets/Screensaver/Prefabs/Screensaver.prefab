@@ -525,8 +525,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
-  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+  m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
+  m_sharedMaterial: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -831,7 +831,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
+  - {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_text: Yes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
-  m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
+  m_sharedMaterial: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1063,8 +1063,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Are you still playing?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
-  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+  m_fontAsset: {fileID: 11400000, guid: 109cf0f9db05e004d9e8d8191b13943a, type: 2}
+  m_sharedMaterial: {fileID: 21449963062756248, guid: 109cf0f9db05e004d9e8d8191b13943a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1090,13 +1090,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 88
-  m_fontSizeBase: 88
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_textAlignment: 258
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -1265,7 +1265,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: New Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2100000, guid: d75b8f41e959450c84ac6e967084d3e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1821,8 +1821,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: KNOWLEDGE BECOMES POWER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: c476708a64b11ab41b628a79acb58d0f, type: 2}
-  m_sharedMaterial: {fileID: 21366470146558786, guid: c476708a64b11ab41b628a79acb58d0f,
+  m_fontAsset: {fileID: 11400000, guid: 109cf0f9db05e004d9e8d8191b13943a, type: 2}
+  m_sharedMaterial: {fileID: 21449963062756248, guid: 109cf0f9db05e004d9e8d8191b13943a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1897,7 +1897,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2024,7 +2024,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
+  - {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_text: <#ff2b00>Tap anywhere to play now</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
-  m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
+  m_sharedMaterial: {fileID: 21900973249025718, guid: 6ee04eb57dba9f2468686beddb750ee0,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2142,7 +2142,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

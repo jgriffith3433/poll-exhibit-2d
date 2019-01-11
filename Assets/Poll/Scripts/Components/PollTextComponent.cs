@@ -44,9 +44,12 @@ public class PollTextComponent : MonoBehaviour {
 
     public void AnimateFromTop()
     {
-        HeightToAnimateTo = ChildRectTransform.sizeDelta.y;
-        ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, 0.1f);
-        DoAnimateFromTop = true;
+        if (ChildRectTransform)
+        {
+            HeightToAnimateTo = ChildRectTransform.sizeDelta.y;
+            ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, 0.1f);
+            DoAnimateFromTop = true;
+        }
     }
 
     public void AnimateFadeIn(int animSpeed = 5)
@@ -135,16 +138,19 @@ public class PollTextComponent : MonoBehaviour {
     {
         if (DoAnimateFromTop)
         {
-            if (ChildRectTransform.sizeDelta.y < HeightToAnimateTo)
+            if (ChildRectTransform)
             {
-                ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, ChildRectTransform.sizeDelta.y + AnimateSpeed);
-
-                if (ChildRectTransform.sizeDelta.y >= HeightToAnimateTo)
+                if (ChildRectTransform.sizeDelta.y < HeightToAnimateTo)
                 {
-                    ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, HeightToAnimateTo);
-                    DoAnimateFromTop = false;
+                    ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, ChildRectTransform.sizeDelta.y + AnimateSpeed);
+
+                    if (ChildRectTransform.sizeDelta.y >= HeightToAnimateTo)
+                    {
+                        ChildRectTransform.sizeDelta = new Vector2(ChildRectTransform.sizeDelta.x, HeightToAnimateTo);
+                        DoAnimateFromTop = false;
+                    }
+                    ChildTextMeshPro.SetText(Text);
                 }
-                ChildTextMeshPro.SetText(Text);
             }
         }
     }

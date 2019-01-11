@@ -28,7 +28,6 @@ public class TestKnowledgeComponent : MonoBehaviour
         switch(ScreenIndex)
         {
             case 1:
-                ScreensaverManager.Instance.DiableScreensaver = false;
                 ConsentGameObject.SetActive(false);
                 TopScoresGameObject.SetActive(true);
                 break;
@@ -42,11 +41,18 @@ public class TestKnowledgeComponent : MonoBehaviour
         }
     }
 
-    public void ButtonPress()
+    public void ButtonPress(string buttonName)
     {
         if (ScreenIndex == 0)
         {
-            GoToNextScreen();
+            if (buttonName == "DisagreeButton")
+            {
+                ExhibitGameManager.Instance.OnDoNotConsent();
+            }
+            else if (buttonName == "AgreeButton")
+            {
+                GoToNextScreen();
+            }
         }
         else if (ScreenIndex == 2)
         {

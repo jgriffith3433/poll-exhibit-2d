@@ -135,6 +135,11 @@ public class ExhibitGameManager : MonoBehaviour
 
     IEnumerator CheckIsConnected()
     {
+        var players = FindObjectsOfType<Player>();
+        foreach(var player in players)
+        {
+            player.CheckNetworkPlayer();
+        }
         Connected = Player != null && PollData.IsDoneParsing;
 
         if (Connected && !Started)
@@ -261,6 +266,12 @@ public class ExhibitGameManager : MonoBehaviour
 
     public void OnFinishScreensaver()
     {
+        GoToState("StartingLeaderboard");
+    }
+
+    public void OnDoNotConsent()
+    {
+        CurrentGameState = "";
         GoToState("StartingLeaderboard");
     }
 

@@ -72,7 +72,7 @@ public class PollComponent : MonoBehaviour
 
     public void ShowInstructions()
     {
-        ScreensaverManager.Instance.DiableScreensaver = true;
+        ScreensaverManager.Instance.DiableScreensaver = false;
         TestKnowledgeInstance = Instantiate(TestKnowledgePrefab);
         TestKnowledgeInstance.transform.SetParent(transform);
     }

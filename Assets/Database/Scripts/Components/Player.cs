@@ -9,9 +9,12 @@ public class Player : NetworkBehaviour
     private string LeaderboardString;
     public bool Loading = true;
 
-    void Awake()
+    public void CheckNetworkPlayer()
     {
-        ExhibitGameManager.Instance.Player = this;
+        if (isLocalPlayer)
+        {
+            ExhibitGameManager.Instance.Player = this;
+        }
     }
 
     [Command]
@@ -50,6 +53,17 @@ public class Player : NetworkBehaviour
     void RpcUpdateDatabase(string databaseStr)
     {
         DatabaseString = databaseStr;
+        var players = FindObjectsOfType<Player>();
+        foreach (var player in players)
+        {
+            if (player != this)
+            {
+                if (player.DatabaseString != databaseStr)
+                {
+                    player.DatabaseString = databaseStr;
+                }
+            }
+        }
     }
 
     [ClientRpc]
@@ -57,6 +71,17 @@ public class Player : NetworkBehaviour
     {
         LeaderboardString = leaderboardString;
         Loading = false;
+        var players = FindObjectsOfType<Player>();
+        foreach (var player in players)
+        {
+            if (player != this)
+            {
+                if (player.LeaderboardString != leaderboardString)
+                {
+                    player.LeaderboardString = leaderboardString;
+                }
+            }
+        }
     }
 
     public string GetDatabaseString()

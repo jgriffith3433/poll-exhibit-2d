@@ -276,8 +276,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: <#000000>CITY MULTI OUTDOOR UNITS ARE AVAILABLE IN BOTH AIR- AND WATER-SOURCED.</color>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6ee04eb57dba9f2468686beddb750ee0, type: 2}
-  m_sharedMaterial: {fileID: 21216427266833240, guid: 6ee04eb57dba9f2468686beddb750ee0,
+  m_fontAsset: {fileID: 11400000, guid: 109cf0f9db05e004d9e8d8191b13943a, type: 2}
+  m_sharedMaterial: {fileID: 21449963062756248, guid: 109cf0f9db05e004d9e8d8191b13943a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
