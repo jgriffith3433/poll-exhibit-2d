@@ -57,8 +57,15 @@ public class KeyboardComponent : MonoBehaviour
         ShowCapital();
     }
 
+    public IEnumerator WaitAndShowSymbols()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ShowSymbols();
+    }
+
     public void OnSelectedNewInput()
     {
+        HideSymbols();
         if (!string.IsNullOrEmpty(Value))
         {
             ShowLower();
@@ -71,7 +78,7 @@ public class KeyboardComponent : MonoBehaviour
 
     public void ShowABCs()
     {
-        Symbols.SetActive(false);
+        HideSymbols();
         if (Capitalize)
         {
             StartCoroutine(WaitAndShowCapital());
@@ -82,11 +89,22 @@ public class KeyboardComponent : MonoBehaviour
         }
     }
 
+    public IEnumerator WaitAndShowABCs()
+    {
+        yield return new WaitForSeconds(0.2f);
+        ShowABCs();
+    }
+
     public void ShowSymbols()
     {
         Symbols.SetActive(true);
         Capital_A_B_Cs.SetActive(false);
         Lower_A_B_Cs.SetActive(false);
+    }
+
+    public void HideSymbols()
+    {
+        Symbols.SetActive(false);
     }
 
     public void HideObjects()
@@ -103,10 +121,10 @@ public class KeyboardComponent : MonoBehaviour
                 LeaderboardManager.Instance.OnEnter();
                 break;
             case "123 sym":
-                ShowSymbols();
+                StartCoroutine(WaitAndShowSymbols());
                 break;
             case "abc":
-                ShowABCs();
+                StartCoroutine(WaitAndShowABCs());
                 break;
             case "capitalize":
                 if (Capitalize)
@@ -130,7 +148,7 @@ public class KeyboardComponent : MonoBehaviour
                 break;
             default:
                 Value += keyButtonValue;
-                if (Capitalize)
+                if (Capitalize && !Symbols.activeInHierarchy)
                 {
                     StartCoroutine(WaitAndShowLower());
                 }

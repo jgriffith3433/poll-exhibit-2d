@@ -1,7 +1,7 @@
 ﻿{
   "poll_id": "0",
   "num_questions_asked": "30",
-  "title_text": "<#333333>Question</uppercase></color>",
+  "title_text": "<#333333><uppercase>Question</uppercase></color>",
   "title_text_position": "-31,14,0",
   "questions": [
     {

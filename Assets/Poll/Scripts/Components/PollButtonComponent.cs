@@ -51,7 +51,11 @@ public class PollButtonComponent : MonoBehaviour {
                     var keyboardComponent = transform.parent.parent.parent.parent.GetComponent<KeyboardComponent>();
                     if (keyboardComponent != null)
                     {
-                        StartCoroutine(AnimatePress());
+                        var loweredButtonText = GetButtonText().ToLower();
+                        if (loweredButtonText != "enter" && loweredButtonText != "123 sym" && loweredButtonText != "abc" && loweredButtonText != "capitalize" && loweredButtonText != "space")
+                        {
+                            StartCoroutine(AnimatePress());
+                        }
                         keyboardComponent.PressKey(GetButtonText());
                     }
                 }

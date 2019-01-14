@@ -53,7 +53,7 @@ public class Player : NetworkBehaviour
     void RpcUpdateDatabase(string databaseStr)
     {
         DatabaseString = databaseStr;
-        var players = FindObjectsOfType<Player>();
+        /*var players = FindObjectsOfType<Player>();
         foreach (var player in players)
         {
             if (player != this)
@@ -63,7 +63,7 @@ public class Player : NetworkBehaviour
                     player.DatabaseString = databaseStr;
                 }
             }
-        }
+        }*/
     }
 
     [ClientRpc]
@@ -71,7 +71,7 @@ public class Player : NetworkBehaviour
     {
         LeaderboardString = leaderboardString;
         Loading = false;
-        var players = FindObjectsOfType<Player>();
+        /*var players = FindObjectsOfType<Player>();
         foreach (var player in players)
         {
             if (player != this)
@@ -81,7 +81,7 @@ public class Player : NetworkBehaviour
                     player.LeaderboardString = leaderboardString;
                 }
             }
-        }
+        }*/
     }
 
     public string GetDatabaseString()

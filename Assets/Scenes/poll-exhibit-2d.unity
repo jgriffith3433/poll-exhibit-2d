@@ -1050,8 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0375c4d6d1a9d4ca23e592ea1cd6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PollPrefab: {fileID: 114538450107652222, guid: 85bb8010e8b14ab4fa06a220c1eb12a0,
-    type: 3}
+  PollPrefab: {fileID: 2648, guid: 85bb8010e8b14ab4fa06a220c1eb12a0, type: 3}
 --- !u!4 &1995646084
 Transform:
   m_ObjectHideFlags: 0
