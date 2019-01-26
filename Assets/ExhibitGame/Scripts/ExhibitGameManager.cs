@@ -220,7 +220,7 @@ public class ExhibitGameManager : MonoBehaviour
     {
         Player.CmdLoadInitialData();
         PollManager.Instance.DestroyPoll();
-        LeaderboardManager.Instance.DestroyLeaderboard();
+        LeaderboardManager.Instance.DestroyLeaderboard();    
     }
 
     public void OnFinishPoll(int score, TimeSpan totalTime, List<PollUserAnswer> userAnswers, string displayName, string firstName, string lastName)
@@ -288,6 +288,12 @@ public class ExhibitGameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitAndShowLeaderboard(string previousGameState)
+    {
+        yield return new WaitForSeconds(2);
+        LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PollUserAnswers, previousGameState == "Poll", DisplayName, FirstName, LastName);
+    }
+
     public void GoToState(string newState)
     {
         var previousState = CurrentGameState;
@@ -313,7 +319,7 @@ public class ExhibitGameManager : MonoBehaviour
         {
             PreviousGameState = previousState;
             ResetGame();
-            LeaderboardManager.Instance.ShowLeaderboard(PollScore, PollTotalTime, PollUserAnswers, PreviousGameState == "Poll", DisplayName, FirstName, LastName);
+            StartCoroutine(WaitAndShowLeaderboard(PreviousGameState));
             /*DisplayName = null;
             FirstName = null;
             LastName = null;

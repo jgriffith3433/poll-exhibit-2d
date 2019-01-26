@@ -111,12 +111,29 @@ public class LeaderboardComponent : MonoBehaviour
             var lowestScore = Data.PlayerData.Count == 10 ? Data.PlayerData.LastOrDefault() : null;
             if (lowestScore != null)
             {
-                if (Score > 0 && Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)
+                if (Score > 0)
                 {
-                    MadeTopTenLeaderboard = true;
-                    HideLeaderboardTopDown();
-                    PollFinishedInstance.SetValues(Score, TotalTime.Value);
-                    ShowFinishPoll();
+                    if (Score > lowestScore.PlayerScore)
+                    {
+                        MadeTopTenLeaderboard = true;
+                        HideLeaderboardTopDown();
+                        PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                        ShowFinishPoll();
+                    }
+                    else if (Score / TotalTime.Value.TotalSeconds > lowestScore.PlayerScore / lowestScore.TotalTime.TotalSeconds)
+                    {
+                        MadeTopTenLeaderboard = true;
+                        HideLeaderboardTopDown();
+                        PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                        ShowFinishPoll();
+                    }
+                    else
+                    {
+                        PollFinishedInstance.SetValues(Score, TotalTime.Value);
+                        ShowFinishPoll();
+                        HideLeaderboardTopDown();
+                        MadeTopTenLeaderboard = false;
+                    }
                 }
                 else
                 {

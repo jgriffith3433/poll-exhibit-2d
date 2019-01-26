@@ -19,6 +19,7 @@ public class DatabaseManager : MonoBehaviour
     private bool Loading = true;
     private bool PreviousDiableScreensaver;
     public NetworkManagerHUD NetworkManager;
+    private Action ReloadCallback;
 
     void Awake()
     {
@@ -34,6 +35,7 @@ public class DatabaseManager : MonoBehaviour
 
     private void LoadDatabases()
     {
+        Loading = true;
         ExhibitData = new ExhibitData();
         LeaderboardData = new LeaderboardData();
         AllLeaderboardData = new LeaderboardData();
@@ -48,6 +50,11 @@ public class DatabaseManager : MonoBehaviour
         if (ExhibitData != null && ExhibitData.IsDoneParsing && LeaderboardData.IsDoneParsing && AllLeaderboardData.IsDoneParsing)
         {
             Loading = false;
+            if (ReloadCallback != null)
+            {
+                ReloadCallback();
+                ReloadCallback = null;
+            }
         }
         else
         {
@@ -64,8 +71,11 @@ public class DatabaseManager : MonoBehaviour
 
     public void SaveLeaderboard(string displayName, string firstName, string lastName, int score, string totalTime, bool madeLeaderboard)
     {
-        LeaderboardData.AddPlayerScore(displayName, firstName, lastName, score, totalTime, madeLeaderboard);
-        LeaderboardData.SaveLeaderboard();
+        if (madeLeaderboard)
+        {
+            LeaderboardData.AddPlayerScore(displayName, firstName, lastName, score, totalTime, madeLeaderboard);
+            LeaderboardData.SaveLeaderboard();
+        }
         AllLeaderboardData.AddPlayerScore(displayName, firstName, lastName, score, totalTime, madeLeaderboard, 999999999);
         AllLeaderboardData.SaveLeaderboard();
     }

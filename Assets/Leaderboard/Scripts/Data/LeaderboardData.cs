@@ -93,6 +93,18 @@ public class LeaderboardData
 
     public void AddPlayerScore(string displayName, string firstName, string lastName, int score, string totalTime, bool madeLeaderboard, int max = 10)
     {
+        var orderedPlayerScoreData = PlayerData.OrderByDescending(pd => pd.PlayerScore).ToList();
+        var sortedPlayerData = new List<LeaderboardPlayerData>();
+
+        foreach (var playerScoreData in orderedPlayerScoreData)
+        {
+            if (!sortedPlayerData.Contains(playerScoreData))
+            {
+                var sameScores = orderedPlayerScoreData.Where(pd => pd.PlayerScore == playerScoreData.PlayerScore).OrderByDescending(pd => pd.PlayerScore / pd.TotalTime.TotalSeconds);
+                sortedPlayerData.AddRange(sameScores);
+            }
+        }
+        PlayerData = sortedPlayerData;
         if (PlayerData.Count == max)
         {
             PlayerData.RemoveAt(max - 1);
@@ -127,6 +139,7 @@ public class LeaderboardData
                 sortedPlayerData.AddRange(sameScores);
             }
         }
+        PlayerData = sortedPlayerData;
 
         foreach (var playerData in sortedPlayerData)
         {
